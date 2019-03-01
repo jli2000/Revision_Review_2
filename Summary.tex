@@ -1,0 +1,82 @@
+\section{Summary}
+\label{sec:summary}
+
+In this study, we have developed a \ac{DSRAR} framework for constructing surrogate models \blue{irrespective of the mutual dependence between the  components 
+of random inputs} using limited training points. 
+\blue{
+To the best of our knowledge, this problem has not been
+addressed by  previous \ac{UQ} studies based on polynomial 
+chaos expansions. The \ac{DSRAR} framework does not assume  mutual 
+independence between the components of random inputs and therefore can be
+applied to \ac{UQ} in complex systems
+where information about the underlying random distribution can be implicit.
+}
+%
+%\blue{
+%In particular, we do not assume that the random components are mutually independent. To the best 
+%of our knowledge, the present framework takes a different starting point from the most of 
+%the previous \ac{UQ} studies based on polynomial chaos expansion. Accordingly, the present method
+%can be well-suited for uncertainty quantification of complex systems,
+%where the knowledge of the underlying randomness can be implicit.
+%}
+%
+To construct the surrogate model, this framework uses data-driven 
+\blue{\ac{amdP}} basis 
+construction and a sparsity-enhancing rotation procedure which leads 
+to more accurate recovery of the sparse representation of the target function. 
+%
+%In particular, the present method does not assume that the random components
+%are mutually independent. To the best of our knowledge, this is different from the majority of 
+%the previous \ac{UQ} studies
+%
+%
+%
+%
+The method benefits from both the orthonormal 
+basis expansion and the enhanced sparsity of the expansion coefficients. 
+%
+\blue{With the assumption that there exists a sparse representation of the surrogate model},
+the \ac{DSRAR} approach can be applied to challenging \ac{UQ} problems 
+under two widely encountered situations: (\Rmnum{1}) probability measure 
+implicitly represented by a large collection of samples and (\Rmnum{2}) 
+non-Gaussian probability measures with explicit (analytical) forms.
+%
+For systems with explicit knowledge of the probability measure, our 
+method exploits sparser representations of \acp{QoI} while retaining 
+proper orthogonality with respect to rotated variables.
+%
+For systems with randomness implicitly represented by a large collection 
+of random samples, we also proposed a heuristic method to construct a 
+\emph{near-orthonormal} basis in addition to the exact orthonormal basis 
+with respect to the discrete measure. The near-orthonormal basis 
+shows {\color{blue}a} smaller basis bound and empirically yields more accurate 
+representations. 
+%
+The numerical examples show the 
+effectiveness of our method for realistic problems on \blue{quantifying 
+uncertainty propagation in molecular system under 
+conformational fluctuations} as well 
+as \acp{PDE} with arbitrary underlying probability measures.
+
+For future study, we note that several issues not considered in the 
+present work could further improve the performance of the present \ac{DSRAR} framework.
+The heuristic approach to constructing near-orthonormal basis introduced in 
+this study yields smaller basis bounds and more accurate representations than 
+existing methods. However, we do not have the theoretical analysis to formally 
+show that the near-orthonormal basis is optimal and to establish the conditions 
+under which it outperforms the exact orthonormal basis. It would be 
+interesting to investigate 
+different approaches of data-driven basis construction to further improve the 
+properties of measurement matrix for \ac{CS} purposes. \textcolor{blue}{For instance,
+if new data becomes available after the surrogate construction, it is worth
+exploring how to use the new information to design more sophisticated 
+(cross-validation) strategies to optimize the orthonormal threshold 
+values and the basis construction procedure.} 
+Furthermore, our study used a standard $\ell_1$ minimization approach 
+for relaxing the \ac{CS} 
+problem and recovering a sparse solution of the under-determined system.
+However, other optimization approaches can be employed when the measurement 
+matrix is highly coherent when $\ell_1$ minimization is not necessarily optimal.
+Finally, it would be interesting to employ the developed \ac{DSRAR} approach for
+\ac{UQ} study in other complex biological systems \cite{Bajaj_ACM_2016, Bajaj_JCB_2018}.
+Such results will be presented in a future publication.

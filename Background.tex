@@ -1,0 +1,131 @@
+\section{Background} \label{sec:prelim}
+
+\subsection{Approximation with orthogonal polynomials} \label{sec:aPE}
+
+We begin with a few facts about multivariate orthogonal polynomials \cite{dunkl_xu_2014}. 
+Let $\Pi^d$ be the set of polynomials in $d$ variables on $\mathbb{R}^d$.
+Polynomials in $\Pi^d$ are naturally indexed by the multi-indices set $\mathbb{N}_0^d$.
+For $\bm{\alpha} = (\alpha_1,\dots,\alpha_d)\in \mathbb{N}_0^d$ and $\bm{z} = (z_1,\dots,z_d)$, a monomial $z^\alpha$ is defined by $\bm{z}^{\bm{\alpha}} = z_1^{\alpha_1}\cdots z_d^{\alpha_d}$ and the degree of $\bm{z}^{\bm{\alpha}}$ is defined by $|\bm{\alpha}| = a_1+\dots+a_d$. From now on, without confusion, $|\cdot|$ operating on a \blue{multi-index} $\ba$ denotes the $\ell_1$ norm of $\ba$ while $|\cdot|$ operating on a set $T$ denotes the cardinality of $T$.
+The degree of a polynomial is defined by the largest degree of its monomial terms.
+Then the space of polynomials of degree at most $p$ is defined by
+\begin{equation}\label{def:P_n^d}
+    \Pi_p^d :=  \textrm{span}\{\bm{z}^{\bm{\alpha}}:|\bm{\alpha}|\leq p, \bm{\alpha} \in \mathbb{N}_0^d \}
+    \textrm{ and }
+    \dim \Pi_p^d = \left(\begin{array}{c} p+d\\ p\end{array}\right).
+\end{equation} 
+If we equip $\mathbb{R}^d$ with a probability measure $\rho$, then we can define an inner product on $\Pi^d$,
+\begin{equation} \label{def:inner_prod}
+    \langle f,g \rangle_{\rho} = \int_{\mathbb{R}^d} f g \dif \rho \qquad f,g\in \Pi^d.
+\end{equation}
+$f$ and $g$ are said to be orthogonal with respect to $\rho$ if $\langle f,g \rangle_{\rho} = 0$.
+Given such an inner product, and an order of the set $\mathbb{N}_0^d$, we can apply the Gram-Schmidt process on the ordered set $\{\bm{z}^{\bm{\alpha}}:\bm{\alpha}\in \mathbb{N}_0^d\}$ to generate a sequence of orthogonal polynomials.
+We will revisit this construction in Section \ref{sec:data_driven_basis}.
+When $d>1$, there is no natural order among monomials.
+As a result, multivariate orthogonal polynomials are, in general, not uniquely determined.
+In this paper, we choose the \emph{graded lexicographic order} when applying the Gram-Schmidt process, that is, $\bm{z}^{\bm{\alpha}}\succ \bm{z}^{\bm{\beta}}$ if $|\bm{\alpha}|>|\bm{\beta}|$ or if $|\bm{\alpha}| = |\bm{\beta}|$ and the first nonzero entry in the difference $\bm{\alpha}-\bm{\beta}$ is positive. 
+
+When a simulation model is expensive to run, building an approximation of the response of the model output with respect to the variations in the model input can often be an efficient approach to quantify uncertainty propagation.
+The polynomial approximation of a function (model) $f(\bm{z}): \mathbb{R}^d\rightarrow\mathbb{R}, d\geq1$ 
+where $\bm{z}= (z_1, \dots, z_d)$ $:\Omega\rightarrow \mathbb{R}^d$ is a $d$-dimensional random variable 
+with associated probability measure $\rho(\bm{z})$, which is widely used due to its fast convergence when $f(\bm{z})$ is analytic.
+In this paper, we will approximate $f$ using an orthogonal polynomial basis.
+It is a generalization of the gPC expansion which usually deals with i.i.d. random variables. 
+
+Let $\Psi = \{\psi_{\bm{\alpha}}(\bm{z}):\bm{\alpha}\in \mathbb{N}_0^d\}$ be a set of orthonormal polynomial basis of $\Pi^d$ associated with the measure $\rho(\bm{z})$, that is,
+\begin{align}\label{eq:orthogonal}
+    \int\psi_{\bm{\alpha}}(\bm{z})\psi_{\bm{\beta}} (\bm{z})\dif \rho(\bm{z})=\delta_{\bm{\alpha}\bm{\beta}}, \quad \bm{\alpha},\bm{\beta}\in \mathbb{N}_0^d,
+\end{align}
+where $\delta_{\bm{\alpha\beta}} := \prod_{i=1}^d \delta_{\alpha_i,\beta_i}$ to be the multi-index Kronecker delta.
+Then the $p$th-degree arbitrary orthogonal polynomial expansion $f_p(\bm{z})$ of function $f(\bm{z})$ associated with $\psi$ is defined as,
+\begin{equation}\label{eq:f_ap_expan}
+    f(\bm{z}) \approx f_p(\bm{z}) := \sum_{\bm{\alpha} \in \Lambda^d_{p}} c_{\bm{\alpha}}\psi_{\bm{\alpha}}(\bm{z}),\quad \Lambda^d_{p}= \left\{\bm{\alpha}\in \mathbb{N}_0^d : |\bm{\alpha}| \leq p \right\},
+\end{equation}
+\blue{where $c_{\bm\alpha}$ is the coefficient 
+  to be evaluated}. Using an ordering of the orthonormal 
+polynomial basis, we can change \eqref{eq:f_ap_expan} into the following single index version
+\begin{align} \label{eq:ape_single}
+    f_p(\bm{z})=\sum_{\bm{\alpha}\in \Lambda^d_{p}}c_{\bm{\alpha}}\psi_{\bm{\alpha}}(\bm{z})=\sum_{n=1}^{N}{c}_n \psi_n(\bm{z}),
+\end{align}
+where \blue{$N$ is the total number of basis and is given by}
+\begin{align*}
+    N = \dim \Pi_p^d =  |\Lambda^d_{p}| = \left( \begin{array}{c} d+p \\ p\end{array}\right).
+\end{align*}
+
+\subsection{Compressed sensing} \label{sec:cs}
+
+Compressed sensing is a well-studied and popular approach to find sparse solutions to linear equations \cite{Candes_2005error, Candes_2008Rip, Davies_2010RICLp,Donoho_2006srs}.
+\blue{In this subsection, we briefly review the theory of \ac{CS} and discuss the conditions
+which allow accurate recovery of solutions to underdetermined linear system.}
+
+Under certain assumptions, the solution---or its approximation---can be found 
+by the well-studied $\ell_1$ minimization, i.e., finding the minimizer
+\begin{equation}\label{eq:ape_L1}
+    \min \|\bm{c}\|_1 \quad \text{subject to }\bm A\bm{c}=\bm{b},
+\end{equation}
+where $\bm{A}\in\mathbb{R}^{M\times N}$, $\bm b \in \mathbb{R}^M$ 
+and $\|\bm{c}\|_1 = \sum_{i=1}^N|c_i|$ is the $\ell_1$ norm of the vector $\bm{c}$.
+
+When the data $\bm b$ is contaminated by noise, the constraint in \eqref{eq:ape_L1} is relaxed to obtain the basis pursuit denoising problem,
+\begin{equation}\label{eq:ape_L1_denoise}
+    \min \|\bm{c}\|_1 \quad \text{subject to }\|\bm A\bm{c}-\bm{b}\|_2\leq \sigma,
+\end{equation}
+where $\sigma$ is an estimate of the $\ell_2$ norm of the noise.
+The optimization problems \eqref{eq:ape_L1} and \eqref{eq:ape_L1_denoise} can be solved with efficient algorithms from convex optimization \cite{Berg_2007spgl}.
+
+\blue{Next we discuss the conditions for the sparse recovery of $\bm c$.}
+\begin{defn} \label{def:s-sparse-vec}
+    A vector $\bm{c}$ is said to be $s$-sparse if it has at most $s$ nonzero entries, i.e., $\bm{c}$ is supported on $T \subset \{1,\dots,N\}$ with $|T|\leq s$.
+\end{defn}
+\begin{defn}[Restricted isometry constant \cite{Candes_2005Decoding, Candes_2006Stablesrec}]\label{def:RIC}
+    For each integer $s=1,2,\ldots,\label{blue}{N}$ define the isometry constant $\delta_s$ of a matrix $\bm A$ as the smallest number such that
+    \begin{equation*}
+        (1-\delta_s)\|\bm{c}\|_2^2\leq\|\bm A\bm{c}\|_2^2\leq(1+\delta_s)\|\bm{c}\|_2^2
+    \end{equation*}
+    holds for any $s$-sparse vector $\bm{c}\in \textcolor{blue}{\mathbb{R}^{N}}$. 
+\end{defn}
+The \acp{RIC} characterizes matrices that are nearly orthonormal. The spare recovery is established by the following theorem. 
+
+\begin{thm}[Sparse Recovery for \ac{RIP}-Matrices]\label{thm:rip_recover}
+Let $\bm A\in \mathbb{R}^{M\times N}$. Assume that its isometry constant $\delta_{2s}$ satisfies $\delta_{2s}<0.4931$. 
+Let \textcolor{blue}{$\bm{c}\in\mathbb{R}^N$}, and assume noisy measurements $\bm{b} = \bm{A}\bm{c} + \bm{\eta}$ are given with $\|\bm{\eta}\|_2\leq \sigma$, then the minimizer $\bm{c}^*$ of 
+\begin{equation*}
+\min \|\bm{c}\|_1 \quad \textrm{subject to }\|\bm A\bm{c}-\bm{b}\|_2\leq \sigma,
+\end{equation*}
+satisfies
+\begin{equation}\label{eq:error}
+\begin{split}
+\|\bm{c}-\bm{c}^*\|_2&\leq C_1 \frac{\sigma_s(\bm{c})}{\sqrt{s}}+C_2\sigma,\\
+\|\bm{c}-\bm{c}^*\|_1&\leq C_3\sigma_s(\bm{c})+C_4\sqrt{s}\sigma.
+\end{split}
+\end{equation}
+where constants $C_1$, $C_2$, $C_3$ and $C_4$ depend only on $\delta_{2s}$, and $\sigma_s(\bm{c}) = \inf_{{\bm{c}_s:\|\bm{c}_s\|_0\leq s}}\|\bm{c}-\bm{c}_s\|_1$ with $\|\bm{c}_s\|_0$ indicates the number of nonzero entries of $\bm{c}_s$ In particular, if $\bm{c}$ is $s$-sparse, then the reconstruction is exact.
+\end{thm}
+\begin{proof}
+    See Rauhut and Ward \cite{Rauhut_2012sparseLegen}.
+\end{proof}
+
+A bounded orthonormal system has the following definition.
+{\color{blue}\begin{defn}\label{def:bnd_orth_sys}
+    $\{\psi_n\}, n = 1, \ldots, N$ is a bounded orthonormal system, if
+    \begin{align}\label{def:sys_bnd}
+        K:=\sup_{n}\|\psi_n\|_{\infty}=\sup_n\sup_{\bm{z}}|\psi_n(\bm{z})|< \infty,
+    \end{align}
+\end{defn}
+where $K$ is called the basis bound. }
+
+These definitions allow us to establish the recoverability of \eqref{eq:ape_L1} based on the \ac{RIP}.
+\begin{thm}[\ac{RIP} for bounded orthonormal systems]\label{thm:boundedBOS}
+    Let $\bm A\in\mathbb{R}^{M\times N}$ be the interpolation matrix with entries 
+    $\{a_{j,n}=\psi_n(\bm{z}^{(j)})\}_{1\leq n\leq N,1\leq j\leq M}$ (see \eqref{eq:matrixelem}), where $\{\psi_n\}$ 
+    is a bounded orthonormal system satisfying \eqref{def:sys_bnd}. Assume that
+    \begin{equation*}
+        M\geq C\delta^{-2}K^2s\log^3(s)\log(N),
+    \end{equation*}
+    then with probability at least $1-N^{-\gamma\log^3(s)}$, the RIC $\delta_s$ of $1/\sqrt{M}\bm A$ satisfies $\delta_s\leq\delta$.
+    Here, $C,\gamma>0$ are universal constants.
+\end{thm}
+\begin{proof}
+    See Rauhut and Ward \cite{Rauhut_2012sparseLegen}.
+\end{proof}
+
+Theorem \ref{thm:rip_recover} and Theorem \ref{thm:boundedBOS} establish the sparse recoverability of the bounded orthonormal systems.

@@ -1,0 +1,25 @@
+The challenge of quantifying uncertainty propagation in real-world systems is 
+rooted in the high-dimensionality of the stochastic input and the frequent lack 
+of explicit knowledge of its probability distribution. Traditional approaches 
+show limitations for such problems, especially when the size of the training data is limited.
+To address these difficulties, we have developed a general framework of constructing 
+surrogate models on spaces of stochastic input with arbitrary probability measure 
+irrespective of \blue{the mutual dependencies between individual components
+of the random inputs} and the analytical form.
+The present \acf*{DSRAR} framework 
+includes a \blue{data-driven construction of multivariate polynomial basis for arbitrary mutually
+dependent probability measures} and a sparsity enhancement rotation procedure.
+This sparsity-enhancing rotation method was initially proposed in our previous work \cite{Lei_Yang_MMS_2015} 
+for Gaussian density distributions, which may not be feasible for non-Gaussian distributions due 
+to the loss of orthogonality after the rotation. To remedy such difficulties, \blue{we 
+developed a new data-driven approach to construct orthonormal polynomials for arbitrary mutually dependent randomness,
+ensuring the constructed basis} maintains the orthogonality/near-orthogonality 
+with respect to the density of the rotated random vector, \blue{where 
+directly applying the regular polynomial chaos including arbitrary polynomial chaos (aPC) \cite{OLADYSHKIN2012} 
+shows limitations due to the assumption of the mutual independence between 
+the components of the random inputs.}   
+The developed \acs*{DSRAR} framework leads to accurate recovery, with only limited training data, of a sparse representation 
+of the target functions. 
+The effectiveness of our method is demonstrated in challenging problems such as \aclp*{PDE} and realistic molecular systems 
+\textcolor{blue}{within high-dimensional ($O(10)$) conformational spaces} where the underlying density is implicitly represented by a \textcolor{blue}{large collection of sample data}, as well as systems {with explicitly given} non-Gaussian probabilistic measures.
+

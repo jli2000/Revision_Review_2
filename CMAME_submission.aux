@@ -1,0 +1,564 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\AC@reset@newl@bel
+\bibstyle{elsarticle-num}
+\emailauthor{huan.lei@pnnl.gov}{Huan Lei\corref {onecorrespondingauthor}\fnref {afootnote}}
+\emailauthor{nathan.baker@pnnl.gov}{Nathan A.\ Baker\corref {onecorrespondingauthor}}
+\citation{Lei_Yang_MMS_2015}
+\citation{OLADYSHKIN2012}
+\newacro{QoI}[QoI]{quantity of interest}
+\newacro{UQ}[UQ]{uncertainty quantification}
+\newacro{MC}[MC]{Monte Carlo}
+\newacro{GP}[GP]{Gaussian Process}
+\newacro{gPC}[gPC]{generalized polynomial chaos}
+\newacro{aPC}[aPC]{arbitrary polynomial chaos}
+\newacro{amdP}[amdP]{\emph  {polynomials for arbitrary mutually dependent}}
+\newacro{DSRAR}[DSRAR]{\emph  {Data-driven Sparsity-enhancing Rotation for Arbitrary Randomness}}
+\newacro{CS}[CS]{compressed sensing}
+\newacro{SASA}[SASA]{solvent-accessible surface area}
+\newacro{PDE}[PDE]{partial differential equation}
+\newacro{RIC}[RIC]{restricted isometry constant}
+\newacro{RIP}[RIP]{restricted isometry property}
+\newacro{PCA}[PCA]{principal component analysis}
+\newacro{MD}[MD]{molecular dynamics}
+\newacro{APBS}[APBS]{Adaptive Poisson-Boltzmann Solver}
+\newacro{PDF}[PDF]{probability density function}
+\newacro{GAFF}[GAFF]{General AMBER Force Field}
+\Newlabel{onecorrespondingauthor}{1}
+\Newlabel{afootnote}{1}
+\Newlabel{Leiaddress}{a}
+\Newlabel{UWaddress}{b}
+\Newlabel{Brownaddress}{c}
+\AC@undonewlabel{acro:DSRAR}
+\newlabel{acro:DSRAR}{{}{1}{}{section*.1}{}}
+\citation{Saltelli_book_2008}
+\citation{Bishop_2006}
+\citation{Laio_Parrinello_PNAS_2002}
+\citation{Fishman96,Kucherenko_2015}
+\citation{Giles_2015,Heinrich_MLMC_2001,Pisaroni_Nobile_CMAME_2017}
+\citation{Koutsourelakis_SISC_2009,Peherstorfer_Willcox_SISC_2016}
+\citation{Fox99,Niedeereiter92,NiederreiterHLZ98}
+\citation{Mckay_Beckman_Technometrics_1979,Stein_tech87,Loh_AS96}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}{section.1}}
+\newlabel{sec:intro}{{1}{2}{Introduction}{section.1}{}}
+\AC@undonewlabel{acro:UQ}
+\newlabel{acro:UQ}{{1}{2}{Introduction}{section*.2}{}}
+\acronymused{UQ}
+\AC@undonewlabel{acro:QoI}
+\newlabel{acro:QoI}{{1}{2}{Introduction}{section*.3}{}}
+\acronymused{QoI}
+\acronymused{QoI}
+\AC@undonewlabel{acro:DSRAR}
+\newlabel{acro:DSRAR}{{1}{2}{Introduction}{section*.4}{}}
+\acronymused{DSRAR}
+\acronymused{UQ}
+\AC@undonewlabel{acro:MC}
+\newlabel{acro:MC}{{1}{2}{Introduction}{section*.5}{}}
+\acronymused{MC}
+\acronymused{QoI}
+\acronymused{QoI}
+\acronymused{MC}
+\acronymused{MC}
+\acronymused{MC}
+\acronymused{MC}
+\acronymused{QoI}
+\acronymused{MC}
+\citation{Sack_Welch_Stat_1989,Kennedy_Hagan_JRSS_2001,GP_book_Rasmussen_2006}
+\citation{Wiener38}
+\citation{Ghanem_1991Spectralappro}
+\citation{Xiu_2002Wiener}
+\citation{GP_book_Rasmussen_2006,Qian_Wu_2008,Williams_2006,Oakley_OHagan_Biometrika_2002,Lockwood_Anitescu_2012}
+\citation{XiuK_JCP03,GhanemMPW_CMAME05,Knio_CFD06,Sudret2008,LiXiu_JCP09,MarzoukXiu2009,Li2010,Li2018}
+\citation{Schobi_2015,Gratiet_2016,Owen_Challenor_SIAM_2017,Roy_Mocayd_2018}
+\citation{MathelinH_NASA03,XiuH_SISC05,Babuska2007}
+\citation{XiuH_SISC05,nobile2008sparse,Ma2009,Foo2010,CONSTANTINE2012,jakemanG2013,Li2016}
+\citation{Doostan_2011nonadapted,Yan_2012Sc,Rauhut_2012sparseLegen,mathelin_gallivan_2012,Yang_2013reweightedL1,Hampton_2015Cs,Peng_2016gradientL1,Yan_2017,Liu_2016QMCL1,Lei_Karniadakis_JCP_2017,ALEMAZKOOR2017,DIAZ2018,RAI2018}
+\citation{OLADYSHKIN2012}
+\citation{Huang_Protein_book_2005}
+\citation{Kumar_Kollman_JCC_1992,Laio_Parrinello_PNAS_2002,Mar_Van_JCP_2008}
+\citation{Lei_Yang_MMS_2015}
+\citation{ConstantineDW14}
+\acronymused{QoI}
+\acronymused{QoI}
+\acronymused{UQ}
+\AC@undonewlabel{acro:gPC}
+\newlabel{acro:gPC}{{1}{3}{Introduction}{section*.6}{}}
+\acronymused{gPC}
+\AC@undonewlabel{acro:GP}
+\newlabel{acro:GP}{{1}{3}{Introduction}{section*.7}{}}
+\acronymused{GP}
+\acronymused{QoI}
+\acronymused{GP}
+\acronymused{UQ}
+\acronymused{gPC}
+\acronymused{QoI}
+\acronymused{QoI}
+\acronymused{UQ}
+\acronymused{gPC}
+\AC@undonewlabel{acro:CS}
+\newlabel{acro:CS}{{1}{3}{Introduction}{section*.8}{}}
+\acronymused{CS}
+\acronymused{QoI}
+\acronymused{gPC}
+\acronymused{QoI}
+\citation{LIweixuan2015,Vittaldev2016}
+\citation{FEINBERG2015}
+\citation{Zabaras_2014}
+\citation{OLADYSHKIN2012,WanK_SISC06,Witteveen_Bijl_2006,Zheng_2015MEPCM,YIN2018}
+\citation{AHLFELD2016}
+\citation{Lei_Yang_MMS_2015}
+\acronymused{UQ}
+\acronymused{QoI}
+\acronymused{QoI}
+\acronymused{CS}
+\acronymused{gPC}
+\acronymused{gPC}
+\acronymused{QoI}
+\acronymused{QoI}
+\AC@undonewlabel{acro:aPC}
+\newlabel{acro:aPC}{{1}{4}{Introduction}{section*.9}{}}
+\acronymused{aPC}
+\acronymused{UQ}
+\acronymused{DSRAR}
+\AC@undonewlabel{acro:amdP}
+\newlabel{acro:amdP}{{1}{5}{Introduction}{section*.10}{}}
+\acronymused{amdP}
+\acronymused{CS}
+\acronymused{DSRAR}
+\acronymused{amdP}
+\AC@undonewlabel{acro:PDE}
+\newlabel{acro:PDE}{{1}{5}{Introduction}{section*.11}{}}
+\acronymused{PDE}
+\citation{dunkl_xu_2014}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Background}{6}{section.2}}
+\newlabel{sec:prelim}{{2}{6}{Background}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Approximation with orthogonal polynomials}{6}{subsection.2.1}}
+\newlabel{sec:aPE}{{2.1}{6}{Approximation with orthogonal polynomials}{subsection.2.1}{}}
+\newlabel{def:P_n^d}{{2.1}{6}{Approximation with orthogonal polynomials}{equation.2.1}{}}
+\newlabel{def:inner_prod}{{2.2}{6}{Approximation with orthogonal polynomials}{equation.2.2}{}}
+\newlabel{eq:orthogonal}{{2.3}{6}{Approximation with orthogonal polynomials}{equation.2.3}{}}
+\citation{Candes_2005error,Candes_2008Rip,Davies_2010RICLp,Donoho_2006srs}
+\citation{Berg_2007spgl}
+\citation{Candes_2005Decoding,Candes_2006Stablesrec}
+\newlabel{eq:f_ap_expan}{{2.4}{7}{Approximation with orthogonal polynomials}{equation.2.4}{}}
+\newlabel{eq:ape_single}{{2.5}{7}{Approximation with orthogonal polynomials}{equation.2.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Compressed sensing}{7}{subsection.2.2}}
+\newlabel{sec:cs}{{2.2}{7}{Compressed sensing}{subsection.2.2}{}}
+\acronymused{CS}
+\newlabel{eq:ape_L1}{{2.6}{7}{Compressed sensing}{equation.2.6}{}}
+\newlabel{eq:ape_L1_denoise}{{2.7}{7}{Compressed sensing}{equation.2.7}{}}
+\newlabel{def:s-sparse-vec}{{2.1}{7}{}{thm.2.1}{}}
+\newlabel{def:RIC}{{2.2}{7}{Restricted isometry constant \cite {Candes_2005Decoding, Candes_2006Stablesrec}}{thm.2.2}{}}
+\newlabel{blue}{{2.2}{7}{Restricted isometry constant \cite {Candes_2005Decoding, Candes_2006Stablesrec}}{thm.2.2}{}}
+\citation{Rauhut_2012sparseLegen}
+\citation{Rauhut_2012sparseLegen}
+\AC@undonewlabel{acro:RIC}
+\newlabel{acro:RIC}{{2.2}{8}{Compressed sensing}{section*.12}{}}
+\acronymused{RIC}
+\newlabel{thm:rip_recover}{{2.3}{8}{Sparse Recovery for \ac {RIP}-Matrices}{thm.2.3}{}}
+\AC@undonewlabel{acro:RIP}
+\newlabel{acro:RIP}{{2.3}{8}{Sparse Recovery for \ac {RIP}-Matrices}{section*.13}{}}
+\acronymused{RIP}
+\newlabel{eq:error}{{2.8}{8}{Sparse Recovery for \ac {RIP}-Matrices}{equation.2.8}{}}
+\newlabel{def:bnd_orth_sys}{{2.4}{8}{}{thm.2.4}{}}
+\newlabel{def:sys_bnd}{{2.9}{8}{}{equation.2.9}{}}
+\acronymused{RIP}
+\newlabel{thm:boundedBOS}{{2.5}{8}{\ac {RIP} for bounded orthonormal systems}{thm.2.5}{}}
+\acronymused{RIP}
+\citation{Natarajan_1995L0}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Methods}{9}{section.3}}
+\newlabel{sec:num_method}{{3}{9}{Methods}{section.3}{}}
+\acronymused{DSRAR}
+\newlabel{eq:ape_L0}{{3.1}{9}{Methods}{equation.3.1}{}}
+\newlabel{eq:matrixelem}{{3.2}{9}{Methods}{equation.3.2}{}}
+\acronymused{CS}
+\acronymused{QoI}
+\acronymused{UQ}
+\acronymused{amdP}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Data-driven construction of the \ac {amdP} basis}{9}{subsection.3.1}}
+\newlabel{sec:data_driven_basis}{{3.1}{9}{Data-driven construction of the \ac {amdP} basis}{subsection.3.1}{}}
+\AC@undonewlabel{acro:PCA}
+\newlabel{acro:PCA}{{3.1}{9}{Data-driven construction of the \ac {amdP} basis}{section*.14}{}}
+\acronymused{PCA}
+\acronymused{amdP}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Orthonormal basis}{9}{subsubsection.3.1.1}}
+\newlabel{def:disc_meas}{{3.3}{9}{Orthonormal basis}{equation.3.3}{}}
+\citation{dunkl_xu_2014}
+\citation{dunkl_xu_2014}
+\newlabel{eq:exact_orth}{{3.4}{10}{Orthonormal basis}{equation.3.4}{}}
+\newlabel{eq:exact_orth_coeff}{{3.5}{10}{Orthonormal basis}{equation.3.5}{}}
+\acronymused{amdP}
+\newlabel{eq:exact_orth_coeff_quad}{{3.6}{10}{Orthonormal basis}{equation.3.6}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Construct the orthonormal {\color  {blue}\ac {amdP}} basis $\left \{ \psi _{\bm  {\alpha }}(\bm  {\xi })\right \}_{\delimiter "026A30C \bm  {\alpha }\delimiter "026A30C = 0}^p$ on discrete sample set $S$.}}{11}{algorithm.1}}
+\acronymused{amdP}
+\newlabel{alg:orth_discrete}{{1}{11}{Construct the orthonormal \blue {\ac {amdP}} basis $\left \{ \psi _{\ba }(\bx )\right \}_{\vert \ba \vert = 0}^p$ on discrete sample set $S$}{algorithm.1}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Construct the orthonormal {\color  {blue}\ac {amdP}} basis $\left \{ \psi _{\bm  {\alpha }}(\bm  {\xi })\right \}_{\delimiter "026A30C \bm  {\alpha }\delimiter "026A30C = 0}^p$ with probability measure $\rho (\bm  {\alpha })$.}}{11}{algorithm.2}}
+\acronymused{amdP}
+\newlabel{alg:orth_density}{{2}{11}{Construct the orthonormal \blue {\ac {amdP}} basis $\left \{ \psi _{\ba }(\bx )\right \}_{\vert \ba \vert = 0}^p$ with probability measure $\rho (\ba )$}{algorithm.2}{}}
+\newlabel{eq:poly_basis_vector}{{3.7}{11}{}{equation.3.7}{}}
+\newlabel{thm:orth_basis}{{3.1}{11}{}{equation.3.7}{}}
+\newlabel{col:orth_basis}{{1}{12}{}{cor.1}{}}
+\acronymused{CS}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}Near-orthonormal basis}{12}{subsubsection.3.1.2}}
+\acronymused{amdP}
+\newlabel{eq:near_orth_condition}{{3.9}{12}{Near-orthonormal basis}{equation.3.9}{}}
+\citation{Lei_Yang_MMS_2015}
+\newlabel{eq:coeff_transform}{{3.10}{13}{Near-orthonormal basis}{equation.3.10}{}}
+\newlabel{eq:zeta_cross_validation}{{3.12}{13}{Near-orthonormal basis}{equation.3.12}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Construct the near-orthonormal {\color  {blue}\ac {amdP}} basis $\left \{ \psi _{\bm  {\alpha }}(\bm  {\xi })\right \}_{\delimiter "026A30C \bm  {\alpha }\delimiter "026A30C = 0}^p$ on discrete sample set $S$.}}{13}{algorithm.3}}
+\acronymused{amdP}
+\acronymused{amdP}
+\newlabel{alg:near_orth_discrete}{{3}{13}{Construct the near-orthonormal \blue {\ac {amdP}} basis $\left \{ \psi _{\ba }(\bx )\right \}_{\vert \ba \vert = 0}^p$ on discrete sample set $S$}{algorithm.3}{}}
+\acronymused{amdP}
+\citation{Lei_Yang_MMS_2015}
+\citation{Russi_PHD_2001,ConstantineDW14}
+\acronymused{amdP}
+\newlabel{eq:near_orth_condition_approx}{{3.13}{14}{}{equation.3.13}{}}
+\acronymused{amdP}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Sparsity enhancement}{14}{subsection.3.2}}
+\newlabel{sec:sparsity_enhancement}{{3.2}{14}{Sparsity enhancement}{subsection.3.2}{}}
+\newlabel{eq:chi_def}{{3.16}{14}{Sparsity enhancement}{equation.3.16}{}}
+\citation{Lei_Yang_MMS_2015}
+\citation{Yang_Lei_JCP_2016}
+\citation{Lei_Yang_MMS_2015}
+\newlabel{eq:G_approx}{{3.17}{15}{Sparsity enhancement}{equation.3.17}{}}
+\acronymused{amdP}
+\acronymused{amdP}
+\acronymused{DSRAR}
+\acronymused{DSRAR}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces \ac {DSRAR}: Surrogate model construction with discrete sample set $S$ and training set $S_f$.}}{16}{algorithm.4}}
+\acronymused{DSRAR}
+\acronymused{amdP}
+\newlabel{alg:data_driven}{{4}{16}{\ac {DSRAR}: Surrogate model construction with discrete sample set $S$ and training set $S_f$}{algorithm.4}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces \ac {DSRAR}: Surrogate model construction with training set $S_f$ and probability measure $\rho (\bm  {\xi })$.}}{16}{algorithm.5}}
+\acronymused{DSRAR}
+\acronymused{amdP}
+\newlabel{alg:explicit_density}{{5}{16}{\ac {DSRAR}: Surrogate model construction with training set $S_f$ and probability measure $\rho (\bx )$}{algorithm.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{17}{section.4}}
+\newlabel{sec:numerical}{{4}{17}{Results}{section.4}{}}
+\acronymused{DSRAR}
+\acronymused{amdP}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Accurate recovery of linear systems with data-driven bases}{17}{subsection.4.1}}
+\newlabel{sec:basis_comparison}{{4.1}{17}{Accurate recovery of linear systems with data-driven bases}{subsection.4.1}{}}
+\newlabel{eq:GM_test_set}{{4.1}{17}{Accurate recovery of linear systems with data-driven bases}{equation.4.1}{}}
+\newlabel{eq:GM_var}{{4.2}{17}{Accurate recovery of linear systems with data-driven bases}{equation.4.2}{}}
+\newlabel{eq:matA}{{4.3}{17}{Accurate recovery of linear systems with data-driven bases}{equation.4.3}{}}
+\acronymused{amdP}
+\acronymused{amdP}
+\citation{Rauhut_2012sparseLegen}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Sparse linear systems}{18}{subsubsection.4.1.1}}
+\newlabel{sec:recover_sparse}{{4.1.1}{18}{Sparse linear systems}{subsubsection.4.1.1}{}}
+\newlabel{eq:delta_s_theta_s}{{4.4}{18}{}{equation.4.4}{}}
+\newlabel{thm:exact_recovery}{{4.1}{18}{}{equation.4.4}{}}
+\acronymused{amdP}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}{Non-sparse} linear systems}{18}{subsubsection.4.1.2}}
+\newlabel{sec:recover_dense}{{4.1.2}{18}{{Non-sparse} linear systems}{subsubsection.4.1.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The measurement matrices constructed by the exact and near-orthonormal bases exhibit similar performance in the theoretical (sufficient) bound and numerical results for recovery of sparse vector. Both bases outperform the Legendre basis. ``\leavevmode {\color  {red}\rectanglesolidline }'': the exact orthonormal {\color  {blue}\ac {amdP}} basis; ``\leavevmode {\color  {green}\triangledashline }'': the near-orthonormal {\color  {blue}\ac {amdP}} basis; ``\leavevmode {\color  {blue}\diamonddashdotline }'': Legendre basis. (a) Mean value of the theoretical bound $\mathbb  {E}\left [\theta _s/\left (1-\delta _s\right )\right ]$ of exact recovery for measurement matrices $\bm  {A}$ constructed by various bases for the chosen non-zero index $T_{\bm  {\alpha }}$ with $s = 3$. {\color  {blue}The error bar represents the standard deviation.} The inset plot shows the theoretical prediction of the exact recovery probability. (b) Relative $l_1$ error of the recovered sparse vector ($s = 5$) using different training set size $M$. The inset plot shows the recovery error $\delimiter "026B30D \bm  {c} - \mathaccentV {tilde}07E{\bm  {c}}\delimiter "026B30D _1$ of one training set for the Legendre basis system.}}{19}{figure.1}}
+\acronymused{amdP}
+\acronymused{amdP}
+\newlabel{fig:err_sparse_vector}{{1}{19}{The measurement matrices constructed by the exact and near-orthonormal bases exhibit similar performance in the theoretical (sufficient) bound and numerical results for recovery of sparse vector. Both bases outperform the Legendre basis. ``\textcolor {red}{\protect \rectanglesolidline }'': the exact orthonormal \blue {\ac {amdP}} basis; ``\textcolor {green}{\protect \triangledashline }'': the near-orthonormal \blue {\ac {amdP}} basis; ``\textcolor {blue}{\protect \diamonddashdotline }'': Legendre basis. (a) Mean value of the theoretical bound $\mathbb {E}\left [\theta _s/\left (1-\delta _s\right )\right ]$ of exact recovery for measurement matrices $\bm A$ constructed by various bases for the chosen non-zero index $T_{\ba }$ with $s = 3$. \blue {The error bar represents the standard deviation.} The inset plot shows the theoretical prediction of the exact recovery probability. (b) Relative $l_1$ error of the recovered sparse vector ($s = 5$) using different training set size $M$. The inset plot shows the recovery error $\Vert \bm c - \tilde {\bm c}\Vert _1$ of one training set for the Legendre basis system}{figure.1}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{19}{figure.1}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{19}{figure.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Systems with explicit knowledge of density function}{19}{subsection.4.2}}
+\newlabel{sec:explicit_density}{{4.2}{19}{Systems with explicit knowledge of density function}{subsection.4.2}{}}
+\acronymused{amdP}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The measurement matrices constructed by different bases show different numerical performance for the recovery of non-sparse vector. The near-orthonormal basis shows the most accurate result. (a) $l_1$ error of the recovered vector $\mathbf  {c}$ with different bases. ``\leavevmode {\color  {red}\rectanglesolidline }'': the exact orthonormal {\color  {blue}\ac {amdP}} basis; ``\leavevmode {\color  {green}\triangledashline }'': the near-orthonormal {\color  {blue}\ac {amdP}} basis; ``\leavevmode {\color  {blue}\diamonddashdotline }'': Legendre basis. (b-d) Contours of $\delimiter "026A30C \mathbf  {c}_{\bm  {\alpha }'} -\mathaccentV {tilde}07E{\mathbf  {c}}_{\bm  {\alpha }'}\delimiter "026A30C $ (sorted by magnitude) from training sets of size $M = 230$ with Legendre (top right), orthonormal (bottom left) and near-orthonormal bases (bottom right).}}{20}{figure.2}}
+\acronymused{amdP}
+\acronymused{amdP}
+\newlabel{fig:err_no_sparse_vector}{{2}{20}{The measurement matrices constructed by different bases show different numerical performance for the recovery of non-sparse vector. The near-orthonormal basis shows the most accurate result. (a) $l_1$ error of the recovered vector $\mathbf {c}$ with different bases. ``\textcolor {red}{\protect \rectanglesolidline }'': the exact orthonormal \blue {\ac {amdP}} basis; ``\textcolor {green}{\protect \triangledashline }'': the near-orthonormal \blue {\ac {amdP}} basis; ``\textcolor {blue}{\protect \diamonddashdotline }'': Legendre basis. (b-d) Contours of $\vert \mathbf {c}_{\bm {\alpha }'} -\tilde {\mathbf {c}}_{\bm {\alpha }'}\vert $ (sorted by magnitude) from training sets of size $M = 230$ with Legendre (top right), orthonormal (bottom left) and near-orthonormal bases (bottom right)}{figure.2}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{20}{figure.2}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{20}{figure.2}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {}}}{20}{figure.2}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {}}}{20}{figure.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}High-dimensional polynomial}{21}{subsubsection.4.2.1}}
+\newlabel{eq:poly_dim_20_p_3}{{4.5}{21}{High-dimensional polynomial}{equation.4.5}{}}
+\newlabel{eq:dens_exp}{{4.6}{21}{High-dimensional polynomial}{equation.4.6}{}}
+\AC@undonewlabel{acro:PDF}
+\newlabel{acro:PDF}{{4.2.1}{21}{High-dimensional polynomial}{section*.15}{}}
+\acronymused{PDF}
+\acronymused{amdP}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Sparsity-enhancing rotation with the reconstructed orthonormal {\color  {blue}\ac {amdP}} basis yields the most accurate recovery of a high-dimensional polynomial function of random vectors following density function given by Equation \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces \ref  {eq:dens_exp}\unskip \@@italiccorr )}}. Directly applying the rotation procedure without reconstructing the orthonormal basis yields errorneous prediction. ``\leavevmode {\color  {red}\rectanglesolidline }'': Laguerre polynomial basis with respect to $\bm  {\xi }$; ``\leavevmode {\color  {red}\triangledashdotline }'': Laguerre polynomial basis with respect to rotated vector $\bm  {\chi }$; ``\leavevmode {\color  {blue}\downtriangledashline }'': the reconstructed {\color  {blue}\ac {amdP}} orthonormal basis with respect to rotated vector $\bm  {\chi }$. }}{21}{figure.3}}
+\acronymused{amdP}
+\acronymused{amdP}
+\newlabel{fig:l2_lauguerre}{{3}{21}{Sparsity-enhancing rotation with the reconstructed orthonormal \blue {\ac {amdP}} basis yields the most accurate recovery of a high-dimensional polynomial function of random vectors following density function given by Equation \eqref {eq:dens_exp}. Directly applying the rotation procedure without reconstructing the orthonormal basis yields errorneous prediction. ``\textcolor {red}{\protect \rectanglesolidline }'': Laguerre polynomial basis with respect to $\bx $; ``\textcolor {red}{\protect \triangledashdotline }'': Laguerre polynomial basis with respect to rotated vector $\bm \chi $; ``\textcolor {blue}{\protect \downtriangledashline }'': the reconstructed \blue {\ac {amdP}} orthonormal basis with respect to rotated vector $\bm \chi $}{figure.3}{}}
+\citation{JardakSK02}
+\citation{Yang_Wan_rotation_2017}
+\acronymused{PDE}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}One-dimensional elliptic \acp {PDE} with high-dimensional random inputs}{22}{subsubsection.4.2.2}}
+\acronymused{PDE}
+\newlabel{eq:ellip}{{4.7}{22}{One-dimensional elliptic \acp {PDE} with high-dimensional random inputs}{equation.4.7}{}}
+\newlabel{eq:exp_kernel}{{4.8}{22}{One-dimensional elliptic \acp {PDE} with high-dimensional random inputs}{equation.4.8}{}}
+\newlabel{eq:kl}{{4.9}{22}{One-dimensional elliptic \acp {PDE} with high-dimensional random inputs}{equation.4.9}{}}
+\newlabel{eq:dens_cheb}{{4.10}{22}{One-dimensional elliptic \acp {PDE} with high-dimensional random inputs}{equation.4.10}{}}
+\acronymused{PDF}
+\acronymused{amdP}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Systems with implicit knowledge of density function}{22}{subsection.4.3}}
+\acronymused{DSRAR}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}High-dimensional polynomials}{22}{subsubsection.4.3.1}}
+\newlabel{sec:high_d_poly}{{4.3.1}{22}{High-dimensional polynomials}{subsubsection.4.3.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Sparsity-enhancing rotation with reconstructed orthonormal basis yield the most accurate surrogate models for a 1D elliptical \ac {PDE} with random permeability coefficient modeled by Equations\nobreakspace  {}\textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces \ref  {eq:kl}\unskip \@@italiccorr )}} and \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces \ref  {eq:dens_cheb}\unskip \@@italiccorr )}}. Directly applying the rotation procedure without reconstructing the orthonormal basis yields increased numerical error. ``\leavevmode {\color  {red}\rectanglesolidline }'': Chebyshev polynomial basis with respect to $\bm  {\xi }$; ``\leavevmode {\color  {red}\triangledashdotline }'': Chebyshev polynomial basis with respect to rotated vector $\bm  {\chi }$; ``\leavevmode {\color  {blue}\downtriangledashline }'': the reconstructed orthonormal {\color  {blue}\ac {amdP}} basis with respect to rotated vector $\bm  {\chi }$. }}{23}{figure.4}}
+\acronymused{PDE}
+\acronymused{amdP}
+\newlabel{fig:l2_chebyshev}{{4}{23}{Sparsity-enhancing rotation with reconstructed orthonormal basis yield the most accurate surrogate models for a 1D elliptical \ac {PDE} with random permeability coefficient modeled by Equations~\eqref {eq:kl} and \eqref {eq:dens_cheb}. Directly applying the rotation procedure without reconstructing the orthonormal basis yields increased numerical error. ``\textcolor {red}{\protect \rectanglesolidline }'': Chebyshev polynomial basis with respect to $\bx $; ``\textcolor {red}{\protect \triangledashdotline }'': Chebyshev polynomial basis with respect to rotated vector $\bm \chi $; ``\textcolor {blue}{\protect \downtriangledashline }'': the reconstructed orthonormal \blue {\ac {amdP}} basis with respect to rotated vector $\bm \chi $}{figure.4}{}}
+\acronymused{amdP}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Numerical results for recovery of a high-dimensional polynomial function. The combination of near-orthonormal basis construction with the sparsity enhancement rotation procedure yields the most accurate results. Directly applying the rotation procedure to the Legendre basis may lead to increased error despite increased sparsity in $\bm  {c}$. (a) Relative $l_2$ error of the recovered polynomial function with different bases: the exact orthonormal {\color  {blue}\ac {amdP}} basis with respect to $\bm  {\xi }$ (``\leavevmode {\color  {red}\rectanglesolidline }'') and $\bm  {\chi }$ (``\leavevmode {\color  {red}\rectangledashline }''); the near-orthonormal {\color  {blue}\ac {amdP}} basis with respect to $\bm  {\xi }$ (``\leavevmode {\color  {green}\trianglesolidline }'') and $\bm  {\chi }$ (``\leavevmode {\color  {green}\triangledashline }''); Legendre basis with respect to $\bm  {\xi }$ (``\leavevmode {\color  {blue}\diamondsolidline }'') and $\bm  {\chi }$( ``\leavevmode {\color  {blue}\diamonddashline }''). (b) Coefficients magnitude $\delimiter "026A30C c_{i}\delimiter "026A30C $ recovered using different bases. ``\leavevmode {\color  {red}\rectangleopen }'': the exact orthonormal {\color  {blue}\ac {amdP}} basis with respect to $\bm  {\xi }$; ``\leavevmode {\color  {green}\triangleopen }'': the near-orthonormal {\color  {blue}\ac {amdP}} basis with respect to $\bm  {\xi }$; ``\leavevmode {\color  {blue}\diamondopen }'': Legendre basis with respect to $\bm  {\xi }$. (c) Recovered coefficient magnitude $\delimiter "026A30C \mathbf  {c}_{i}\delimiter "026A30C $ using the near orthogonal basis with respect to $\bm  {\xi }$ (``\leavevmode {\color  {green}\triangleopen }'') and $\bm  {\chi }$ (``\leavevmode {\color  {gray}\circleopen }''). The dashed vertical lines indicate the separation between different polynomial orders $p$. (d) Recovered coefficient magnitude $\delimiter "026A30C \mathbf  {c}_{i}\delimiter "026A30C $ using the Legendre basis with respect to $\bm  {\xi }$ (``\leavevmode {\color  {blue}\diamondopen }'') and $\bm  {\chi }$ (``\leavevmode {\color  {gray}\circleopen }'').}}{24}{figure.5}}
+\acronymused{amdP}
+\acronymused{amdP}
+\acronymused{amdP}
+\acronymused{amdP}
+\newlabel{fig:err_rand_poly_dim_25}{{5}{24}{Numerical results for recovery of a high-dimensional polynomial function. The combination of near-orthonormal basis construction with the sparsity enhancement rotation procedure yields the most accurate results. Directly applying the rotation procedure to the Legendre basis may lead to increased error despite increased sparsity in $\bm c$. (a) Relative $l_2$ error of the recovered polynomial function with different bases: the exact orthonormal \blue {\ac {amdP}} basis with respect to $\bx $ (``\textcolor {red}{\protect \rectanglesolidline }'') and $\bm \chi $ (``\textcolor {red}{\protect \rectangledashline }''); the near-orthonormal \blue {\ac {amdP}} basis with respect to $\bx $ (``\textcolor {green}{\protect \trianglesolidline }'') and $\bm \chi $ (``\textcolor {green}{\protect \triangledashline }''); Legendre basis with respect to $\bx $ (``\textcolor {blue}{\protect \diamondsolidline }'') and $\bm \chi $( ``\textcolor {blue}{\protect \diamonddashline }''). (b) Coefficients magnitude $\vert c_{i}\vert $ recovered using different bases. ``\textcolor {red}{\protect \rectangleopen }'': the exact orthonormal \blue {\ac {amdP}} basis with respect to $\bx $; ``\textcolor {green}{\protect \triangleopen }'': the near-orthonormal \blue {\ac {amdP}} basis with respect to $\bx $; ``\textcolor {blue}{\protect \diamondopen }'': Legendre basis with respect to $\bx $. (c) Recovered coefficient magnitude $\vert \mathbf {c}_{i}\vert $ using the near orthogonal basis with respect to $\bx $ (``\textcolor {green}{\protect \triangleopen }'') and $\bm \chi $ (``\textcolor {gray}{\protect \circleopen }''). The dashed vertical lines indicate the separation between different polynomial orders $p$. (d) Recovered coefficient magnitude $\vert \mathbf {c}_{i}\vert $ using the Legendre basis with respect to $\bx $ (``\textcolor {blue}{\protect \diamondopen }'') and $\bm \chi $ (``\textcolor {gray}{\protect \circleopen }'')}{figure.5}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{24}{figure.5}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{24}{figure.5}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {}}}{24}{figure.5}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {}}}{24}{figure.5}}
+\citation{Zabaras_2014}
+\citation{Yang_2013reweightedL1}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The combination of near-orthonormal basis construction and sparsity enhancement rotation yields the most accurate results, as shown through the relative $l_2$ error of the constructed surrogate model for the 1D elliptic \ac {PDE} with random permeability coefficient: the exact orthonormal {\color  {blue}\ac {amdP}} basis with respect to $\bm  {\xi }$ (``\leavevmode {\color  {red}\rectanglesolidline }'') and $\bm  {\chi }$ (``\leavevmode {\color  {red}\rectangledashline }''); Legendre basis with respect to $\bm  {\xi }$ (``\leavevmode {\color  {blue}\diamondsolidline }'') and $\bm  {\chi }$( ``\leavevmode {\color  {blue}\diamonddashline }''); Hermite basis with respect to $\bm  {\xi }$ (``\leavevmode {\color  {gray}\downtrianglesolidline }''); the near-orthornormal {\color  {blue}\ac {amdP}} basis with respect to $\bm  {\chi }$ (``\leavevmode {\color  {green}\triangledashline }''). }}{25}{figure.6}}
+\acronymused{PDE}
+\acronymused{amdP}
+\acronymused{amdP}
+\newlabel{fig:err_elliptical_dim_20_p_3}{{6}{25}{The combination of near-orthonormal basis construction and sparsity enhancement rotation yields the most accurate results, as shown through the relative $l_2$ error of the constructed surrogate model for the 1D elliptic \ac {PDE} with random permeability coefficient: the exact orthonormal \blue {\ac {amdP}} basis with respect to $\bx $ (``\textcolor {red}{\protect \rectanglesolidline }'') and $\bm \chi $ (``\textcolor {red}{\protect \rectangledashline }''); Legendre basis with respect to $\bx $ (``\textcolor {blue}{\protect \diamondsolidline }'') and $\bm \chi $( ``\textcolor {blue}{\protect \diamonddashline }''); Hermite basis with respect to $\bx $ (``\textcolor {gray}{\protect \downtrianglesolidline }''); the near-orthornormal \blue {\ac {amdP}} basis with respect to $\bm \chi $ (``\textcolor {green}{\protect \triangledashline }'')}{figure.6}{}}
+\acronymused{PDE}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}1D elliptic \acp {PDE} with high-dimensional random inputs}{25}{subsubsection.4.3.2}}
+\acronymused{PDE}
+\acronymused{PCA}
+\newlabel{eq:ellip_sol}{{4.13}{25}{1D elliptic \acp {PDE} with high-dimensional random inputs}{equation.4.13}{}}
+\acronymused{QoI}
+\citation{Lei_Yang_MMS_2015}
+\citation{Ati_Bahar_BJ_2001}
+\citation{ren_biomolecular_2012,baker_biomolecular_2005}
+\acronymused{UQ}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}\ac {UQ} study of a molecule system under Non-Gaussian conformational distributions}{26}{subsection.4.4}}
+\newlabel{sec:mole_example}{{4.4}{26}{\ac {UQ} study of a molecule system under Non-Gaussian conformational distributions}{subsection.4.4}{}}
+\AC@undonewlabel{acro:SASA}
+\newlabel{acro:SASA}{{4.4}{26}{\ac {UQ} study of a molecule system under Non-Gaussian conformational distributions}{section*.16}{}}
+\acronymused{SASA}
+\AC@undonewlabel{acro:MD}
+\newlabel{acro:MD}{{4.4}{26}{\ac {UQ} study of a molecule system under Non-Gaussian conformational distributions}{section*.17}{}}
+\acronymused{MD}
+\acronymused{MD}
+\acronymused{PCA}
+\acronymused{SASA}
+\acronymused{QoI}
+\newlabel{eq:PB}{{4.15}{26}{\ac {UQ} study of a molecule system under Non-Gaussian conformational distributions}{equation.4.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces {The present method based on data-driven basis construction and sparsity enhancement rotation yields the most accurate surrogate model for molecular systems with mutually dependent non-Gaussian density distributions.} (a-b) Sampling points representing the joint distributions $\left (\xi _1, \xi _2\right )$ (left) and $\left (\xi _1, \xi _3\right )$ (right). (c-d) Relative $l_2$ error of the polar solvation energy (left) and the local \ac {SASA} (right) of an individual atom (the H9 atom attached to the ortho-carbon atom) obtained with different numbers of training data $M$: the exact {\color  {blue}\ac {amdP}} orthonormal basis with respect to $\bm  {\xi }$ (``\leavevmode {\color  {red}\rectanglesolidline }'') and $\bm  {\chi }$ (``\leavevmode {\color  {red}\rectangledashline }''); Hermite basis with respect to $\bm  {\xi }$ (``\leavevmode {\color  {gray}\downtrianglesolidline }'') and $\bm  {\chi }$ (``\leavevmode {\color  {gray}\downtriangledashline }''); Legendre basis with respect to $\bm  {\xi }$ (``\leavevmode {\color  {blue}\diamondsolidline }''); the near-orthornormal {\color  {blue}\ac {amdP}} basis with respect to $\bm  {\chi }$ (``\leavevmode {\color  {green}\triangledashline }''). }}{27}{figure.7}}
+\acronymused{SASA}
+\acronymused{amdP}
+\acronymused{amdP}
+\newlabel{fig:err_mol_dim_12_p_4}{{7}{27}{{The present method based on data-driven basis construction and sparsity enhancement rotation yields the most accurate surrogate model for molecular systems with mutually dependent non-Gaussian density distributions.} (a-b) Sampling points representing the joint distributions $\left (\xi _1, \xi _2\right )$ (left) and $\left (\xi _1, \xi _3\right )$ (right). (c-d) Relative $l_2$ error of the polar solvation energy (left) and the local \ac {SASA} (right) of an individual atom (the H9 atom attached to the ortho-carbon atom) obtained with different numbers of training data $M$: the exact \blue {\ac {amdP}} orthonormal basis with respect to $\bx $ (``\textcolor {red}{\protect \rectanglesolidline }'') and $\bm \chi $ (``\textcolor {red}{\protect \rectangledashline }''); Hermite basis with respect to $\bx $ (``\textcolor {gray}{\protect \downtrianglesolidline }'') and $\bm \chi $ (``\textcolor {gray}{\protect \downtriangledashline }''); Legendre basis with respect to $\bx $ (``\textcolor {blue}{\protect \diamondsolidline }''); the near-orthornormal \blue {\ac {amdP}} basis with respect to $\bm \chi $ (``\textcolor {green}{\protect \triangledashline }'')}{figure.7}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{27}{figure.7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{27}{figure.7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {}}}{27}{figure.7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {}}}{27}{figure.7}}
+\citation{APBS_2018}
+\citation{Shrake_JMB_1973}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces {The present method yields the most accurate prediction on the \ac {PDF} of the QoI for the molecular systems. Direct fitting of the underlying density $\omega (\bm  {\xi })$ using Gaussian Mixture model may induce biased error to the \ac {PDF} prediction.} (a) Fitted random variables $(\xi _1,\xi _2)$ with Gaussian mixture models. (b) \ac {PDF} of the solvation energy obtained with the Gaussian Mixture model and the present data-driven approach. ``\leavevmode {\color  {red}\rectanglesolidline }'': reference solution obtained from $2\times 10^5$ \ac {MC} samples; ``\leavevmode {\color  {blue}\diamonddashdotline }'': direct \ac {MC} sampling using the same set of $200$ samples; ``\leavevmode {\color  {green}\triangledashline }'': present method using the same set of $200$ samples; ``\leavevmode {\color  {orange}\dashline }'': fitting Gaussian Mixture model using $800$ samples. }}{28}{figure.8}}
+\acronymused{PDF}
+\acronymused{PDF}
+\acronymused{PDF}
+\acronymused{MC}
+\acronymused{MC}
+\newlabel{fig:pdf_mol_dim_12_p_4}{{8}{28}{{The present method yields the most accurate prediction on the \ac {PDF} of the QoI for the molecular systems. Direct fitting of the underlying density $\omega (\bx )$ using Gaussian Mixture model may induce biased error to the \ac {PDF} prediction.} (a) Fitted random variables $(\xi _1,\xi _2)$ with Gaussian mixture models. (b) \ac {PDF} of the solvation energy obtained with the Gaussian Mixture model and the present data-driven approach. ``\textcolor {red}{\protect \rectanglesolidline }'': reference solution obtained from $2\times 10^5$ \ac {MC} samples; ``\textcolor {blue}{\protect \diamonddashdotline }'': direct \ac {MC} sampling using the same set of $200$ samples; ``\textcolor {green}{\protect \triangledashline }'': present method using the same set of $200$ samples; ``\textcolor {orange}{\protect \dashline }'': fitting Gaussian Mixture model using $800$ samples}{figure.8}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{28}{figure.8}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{28}{figure.8}}
+\AC@undonewlabel{acro:APBS}
+\newlabel{acro:APBS}{{4.4}{28}{\ac {UQ} study of a molecule system under Non-Gaussian conformational distributions}{section*.18}{}}
+\acronymused{APBS}
+\acronymused{SASA}
+\acronymused{APBS}
+\acronymused{APBS}
+\acronymused{SASA}
+\acronymused{gPC}
+\acronymused{QoI}
+\citation{Bajaj_ACM_2016,Bajaj_JCB_2018}
+\acronymused{PDF}
+\acronymused{QoI}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Summary}{29}{section.5}}
+\newlabel{sec:summary}{{5}{29}{Summary}{section.5}{}}
+\acronymused{DSRAR}
+\acronymused{UQ}
+\acronymused{DSRAR}
+\acronymused{UQ}
+\acronymused{amdP}
+\acronymused{DSRAR}
+\acronymused{UQ}
+\acronymused{QoI}
+\acronymused{PDE}
+\acronymused{DSRAR}
+\citation{Rauhut_2010CsSM}
+\citation{Candes_2005Decoding,Candes_2006Stablesrec,Rauhut_2010CsSM}
+\citation{Rauhut_2010CsSM}
+\acronymused{CS}
+\acronymused{CS}
+\acronymused{DSRAR}
+\acronymused{UQ}
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix A}Proof of Theorem\nobreakspace  {}\ref  {thm:exact_recovery}}{30}{appendix.A}}
+\newlabel{app:exact_recovery}{{Appendix A}{30}{Proof of Theorem~\ref {thm:exact_recovery}}{appendix.A}{}}
+\newlabel{eq:null_condition}{{A.1}{30}{Proof of Theorem~\ref {thm:exact_recovery}}{equation.A.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {B.9}{\ignorespaces {The null spaces of measurement matrices constructed by the exact and near-orthonormal bases are different under $\left \delimiter "026B30D \bm  {v}_{T_{\bm  {\alpha }}}\right \delimiter "026B30D _1 > \left \delimiter "026B30D \bm  {v}_{T_{\bm  {\alpha }}^c}\right \delimiter "026B30D _1$---a necessary condition for $\bm  {c}$ not being recoverable exactly.} Density contour of the normalized null space vector component $\qopname  \relax o{log}\delimiter "026A30C \rm  {v}_{i'}\delimiter "026A30C $ (sorted by magnitude) of the measurement matrix $\bm  {A}$ constructed by orthogonal (a) and near-orthogonal basis functions (b) that satisfy $\left \delimiter "026B30D \bm  {v}_{T_{\bm  {\alpha }}}\right \delimiter "026B30D _1 > \left \delimiter "026B30D \bm  {v}_{T_{\bm  {\alpha }}^c}\right \delimiter "026B30D _1$ and $\delimiter "026B30D \bm  {v}\delimiter "026B30D _2 = 1$.}}{31}{figure.9}}
+\newlabel{fig:contour_null_vector}{{B.9}{31}{{The null spaces of measurement matrices constructed by the exact and near-orthonormal bases are different under $\left \Vert \bm v_{T_{\ba }}\right \Vert _1 > \left \Vert \bm v_{T_{\ba }^c}\right \Vert _1$---a necessary condition for $\bm c$ not being recoverable exactly.} Density contour of the normalized null space vector component $\log \vert \rm {v}_{i'}\vert $ (sorted by magnitude) of the measurement matrix $\bm A$ constructed by orthogonal (a) and near-orthogonal basis functions (b) that satisfy $\left \Vert \bm v_{T_{\ba }}\right \Vert _1 > \left \Vert \bm v_{T_{\ba }^c}\right \Vert _1$ and $\Vert \bm v\Vert _2 = 1$}{figure.9}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{31}{figure.9}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{31}{figure.9}}
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix B}Measurement matrix and basis bounds}{31}{appendix.B}}
+\newlabel{app:basis_bound}{{Appendix B}{31}{Measurement matrix and basis bounds}{appendix.B}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix B.1}Null space of measurement matrix from Section \ref  {sec:basis_comparison}}{31}{subsection.B.1}}
+\newlabel{eq:l1_failure}{{B.1}{31}{Null space of measurement matrix from Section \ref {sec:basis_comparison}}{equation.B.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix B.2}Basis bounds}{31}{subsection.B.2}}
+\citation{Marrel_Q2_2009}
+\newlabel{eq:basis_bound}{{B.2}{32}{Basis bounds}{equation.B.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {B.1}{\ignorespaces $\mathaccentV {tilde}07E{K}$ of constructed basis set for Gaussian mixture system $d = 25$, $p = 2$ and $N_s = 1\times 10^5$.}}{32}{table.1}}
+\newlabel{tab:GM_d_25_p_2}{{B.1}{32}{$\tilde {K}$ of constructed basis set for Gaussian mixture system $d = 25$, $p = 2$ and $N_s = 1\times 10^5$}{table.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix C}Other metrics for the surrogate model}{32}{appendix.C}}
+\citation{Chastaing_sobol_2014}
+\@writefile{lot}{\contentsline {table}{\numberline {B.2}{\ignorespaces $\mathaccentV {tilde}07E{K}$ of constructed basis set for Gaussian mixture system $d = 25$, $p = 3$ and $N_s = 2\times 10^5$.}}{33}{table.2}}
+\newlabel{tab:GM_d_25_p_3}{{B.2}{33}{$\tilde {K}$ of constructed basis set for Gaussian mixture system $d = 25$, $p = 3$ and $N_s = 2\times 10^5$}{table.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {B.3}{\ignorespaces $\mathaccentV {tilde}07E{K}$ of constructed basis set for molecular system $d = 12$, $p = 4$ and $N_s = 2\times 10^5$.}}{33}{table.3}}
+\newlabel{tab:BioMol_d_12_p_4}{{B.3}{33}{$\tilde {K}$ of constructed basis set for molecular system $d = 12$, $p = 4$ and $N_s = 2\times 10^5$}{table.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {C.4}{\ignorespaces The predictivity coefficient $Q_2$ for polynomial function with Gaussian Mixture measure ($d = 25$ and $p = 3$) and the molecular system for solvation energy and SASA of atom $\rm  {H9}$.}}{33}{table.4}}
+\newlabel{tab:Q_2_GM_mol}{{C.4}{33}{The predictivity coefficient $Q_2$ for polynomial function with Gaussian Mixture measure ($d = 25$ and $p = 3$) and the molecular system for solvation energy and SASA of atom $\rm {H9}$}{table.4}{}}
+\acronymused{QoI}
+\citation{GROMACS}
+\citation{RN1}
+\citation{RN2}
+\citation{RN3}
+\citation{RN4}
+\citation{RN5}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.10}{\ignorespaces The first-order \leavevmode {\color  {red}Sobol'} sensitivity indices for (a) polynomial function with Gaussian mixture measure ($d = 25$, $p = 3$) (b) molecular system for solvation energy (``\leavevmode {\color  {red}\rectanglesolidline }'') and \ac {SASA} of atom $\rm  {H9}$(``\leavevmode {\color  {blue}\diamonddashdotline }''). }}{34}{figure.10}}
+\acronymused{SASA}
+\newlabel{fig:sobol_GM_mol}{{C.10}{34}{The first-order \textcolor {red}{Sobol'} sensitivity indices for (a) polynomial function with Gaussian mixture measure ($d = 25$, $p = 3$) (b) molecular system for solvation energy (``\textcolor {red}{\protect \rectanglesolidline }'') and \ac {SASA} of atom $\rm {H9}$(``\textcolor {blue}{\protect \diamonddashdotline }'')}{figure.10}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{34}{figure.10}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{34}{figure.10}}
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix D}Generation of the Gaussian mixture data set}{34}{appendix.D}}
+\newlabel{app:GM_generation}{{Appendix D}{34}{Generation of the Gaussian mixture data set}{appendix.D}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix E}Molecular Dynamics simulation and calculation details}{34}{appendix.E}}
+\newlabel{app:sim}{{Appendix E}{34}{Molecular Dynamics simulation and calculation details}{appendix.E}{}}
+\acronymused{MD}
+\AC@undonewlabel{acro:GAFF}
+\newlabel{acro:GAFF}{{Appendix E}{34}{Molecular Dynamics simulation and calculation details}{section*.19}{}}
+\acronymused{GAFF}
+\citation{BakerSJHM01,APBS_2018}
+\bibdata{ab_uq,physics_system}
+\bibcite{Lei_Yang_MMS_2015}{{1}{}{{}}{{}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {E.11}{\ignorespaces Sketch of the molecule benzyl bromide with labeled atoms.}}{35}{figure.11}}
+\newlabel{fig:mol_blb}{{E.11}{35}{Sketch of the molecule benzyl bromide with labeled atoms}{figure.11}{}}
+\bibcite{OLADYSHKIN2012}{{2}{}{{}}{{}}}
+\bibcite{Saltelli_book_2008}{{3}{}{{}}{{}}}
+\bibcite{Bishop_2006}{{4}{}{{}}{{}}}
+\bibcite{Laio_Parrinello_PNAS_2002}{{5}{}{{}}{{}}}
+\bibcite{Fishman96}{{6}{}{{}}{{}}}
+\bibcite{Kucherenko_2015}{{7}{}{{}}{{}}}
+\bibcite{Giles_2015}{{8}{}{{}}{{}}}
+\bibcite{Heinrich_MLMC_2001}{{9}{}{{}}{{}}}
+\bibcite{Pisaroni_Nobile_CMAME_2017}{{10}{}{{}}{{}}}
+\bibcite{Koutsourelakis_SISC_2009}{{11}{}{{}}{{}}}
+\bibcite{Peherstorfer_Willcox_SISC_2016}{{12}{}{{}}{{}}}
+\bibcite{Fox99}{{13}{}{{}}{{}}}
+\bibcite{Niedeereiter92}{{14}{}{{}}{{}}}
+\bibcite{NiederreiterHLZ98}{{15}{}{{}}{{}}}
+\bibcite{Mckay_Beckman_Technometrics_1979}{{16}{}{{}}{{}}}
+\bibcite{Stein_tech87}{{17}{}{{}}{{}}}
+\bibcite{Loh_AS96}{{18}{}{{}}{{}}}
+\bibcite{Sack_Welch_Stat_1989}{{19}{}{{}}{{}}}
+\bibcite{Kennedy_Hagan_JRSS_2001}{{20}{}{{}}{{}}}
+\bibcite{GP_book_Rasmussen_2006}{{21}{}{{}}{{}}}
+\bibcite{Wiener38}{{22}{}{{}}{{}}}
+\bibcite{Ghanem_1991Spectralappro}{{23}{}{{}}{{}}}
+\bibcite{Xiu_2002Wiener}{{24}{}{{}}{{}}}
+\bibcite{Qian_Wu_2008}{{25}{}{{}}{{}}}
+\bibcite{Williams_2006}{{26}{}{{}}{{}}}
+\bibcite{Oakley_OHagan_Biometrika_2002}{{27}{}{{}}{{}}}
+\bibcite{Lockwood_Anitescu_2012}{{28}{}{{}}{{}}}
+\bibcite{XiuK_JCP03}{{29}{}{{}}{{}}}
+\bibcite{GhanemMPW_CMAME05}{{30}{}{{}}{{}}}
+\bibcite{Knio_CFD06}{{31}{}{{}}{{}}}
+\bibcite{Sudret2008}{{32}{}{{}}{{}}}
+\bibcite{LiXiu_JCP09}{{33}{}{{}}{{}}}
+\bibcite{MarzoukXiu2009}{{34}{}{{}}{{}}}
+\bibcite{Li2010}{{35}{}{{}}{{}}}
+\bibcite{Li2018}{{36}{}{{}}{{}}}
+\bibcite{Schobi_2015}{{37}{}{{}}{{}}}
+\bibcite{Gratiet_2016}{{38}{}{{}}{{}}}
+\bibcite{Owen_Challenor_SIAM_2017}{{39}{}{{}}{{}}}
+\bibcite{Roy_Mocayd_2018}{{40}{}{{}}{{}}}
+\bibcite{MathelinH_NASA03}{{41}{}{{}}{{}}}
+\bibcite{XiuH_SISC05}{{42}{}{{}}{{}}}
+\bibcite{Babuska2007}{{43}{}{{}}{{}}}
+\bibcite{nobile2008sparse}{{44}{}{{}}{{}}}
+\bibcite{Ma2009}{{45}{}{{}}{{}}}
+\bibcite{Foo2010}{{46}{}{{}}{{}}}
+\bibcite{CONSTANTINE2012}{{47}{}{{}}{{}}}
+\bibcite{jakemanG2013}{{48}{}{{}}{{}}}
+\bibcite{Li2016}{{49}{}{{}}{{}}}
+\bibcite{Doostan_2011nonadapted}{{50}{}{{}}{{}}}
+\bibcite{Yan_2012Sc}{{51}{}{{}}{{}}}
+\bibcite{Rauhut_2012sparseLegen}{{52}{}{{}}{{}}}
+\bibcite{mathelin_gallivan_2012}{{53}{}{{}}{{}}}
+\bibcite{Yang_2013reweightedL1}{{54}{}{{}}{{}}}
+\bibcite{Hampton_2015Cs}{{55}{}{{}}{{}}}
+\bibcite{Peng_2016gradientL1}{{56}{}{{}}{{}}}
+\bibcite{Yan_2017}{{57}{}{{}}{{}}}
+\bibcite{Liu_2016QMCL1}{{58}{}{{}}{{}}}
+\bibcite{Lei_Karniadakis_JCP_2017}{{59}{}{{}}{{}}}
+\bibcite{ALEMAZKOOR2017}{{60}{}{{}}{{}}}
+\bibcite{DIAZ2018}{{61}{}{{}}{{}}}
+\bibcite{RAI2018}{{62}{}{{}}{{}}}
+\bibcite{Huang_Protein_book_2005}{{63}{}{{}}{{}}}
+\bibcite{Kumar_Kollman_JCC_1992}{{64}{}{{}}{{}}}
+\bibcite{Mar_Van_JCP_2008}{{65}{}{{}}{{}}}
+\bibcite{ConstantineDW14}{{66}{}{{}}{{}}}
+\bibcite{LIweixuan2015}{{67}{}{{}}{{}}}
+\bibcite{Vittaldev2016}{{68}{}{{}}{{}}}
+\bibcite{FEINBERG2015}{{69}{}{{}}{{}}}
+\bibcite{Zabaras_2014}{{70}{}{{}}{{}}}
+\bibcite{WanK_SISC06}{{71}{}{{}}{{}}}
+\bibcite{Witteveen_Bijl_2006}{{72}{}{{}}{{}}}
+\bibcite{Zheng_2015MEPCM}{{73}{}{{}}{{}}}
+\bibcite{YIN2018}{{74}{}{{}}{{}}}
+\bibcite{AHLFELD2016}{{75}{}{{}}{{}}}
+\bibcite{dunkl_xu_2014}{{76}{}{{}}{{}}}
+\bibcite{Candes_2005error}{{77}{}{{}}{{}}}
+\bibcite{Candes_2008Rip}{{78}{}{{}}{{}}}
+\bibcite{Davies_2010RICLp}{{79}{}{{}}{{}}}
+\bibcite{Donoho_2006srs}{{80}{}{{}}{{}}}
+\bibcite{Berg_2007spgl}{{81}{}{{}}{{}}}
+\bibcite{Candes_2005Decoding}{{82}{}{{}}{{}}}
+\bibcite{Candes_2006Stablesrec}{{83}{}{{}}{{}}}
+\bibcite{Natarajan_1995L0}{{84}{}{{}}{{}}}
+\bibcite{Russi_PHD_2001}{{85}{}{{}}{{}}}
+\bibcite{Yang_Lei_JCP_2016}{{86}{}{{}}{{}}}
+\bibcite{JardakSK02}{{87}{}{{}}{{}}}
+\bibcite{Yang_Wan_rotation_2017}{{88}{}{{}}{{}}}
+\bibcite{Ati_Bahar_BJ_2001}{{89}{}{{}}{{}}}
+\bibcite{ren_biomolecular_2012}{{90}{}{{}}{{}}}
+\bibcite{baker_biomolecular_2005}{{91}{}{{}}{{}}}
+\bibcite{APBS_2018}{{92}{}{{}}{{}}}
+\bibcite{Shrake_JMB_1973}{{93}{}{{}}{{}}}
+\bibcite{Bajaj_ACM_2016}{{94}{}{{}}{{}}}
+\bibcite{Bajaj_JCB_2018}{{95}{}{{}}{{}}}
+\bibcite{Rauhut_2010CsSM}{{96}{}{{}}{{}}}
+\bibcite{Marrel_Q2_2009}{{97}{}{{}}{{}}}
+\bibcite{Chastaing_sobol_2014}{{98}{}{{}}{{}}}
+\bibcite{GROMACS}{{99}{}{{}}{{}}}
+\bibcite{RN1}{{100}{}{{}}{{}}}
+\bibcite{RN2}{{101}{}{{}}{{}}}
+\bibcite{RN3}{{102}{}{{}}{{}}}
+\bibcite{RN4}{{103}{}{{}}{{}}}
+\bibcite{RN5}{{104}{}{{}}{{}}}
+\bibcite{BakerSJHM01}{{105}{}{{}}{{}}}
+\providecommand\NAT@force@numbers{}\NAT@force@numbers

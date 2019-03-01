@@ -1,0 +1,205 @@
+\section{Introduction}\label{sec:intro}
+
+A fundamental problem in \ac{UQ} \cite{Saltelli_book_2008} is to calculate 
+the statistical properties of a \ac{QoI} due to various sources of randomness, e.g., \blue{
+numerical simulations} subject to uncertain parameters, initial conditions and/or boundary 
+conditions, as well as experimental measurements in the presence of material heterogeneity, thermal fluctuations. Such sources of uncertainty 
+are usually characterized by high-dimensional random variables whose probability 
+measures can be either discrete or continuous. In real-world systems, there are usually two crucial
+challenges to accurately quantify the propagation of the randomness from the input to the system response.
+The first challenge comes from the high-dimensionality of the random inputs. \blue{
+For such systems, limited computational resources often motivates further dimensionality reduction \cite{Bishop_2006}. 
+However, it is often non-trivial to accurately transfer the high-dimensional random space into 
+a low-dimensional random space.}
+This results in the numerical intractability of quantifying the uncertainty of the \ac{QoI} from training data of limited size. 
+%
+The second challenge arises from frequent dependencies and arbitrary distribution of the random inputs. 
+Typically, random inputs are \blue{represented by random vectors with mutually independent components.}   
+For realistic systems, the underlying distribution of the inputs can often involve dependencies that cannot be 
+ignored \blue{(e.g., see molecule systems in Ref. \cite{Laio_Parrinello_PNAS_2002} and Sec. \ref{sec:mole_example})}.
+\blue{Moreover, the input distribution could be even unknown} and thus we may only have access to it implicitly through a 
+collection of samples. This creates further numerical obstacles in characterizing the random inputs 
+as well as their effect on the system response. In the current work, we present a 
+\ac{DSRAR} framework
+for dealing with all of the aforementioned challenges. \blue{While we focused on numerical experiments in the present study, the developed 
+framework can be also applied to \ac{UQ} in experimental studies.}
+
+In practice, a straightforward and robust approach is the \ac{MC} method, which involves collecting 
+a large number of samples of the random inputs from their distribution, evaluating 
+the \ac{QoI} at each sample point, and then obtaining the statistical properties (mean, variance, \blue{sensitivity indices}, 
+probability density function, probability of a certain event etc.) of the \ac{QoI}. Unfortunately, to 
+get an accurate estimate, the \ac{MC} method requires a large number of simulations due to
+its slow convergence rate \cite{Fishman96, Kucherenko_2015}. Furthermore, for large or complex systems, even a single 
+instance of these simulations may require very large computational resources. Under such circumstances, 
+the computational cost of \ac{MC} method can become extremely large. \textcolor{blue}{Several approaches have been developed to 
+alleviate such difficulties. 
+For instance, sampling approaches such as multilevel-\ac{MC} \cite{Giles_2015,Heinrich_MLMC_2001,Pisaroni_Nobile_CMAME_2017}
+and multifidelity-\ac{MC} \cite{Koutsourelakis_SISC_2009, Peherstorfer_Willcox_SISC_2016} have 
+been designed to optimize the computational load when samples of 
+the \ac{QoI} are available at hierarchical levels of accuracy;} sampling approaches like quasi-\ac{MC} 
+\cite{Fox99,Niedeereiter92,NiederreiterHLZ98} and Latin Hypercube sampling 
+\cite{Mckay_Beckman_Technometrics_1979,Stein_tech87,Loh_AS96}, have been designed to accelerate convergence. 
+However, when the underlying distribution of the inputs is arbitrary and not explicitly given, 
+\textcolor{blue}{the latter two sampling strategies may lose their advantage if it 
+is not straightforward to generate quasi-random sequences following the underlying distribution}. 
+
+An alternative approach approximates the \ac{QoI} via constructing the surrogate model 
+of the random inputs and then calculates the statistics of the \ac{QoI} 
+analytically or numerically.
+\blue{
+Among such approaches, the most popular are the Gaussian Process \cite{Sack_Welch_Stat_1989, 
+Kennedy_Hagan_JRSS_2001, GP_book_Rasmussen_2006}, and the polynomial chaos 
+expansion originally introduced by Wiener \cite{Wiener38}, applied to \ac{UQ} by Ghanem 
+\cite{Ghanem_1991Spectralappro} and extended to the \ac{gPC} expansion by Xiu \cite{Xiu_2002Wiener}.
+The \ac{GP} is a stochastic process which approximates the values of the \ac{QoI} at every finite sets of 
+sample point as multivariate Gaussian random vectors. The flexibility of the mean and covariance functions 
+enables \ac{GP} to characterize a wide range of function behavior with broad applications on \ac{UQ}
+\cite{GP_book_Rasmussen_2006, Qian_Wu_2008, Williams_2006, Oakley_OHagan_Biometrika_2002, Lockwood_Anitescu_2012}.}
+The \ac{gPC} expansion approximates the \ac{QoI} by a set of simple basis functions. 
+It is known to be a \emph{mathematically optimal} approximation of the \ac{QoI} 
+when the basis functions are chosen to be orthogonal with respect to the probability measure of the random inputs.
+This approach has been demonstrated for diverse applications 
+in \ac{UQ} \cite{XiuK_JCP03,GhanemMPW_CMAME05,Knio_CFD06,Sudret2008,LiXiu_JCP09, MarzoukXiu2009, Li2010,Li2018} 
+due to its spectral convergence under certain situations. 
+\blue{In this study, we focus on the approach developed 
+based on \ac{gPC} and we refer to previous publications \cite{Schobi_2015,Gratiet_2016,Owen_Challenor_SIAM_2017,Roy_Mocayd_2018} 
+(and the references therein) for comparative studies of the two approaches. }
+%Both approaches have broad applications on \ac{UQ} \cite{XiuK_JCP03,GhanemMPW_CMAME05,Knio_CFD06,
+%Sudret2008,LiXiu_JCP09, MarzoukXiu2009, Li2010,Li2018}  
+%\ac{gPC} expansions have diverse applications and far-reaching influence on \ac{UQ} \cite{XiuK_JCP03,GhanemMPW_CMAME05,Knio_CFD06,Sudret2008,LiXiu_JCP09, MarzoukXiu2009, Li2010,Li2018} due to their spectral convergence under certain situations.
+%However, \ac{gPC} expansions can only handle independent identically distributed (i.i.d.) random variables of standard types (uniform, Gaussian, gamma, beta, etc.).
+%Otherwise, a pre-processing step to transform the original random variables into i.i.d.\ random variables of standard type is required.
+%In general, these transformations are highly nonlinear which result in the final function approximation of the \ac{QoI} to be a high-degree polynomial in order to maintain the accuracy.
+%To avoid the slow convergence 
+%of the transformed random variables, Wan\cite{WanK_SISC06} introduced the gPC of arbitrary probability 
+%measures and extended the technique to discrete measures in \cite{Zheng_2015MEPCM}.  
+
+%
+In principle, if the orthogonal polynomial type and the corresponding random 
+variables are determined, both intrusive and non intrusive methods can be used 
+to evaluate the coefficients of the expansion. For example, stochastic collocation, based 
+on tensor products of one-dimensional quadrature rules, is often employed when 
+dimensionality is small \cite{MathelinH_NASA03,XiuH_SISC05,Babuska2007}, \blue{with the 
+number of basis functions given by $(p+d)!/p!d!$, where $p$ is polynomial order and $d$ is the dimension}.
+However, as the dimension increases, the number of quadrature points needed for the tensor 
+product rule increases exponentially. \blue{To mitigate this issue, sparse grid 
+and adaptive 
+collocation methods have been proposed to deal with moderate dimensionality 
+\cite{XiuH_SISC05,nobile2008sparse,Ma2009,Foo2010,CONSTANTINE2012,jakemanG2013,Li2016}}. 
+%However, one of the big challenges of uncertainty quantification is the curse of dimensionality--as the dimensionality becomes 
+%larger, both the number of polynomial basis as well as the number of 
+%quadrature points increase dramatically. To calculate the coefficients of the expansion of the QoI, simulations 
+%on each quadrature points are desired. 
+%
+When the dimension of the random inputs is large, none of the above collocation 
+methods is feasible. In the case of a limited number of available simulations and large dimensionality, \ac{CS} approaches have been used to construct sparse polynomial approximations of the \ac{QoI} \cite{Doostan_2011nonadapted, Yan_2012Sc, Rauhut_2012sparseLegen,mathelin_gallivan_2012,Yang_2013reweightedL1,Hampton_2015Cs,Peng_2016gradientL1,Yan_2017,Liu_2016QMCL1, Lei_Karniadakis_JCP_2017,ALEMAZKOOR2017,DIAZ2018,RAI2018}. 
+\blue{Finally, we note that \ac{gPC} (including extensions such as arbitrary polynomial
+chaos \cite{OLADYSHKIN2012}), in its current form, can only handle
+ random vector with 
+independent identically distributed (i.i.d.) components in standard types (uniform, Gaussian, gamma, beta, etc.).
+For other distributions, a pre-processing step is required to transform the original random variables into i.i.d.\ random variables of standard types.
+In general, these transformations are highly nonlinear which result in the final \ac{QoI} function approximation 
+to be a high-degree polynomial in order to maintain accuracy.}
+
+
+%In this paper we focus on a {\it non-intrusive} way to effect the approximation. 
+The methods discussed above rely on the \emph{explicit} knowledge of the 
+underlying probability measures and/or the assumption of mutual independence between
+the components of the random inputs. However, such assumptions on the random inputs can be quite 
+restrictive for realistic applications. One such example is the
+\ac{UQ} for molecular system properties \acp{QoI} due to conformational 
+fluctuations \cite{Huang_Protein_book_2005}. For such systems, the random inputs are the various conformational states 
+(i.e., the instantaneous structure) of the molecule. The underlying distribution is 
+determined by the free energy function of the system, which is essentially the multi-dimensional marginal density
+distribution with respect to the (Boltzmann) distribution of the full Hamiltonian system.
+Unfortunately, numerical evaluation of the free energy function is a well-known challenging
+problem. Although various sampling strategies have been 
+developed \cite{Kumar_Kollman_JCC_1992,Laio_Parrinello_PNAS_2002,Mar_Van_JCP_2008}, the
+explicit free energy function is usually unknown for dimensions greater than $4$. 
+In practice, the underlying density is only known implicitly through a large collection 
+of the molecule conformational states obtained from experiments or simulated trajectories. 
+Another commonly encountered example arises in our recent work \cite{Lei_Yang_MMS_2015} on constructing sparse 
+representations of a  \ac{QoI} based on \ac{CS}. 
+Inspired by the active subspace method \cite{ConstantineDW14}, we 
+proposed a method to enhance the sparsity of polynomial expansion in terms of a 
+new random vector via unitary rotation of the original random vector. For i.i.d.\ Gaussian 
+random inputs, the new random vector retains the same distribution. However, for 
+non-Gaussian random inputs, which are more realistic for applications, the new random vector
+does not retain the mutual independence even if the original random vector elements are i.i.d.
+%
+%The random inputs are described as a large collection of independent samples. 
+%
+
+For problems with non-Gaussian random inputs,
+the traditional approach is to cast the available statistics 
+into a family of standard distributions and then to apply the \ac{gPC} techniques discussed above.
+Gaussian mixture models, due to their flexibility, are broadly employed to approximate 
+the distribution of the data. 
+With the distribution approximated, a \ac{gPC} expansion of the \ac{QoI} can be constructed for each Gaussian component.
+The statistical properties of the \ac{QoI} are derived by combining the statistical properties of all components \cite{LIweixuan2015,Vittaldev2016}.
+However, there are two drawbacks of the Gaussian mixture approach: (i) it lacks one-to-one correspondence between one instance of random inputs and the approximated function evaluation, (ii) it is difficult to determine an appropriate and accurate probability density approximation when the dimension is larger than one.
+Copulas have been employed to treat dependent probabilistic models for surrogate construction in \cite{FEINBERG2015}.
+Zabaras \cite{Zabaras_2014} has established a graph-based approach to factorize the joint distribution into a set of conditional distributions based on the dependence structure of the variables.
+Alternatively, several studies have been devoted to constructing orthogonal
+polynomial bases using the moments of the random variables. 
+Orthogonal polynomial chaos for random vectors with independent components of
+arbitrary measure
+was proposed in \cite{OLADYSHKIN2012, WanK_SISC06, Witteveen_Bijl_2006, Zheng_2015MEPCM,YIN2018}. 
+Ahlfeld investigated the quadrature rule of this \ac{aPC} and proposed 
+a sparse quadrature rule for the integration which can facilitate the evaluation of the 
+expansion coefficients \cite{AHLFELD2016}. However, those quadrature rules of arbitrary 
+polynomial chaos again assume \blue{ \emph{the components of the random inputs are mutually independent.}} 
+
+In this paper, we develop a \blue{general \ac{UQ} framework for constructing 
+surrogate models via
+\ac{DSRAR} \emph{irrespective of possible mutual dependencies 
+between the random input components}.}
+\blue{This approach is different from the aforementioned studies based on 
+polynomial chaos expansions and, therefore, can be particularly} 
+useful for realistic systems where the input distributions
+can be non-standard or unknown analytically. 
+\blue{
+The key idea is a data-driven approach for basis construction, consisting
+of multivariate orthonormal
+\ac{amdP},}  
+coupled with the previously developed rotation-based sparsity enhancement approach \cite{Lei_Yang_MMS_2015}. This can be 
+viewed a special case of the present method when the random inputs are from a Gaussian distribution. 
+When the size of the training set is limited, the method can recover the 
+expansion coefficients by \ac{CS}, \blue{under the assumption that there 
+exists a sparse representation of surrogate model.}
+%
+As we will show, directly employing a regular polynomial basis and/or the sparsity enhancement rotation 
+on the random input may result in large recovery error due to the violation of orthogonality for non-standard density distributions.
+The procedure of data-driven basis construction described in the present study retains proper orthogonality 
+with respect to the associated random inputs and therefore ensures more accurate recovery.
+In this sense, the present method takes advantage of both the orthonormal basis expansion and the enhanced
+sparsity of the expansion coefficients. 
+{The method deals with two situations widely encountered in real-world applications: (\Rmnum{1}) probability measures 
+  that are implicitly represented by \textcolor{blue}{a large collection of samples} and 
+  (\Rmnum{2}) non-Gaussian probability measures with explicit (analytical) forms.
+For the first situation, we construct
+orthonormal polynomial bases with respect to discrete measures on the sample set. 
+Besides the exact orthonormal basis, we also propose a heuristic method to 
+construct a \emph{near-orthonormal} basis, which yields a smaller basis bound 
+than the exact orthonormal basis and results in more accurate recovery of the 
+sparse representation. For the second situation, we construct the orthonormal basis when
+the quadrature rules for polynomial integration are known. This construction
+is especially well suited to random variables obtained from sparsity enhancement of non-Gaussian distributions. 
+}
+
+
+The paper is organized as follows.
+In Section~\ref{sec:prelim}, we present the problem setup and briefly review preliminary background on multivariate orthogonal polynomials and compressed sensing.
+In Section~\ref{sec:num_method}, we present the \ac{DSRAR} framework by first introducing 
+the methods to construct data-driven orthonormal \ac{amdP} basis. When the underlying density is implicitly represented by a large 
+collection of random input samples, we propose a heuristic approach to construct a near-orthonormal basis  along with some heuristics on the advantage over an exactly orthonormal basis.
+Then we introduce the rotation-based sparsity enhancement method and provide algorithmic details on how to combine the data-driven basis construction and sparsity enhancement rotation.
+In Section~\ref{sec:numerical}, we demonstrate the developed framework 
+\blue{
+in a realistic molecular system fluctuating in a high-dimensional conformational space ($O(10)$) 
+as well as \acp{PDE} with arbitrary randomness where the 
+underlying distributions are either explicitly known or implicitly represented by a large collection of samples.} 
+%
+Concluding remarks and directions for future work are provided in Section~\ref{sec:summary}.
+
+

@@ -1,0 +1,509 @@
+\section{Results} \label{sec:numerical}
+
+This section presents the numerical results of the present \ac{DSRAR} framework for surrogate model construction with 
+arbitrary underlying distributions. For numerical examples where the probability measure $\rho(\bx)$ (with density function 
+$\omega(\bx)$) is not known explicitly and is represented by a discrete data 
+set $S= \left\{\bx^{(k)}\right\}_{k = 1}^{N_s}$, we split $S$ equally into two subsets $S=S_1\cup S_2$.
+\textcolor{blue}{We use $S_1$ to construct the data-driven \blue{\ac{amdP}} basis and split $S_2$ into two disjoint subset 
+$S_2 = S_{2,1}\cup S_{2,2}$, where $S_{2,1}$ is the training set for surrogate model construction and $S_{2,2}$ is the test
+set to evaluate the accuracy of the constructed surrogate model. The size of the training set is $O(10^2) - O(10^3)$ 
+and size of the test set is $O(10^5)$.} 
+
+
+\subsection{Accurate recovery of linear systems with data-driven bases} \label{sec:basis_comparison}
+
+In this test, we collected a sample set $S = \left\{\bx^{(k)}\right\}_{k = 1}^{N_s}$ with $N_s = 2\times10^5$.
+The random vector $\bx$ followed the Gaussian mixture distribution 
+\begin{equation}
+  \omega (\bx) = \sum_{i=1}^{N_m} a_i \mathcal{N}(\bm{\mu_i,\Sigma_i})
+  \label{eq:GM_test_set}
+\end{equation}
+where $N_m$ is the number of Gaussian modes.
+We set $N_m = 3$, $a_i>0$ for $i=1,2,3$ and $\sum_{i=1}^3 a_i = 1$.
+For each Gaussian mode, $\bm\mu_i$ is a 25-dimensional i.i.d.\ random vector with uniform distribution $\mathcal{U}[-2.5,2.5]$ on each dimension and then shifted such that $\sum_{i=1}^3 a_i \bm\mu_i = 0$.
+The matrices $\bm \Sigma_i$ were chosen such that 
+\begin{equation}
+  \bm\Sigma_i = (\bm \Upsilon_i {\bm \Upsilon_1}^T + \mathbf{I})/4,
+  \label{eq:GM_var}
+\end{equation}
+where $\bm\Upsilon_i$ is a random matrix with i.i.d.\ entries from $\mathcal{U}[0,1]$ for $i=1,2,3$.
+
+We considered a linear system \[{\bm A} \bm c = {\bm b} + \bm\ve \] and recovered $\bm c$ \textcolor{blue}{using $M$ training points} 
+by solving the $l_1$ minimization problem defined by \eqref{eq:ape_L1} where 
+\begin{equation}
+\left[ {\bm A} \right]_{i,j} = \psi_{j}(\bx^{(i)}), \quad b_i = \sum_{k=1}^N c_{k} \psi_{k}(\bx^{(i)}), 
+\label{eq:matA}
+\end{equation}
+with $1\le i \le M$, $1\le j \le N$, and $\bm \ve$ is noise with $\|\bm \ve\|_2\leq 10^{-7}$. 
+We set $d = 25$, $p = 2$ and $N =  \left( \begin{array}{c} d+p \\ p\end{array}\right) = 351$. 
+The basis functions $\psi_{\ba}(\bx)$ were constructed on the set $S_1$ by the following approaches: 
+\begin{enumerate}
+  \item the orthonormal \blue{\ac{amdP}} basis subject to Equations \eqref{eq:exact_orth} and \eqref{eq:exact_orth_coeff}; 
+  \item the near-orthonormal \blue{\ac{amdP}} basis subject to Equation \eqref{eq:near_orth_condition};
+  \item tensor product of univariate normalized Legendre polynomials (both sampling points and training points are scaled to lie in $[-1, 1]$ on each dimension accordingly). 
+\end{enumerate}
+Training points from set $S_2$ were used to examine the recovery accuracy of $\bm c$.
+
+\subsubsection{Sparse linear systems}
+\label{sec:recover_sparse}
+First, we considered the scenario where $\bm c$ is a $s$-sparse vector and employed the following theoretical bound to examine the recovery accuracy via $l_1$-minimization.
+
+\begin{thm}
+  Given a matrix $\bm{{\Psi}} \in \mathbb{R}^{M\times N}$ and set $T_{\ba}$ with $s = \vert T_{\ba} \vert$, a $s$-sparse vector $\bm c$ with non-zero entries on $T_{\ba}$ can be exactly recovered via $l_1$-minimization if $\frac{\theta_s}{1-\delta_s} < 0.5$, where $\delta_s$ and $\theta_s$ are defined by
+  \begin{equation}
+    \begin{split}
+      &\delta_s := \inf \left[ \delta :  (1-\delta)\|\bm y\|_2^2 \le \|\bm\Psi_t \bm y\|_2^2 \le (1+\delta)\|\bm y\|_2^2 \right] ,\  \forall t \subseteq \mathbf{T}, \forall \bm y \in \mathbb{R}^{|t|} \\
+      &\theta_s := \inf \left[ \theta : \vert \langle \bm\Psi_{t'} {\bm y}', \bm\Psi_t \bm y\rangle \vert \le \theta \Vert {\bm y}'\Vert_2 \Vert \bm y\Vert_2 \right] ,\  \forall t \subseteq \mathbf{T}, t'\nsubseteq \mathbf{T}, |t'| \le s, \forall \bm y \in \mathbb{R}^{|t|}, {\bm y}' \in \mathbb{R}^{|t'|}
+    \end{split}
+    \label{eq:delta_s_theta_s}
+  \end{equation} \label{thm:exact_recovery}
+   where $\bm\Psi_{t}$ and $\bm\Psi_{t'}$ denote the sub-matrices of $\bm\Psi$ with column indices in $t$ and $t'$ respectively.
+\end{thm}
+
+Theorem~\ref{thm:exact_recovery} (see \ref{app:exact_recovery} for proof) provides a sufficient condition to exactly 
+recover $\bm c$ with non-zero entries on index set $T_{\ba}$. For numerical study, we randomly chose an index set $T_{\ba}$  
+from $\Lambda^d_{p}$ with $\vert T_{\ba}\vert = 3$, where $\Lambda_p^d$ is defined by \eqref{eq:f_ap_expan}.
+For each training set, we constructed the measurement matrix $\bm A$ with different 
+bases and computed $\theta_s/\left(1-\delta_s\right)$ by \eqref{eq:delta_s_theta_s}.
+Figure~\ref{fig:err_sparse_vector}(a) shows the mean value $\mathbb{E}\left[\theta_s/\left(1-\delta_s\right)\right]$ on $200$ independent
+training sets chosen from $S_2$ for each $M$. 
+The exact and near-orthonormal bases yield similar results: $\mathbb{E}\left[\theta_s/\left(1-\delta_s\right)\right]$ becomes smaller than $0.5$ as $M$ approaches $210$,  which is also shown in the inset plot of Figure~\ref{fig:err_sparse_vector}(a).
+In contrast, $\mathbb{E}\left[\theta_s/\left(1-\delta_s\right)\right]$ obtained from Legendre polynomial basis shows worse performance due to the loss of orthonormality.
+
+%%%
+\begin{figure}[tbp]
+  \center
+  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_1/Theta_delta_sample_Ns_3_inset}}
+  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_1/CEl2_sparse_basis_Ns_5_Null_vec_color}}
+  \caption{The measurement matrices constructed by the exact and near-orthonormal bases exhibit similar performance
+  in the theoretical (sufficient) bound and numerical results for  recovery of sparse vector. 
+   Both bases outperform the Legendre basis.
+  ``\textcolor{red}{\protect\rectanglesolidline}'': the exact orthonormal \blue{\ac{amdP}} basis;  
+  ``\textcolor{green}{\protect\triangledashline}'': the near-orthonormal \blue{\ac{amdP}} basis;  
+  ``\textcolor{blue}{\protect\diamonddashdotline}'': Legendre basis.
+  (a) Mean value of the theoretical bound $\mathbb{E}\left[\theta_s/\left(1-\delta_s\right)\right]$ of exact recovery 
+  for measurement matrices $\bm A$ constructed by various bases for the chosen non-zero index $T_{\ba}$ with $s = 3$.
+  \blue{The error bar represents the standard deviation.}
+  The inset plot shows the theoretical prediction of the exact recovery probability.
+  (b) Relative $l_1$ error of the recovered sparse vector ($s = 5$) using different training set size $M$.
+  The inset plot shows the recovery error $\Vert \bm c - \tilde{\bm c}\Vert_1$ of one training set for the Legendre basis system.} \label{fig:err_sparse_vector}
+\end{figure}
+%%%
+
+In our numerical experiments, we were able to recover $\bm c$ using fewer samples
+than the number {\color{blue} $M$---as suggested by the sufficient condition (Theorem 2.5) originally given} by Rauhut
+\cite{Rauhut_2012sparseLegen}---since this number is based on the worst case scenario and is not, in general, a sharp bound.
+Figure~\ref{fig:err_sparse_vector}(b) shows the numerical results of a test case with $\bm c_{T_{\ba}} = 1$, $\bm c_{T_{\ba}^c} = 0$, $\vert T_{\ba} \vert = 5$. 
+%The numerical solution $\tilde{\bm c}$ is computed by 
+%setting $\Vert \varepsilon \Vert_2 = 10^{-7}$. 
+For each $M$, $200$ CS implementations were conducted to compute the average of the relative error $\Vert \bm c - \tilde{\bm c}\Vert_1/ \Vert \bm c \Vert_1$.
+The exact and near-orthonormal \blue{\ac{amdP}} bases show similar performance, where $\bm c$ can be accurately recovered (up to $\Vert\bm \varepsilon \Vert_2$) using $M = 45$ training points.
+In contrast, the Legendre basis yields larger relative error in $\ell_1$-norm. The relative error of the recovered coefficients from one CS implementation with Legendre basis is shown in the inset plot of Figure~\ref{fig:err_sparse_vector}(b).
+
+\subsubsection{{Non-sparse} linear systems}
+\label{sec:recover_dense}
+We also tested the recovery performance when the exact representation is not sparse.
+The vector $\bm c$ is chosen with a random non-zero index set $T_{\ba}$ with $\vert T_{\ba}\vert = 120$.
+Individual components of $\bm c_{T_{\ba}}$ are i.i.d.\ log-normal, such that $\log \bm c_{T_{\ba}} \sim \mathcal{N}(0,2)$.
+For each size ($M$) of the training set, $200$ CS implementations were conducted to compute the average of the numerical error $\Vert \bm c - \tilde{\bm c}\Vert_2$, as shown in Figure~\ref{fig:err_no_sparse_vector}(a).
+Similar to the previous example, the Legendre basis exhibits the largest approximation error.
+The near-orthonormal basis shows smaller error than the exact orthonormal basis.
+
+%%%
+\begin{figure}[tbp]
+  \center
+  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_3/CEl2_sparse_basis_Ns_120}}
+  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_3/Err_log_vec_density_sam_230_legendre_norm}}\\
+  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_3/Err_log_vec_density_sam_230_orth}}
+  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_3/Err_log_vec_density_sam_230_orth_bound}}
+  \caption{The measurement matrices constructed by different bases show 
+    different numerical performance for the recovery
+   of non-sparse vector. The near-orthonormal basis shows the most accurate result.
+  (a) $l_1$ error of the recovered vector $\mathbf{c}$ with different bases. 
+    ``\textcolor{red}{\protect\rectanglesolidline}'': the exact orthonormal \blue{\ac{amdP}} basis;  
+  ``\textcolor{green}{\protect\triangledashline}'': the near-orthonormal \blue{\ac{amdP}} basis;  
+  ``\textcolor{blue}{\protect\diamonddashdotline}'': Legendre basis.
+  (b-d) Contours of $\vert \mathbf{c}_{\bm{\alpha}'} -\tilde{\mathbf{c}}_{\bm{\alpha}'}\vert$ (sorted by magnitude) from training
+  sets of size $M = 230$ with Legendre (top right), orthonormal (bottom left) and near-orthonormal bases (bottom right).}
+\label{fig:err_no_sparse_vector}
+\end{figure}
+%%%
+
+
+We also computed the density distribution of individual component $\vert \bm c_{i'} - \tilde{\bm c}_{i'}\vert$, where $i'$ 
+refers to single index sorted by the magnitude in descending order.
+Figure~\ref{fig:err_no_sparse_vector}(b-d) shows that, compared with the exact orthonormal basis and the Legendre basis, the 
+distribution of $\log\left \vert \bm c_{i'} - \tilde{\bm c}_{i'}\right\vert$ obtained from near-orthonormal basis is 
+biased toward the smallest magnitudes for error of individual $i'$. This result can be interpreted as that the 
+average of $\Vert \bm c - \tilde{\bm c}\Vert_2$ of the near orthogonal basis is smaller than that of the exact 
+orthogonal basis and also outperforms the Legendre basis. 
+
+%Let $\tilde{\bm c} = \bm c + \bm v$, $\bm v \in \textrm{Ker}~\bm{A}$.
+%From the null space property \cite{Rauhut_2010CsSM}, $\tilde{\bm c}$ does not fully recover $\bm c$ if $\Vert  \tilde{\bm c} \Vert_1 < \Vert \bm c\Vert_1$, which requires $\left \Vert \bm v_{T_{\ba}}\right \Vert_1 > \left \Vert \bm v_{T_{\ba}^c}\right\Vert_1$, where $T_{\ba}^c$ refers to the complement of $T_{\ba}$.
+%We examined this \emph{necessary condition} by randomly choosing a non-zero index set $T_{\ba}$ with $\left\vert T_{\ba}\right\vert = 50$ and $M = 180$.
+%For $\bm A$ constructed by both basis sets, we collected $1000$ normalized  $\bm v\in\rm{Ker}~\bm A $ that satisfy $\left \Vert \bm v_{T_{\ba}}\right \Vert_1 > \left \Vert \bm v_{T_{\ba}^c}\right\Vert_1$.
+%Figure~\ref{fig:contour_null_vector} shows the density contour of individual component $\left\vert \bm v_{i'}\right\vert$ in log-scale, where $i'$ refers to the index sorted by magnitude in descending order.
+%%%%
+%\begin{figure}[tbp]
+%  \center
+%  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_2/Logscale_null_vec_density_Ns_50_sam_180_orth.eps}}
+%  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_2/Logscale_null_vec_density_Ns_50_sam_180_orth_bound.eps}}
+%  \caption{{The null spaces of measurement matrices constructed by the exact and near-orthonormal bases are different under $\left \Vert \bm v_{T_{\ba}}\right \Vert_1 > \left \Vert \bm v_{T_{\ba}^c}\right\Vert_1$---a necessary
+%    condition for $\bm c$ not being recoverable exactly.}
+%  Density contour of the normalized null space vector component $\log\vert \rm {v}_{i'}\vert $ (sorted by magnitude) of the measurement matrix $\bm A$ constructed by orthogonal (a) and near-orthogonal basis functions (b) that satisfy $\left \Vert \bm v_{T_{\ba}}\right \Vert_1 > \left \Vert \bm v_{T_{\ba}^c}\right\Vert_1$ and $\Vert \bm v\Vert_2 = 1$.} \label{fig:contour_null_vector}
+%\end{figure}
+%%%%
+%The two basis sets demonstrated different distributions of $\log\left\vert \bm v_{i'}\right\vert$, which likely contributes to the different recovery errors shown in Figure~\ref{fig:err_no_sparse_vector}. 
+
+% In addition to the dataset specified in \eqref{eq:GM_test_set}, we also conducted numerical tests on datasets from various density functions $\omega(\bx)$ with dimension $d$ between $10$ and $40$.
+% Comparisons between the different basis functions show similar results as above.
+% \fxwarning{Is this data shown anywhere?}
+% \textcolor{blue}{We do not show such data in the manuscript, shall we remove it?}
+% These additional results support our conclusion that the near-orthonormal basis provides an appropriate candidate to represent $f(\bx)$.
+% \fxwarning{In the absence of a Discussion section, it would be good to conclude this (sub)section with a summary of what this result means for algorithm (e.g., a summary of the result).}
+%{In this subsection \ref{sec:basis_comparison}, we showed that the exact and near-orthonormal 
+%bases exhibit similar performance (both the theoretical sufficient condition (Figure~\ref{fig:err_sparse_vector}(a)) 
+%and numerically (Figure~\ref{fig:err_sparse_vector}(b)) for the recovery of a sparse vector. However, the recovery of non-sparse 
+%vector, the near-orthonormal basis show better performance.}
+
+\subsection{Systems with explicit knowledge of density function}
+\label{sec:explicit_density}
+In this subsection, we demonstrate the proposed method in systems with common non-Gaussian 
+randomness with analytical density function $\omega(\bx)$. We show that the present method 
+based on orthonormal basis construction and rotation of the random variables exploits 
+the sparser representation of QoI while retaining proper orthogonality with respect 
+to rotated variables. Therefore, it yields more accurate surrogate models than other approaches
+based on the direct recovery of $\bm c$ without the sparsity enhancement rotation procedure 
+and/or directly applying the rotation procedure without reconstruction of
+the orthonormal \blue{\ac{amdP}} basis.
+
+\subsubsection{High-dimensional polynomial}
+For the first numerical example, we consider a high-dimensional polynomial function 
+\begin{equation}
+f(\bx) = \sum_{ \vert \ba \vert \le 3} \hat{c}_{\ba} \hat{\psi}_{\ba}(\bx) 
+=   \sum_{i = 1}^N \frac{\eta_i}{\vert i \vert^{1.5}} \hat{\psi}_{i}(\bx),
+\label{eq:poly_dim_20_p_3}  
+\end{equation}
+where $\hat{\psi}_{\ba}$ and $\hat{\psi}_{i}$ represent monomial basis functions, $\eta_i$ 
+represents uniform random variables $\mathcal{U}\left[0,1\right].$  {We employed
+this polynomial function with sparse coefficients as a benchmark problem to examine the recovery
+accuracy of the present method.} $\bx$ is a random vector consisting of $20$ i.i.d.\ random variables. 
+The density function of the $i\mhyphen$th variable $\xi_i$ is given by 
+\begin{equation}
+\omega(\xi_i) = e^{-\xi_i},
+\label{eq:dens_exp}  
+\end{equation}
+where the corresponding orthonormal basis are given by the Laguerre polynomials. Accordingly, we construct
+a \nth{3}-order polynomial expansion $\tilde{f}(\bx)$ with $N = 1771$ multivariate basis functions,  
+which are the tensor product of the univariate Laguerre polynomials. Figure \ref{fig:l2_lauguerre} 
+shows the relative $l_2$ error of $\tilde{f}$ computed by level $4$ sparse grid integration.
+Similar to the previous example, the \ac{PDF} of $\bm\chi$ does not
+retain the form $\omega'(\bm\chi) = \prod_{i=1}^d \exp(-\chi_i)$ after the rotation. Iteratively employing the 
+multivariate Laguerre polynomials to represent $\tilde{g}(\bm\chi)$ may result in erroneous prediction (the red dash-dotted curve).
+Alternatively, such a problem can be addressed by using the reconstructed orthonormal \blue{\ac{amdP}} basis
+with respect to $\bm\chi$, which yields a smaller error than $\tilde{f}(\bx)$ (the blue dashed curve).
+
+\begin{figure}[htbp]
+\center
+\includegraphics*[scale=0.25]{./Figure/Group_7/el2_lauguerre_dim_20_p_3}
+\caption{Sparsity-enhancing rotation with the reconstructed orthonormal \blue{\ac{amdP}} basis yields the most accurate 
+  recovery of a high-dimensional polynomial function of random vectors
+  following density function given by Equation \eqref{eq:dens_exp}. Directly applying the rotation procedure without
+  reconstructing the orthonormal basis yields errorneous prediction. 
+  ``\textcolor{red}{\protect\rectanglesolidline}'':  Laguerre polynomial basis with respect to $\bx$;  
+  ``\textcolor{red}{\protect\triangledashdotline}'':  Laguerre polynomial basis with respect to rotated vector $\bm\chi$;  
+  ``\textcolor{blue}{\protect\downtriangledashline}'':  the reconstructed  \blue{\ac{amdP}}  orthonormal basis with respect to rotated vector $\bm\chi$.
+}
+\label{fig:l2_lauguerre}
+\end{figure}
+
+\subsubsection{One-dimensional elliptic \acp{PDE} with high-dimensional random inputs}
+We applied the proposed method to model the solution to a one-dimensional (1D) elliptic \ac{PDE} with high dimensional random input
+\begin{equation}
+  \begin{aligned}
+    -\frac{d}{dx} \left( D(x;\bx)\frac{d u(x;\bx)}{dx} \right) = 1, & \quad x \in (0,1) \\
+    u(0) = u(1) = 0, &
+  \end{aligned} \label{eq:ellip}
+\end{equation}
+where $a(x;\bx) := \log D(x;\bx)$ is the stochastic input and $a(x;\bx)$ was a stationary process with correlation function 
+\begin{equation} \label{eq:exp_kernel}
+  K(x,x') = \exp\left(\dfrac{|x-x'|}{l_c}\right),
+\end{equation}
+where $l_c$ is the correlation length.
+We constructed $a(x;\bx)$ by the Karhunen-Lo\`eve (KL) expansion:
+\begin{equation} \label{eq:kl}
+  a(x;\bx) = a_0(x) + \sigma \sum_{i=1}^{d}\sqrt{\lambda_i}\phi_i(x)\xi_i, 
+\end{equation}
+where $\{\lambda_i\}_{i=1}^{d}$, and $\{\phi_i(x)\}_{i=1}^{d}$ are the $d$ largest eigenvalues and the corresponding eigenfunctions of $K(x,x')$.
+The values of $\lambda_i$ and the analytical expressions for $\phi_i$ were available from the literature \cite{JardakSK02}.
+The $\xi_i$ are i.i.d.~ random variables on $\left[-1, 1\right]$. The 
+density function of $\xi_i$ is given by
+\begin{equation}
+\omega(\xi_i) = \frac{1}{\pi \sqrt{1 - \xi_i^2}},
+\label{eq:dens_cheb}
+\end{equation}
+where the corresponding orthonormal basis consists of Chebyshev polynomials of 
+the first kind. 
+For this example, we set $a_0(x) \equiv 1$, $\sigma = 0.8$, $l_c = 0.14$ and $d = 16$.
+We chose the quantity of interest as $u(x;\bx)$ at $x=0.45$ and constructed a \nth{3}-order polynomial expansion with $N=969$ basis functions.
+Figure~\ref{fig:l2_chebyshev} shows the relative $l_2$ error of the constructed $\tilde{f}(\bx)$ and $\tilde{g}({\bm\chi})$.
+%%%
+\begin{figure}[tbp]
+  \center
+  \includegraphics*[scale=0.25]{./Figure/Group_7/el2_chebyshev_dim_16_p_3}
+  \caption{Sparsity-enhancing rotation with reconstructed orthonormal basis yield the most accurate surrogate 
+    models for a 1D elliptical \ac{PDE} with random permeability coefficient modeled by Equations~\eqref{eq:kl} and \eqref{eq:dens_cheb}.
+  Directly applying the rotation procedure without reconstructing the orthonormal basis yields increased numerical error. 
+  ``\textcolor{red}{\protect\rectanglesolidline}'':  Chebyshev polynomial basis with respect to $\bx$;  
+  ``\textcolor{red}{\protect\triangledashdotline}'':  Chebyshev  polynomial basis with respect to rotated vector $\bm\chi$;  
+  ``\textcolor{blue}{\protect\downtriangledashline}'':  the reconstructed orthonormal \blue{\ac{amdP}} basis with respect to rotated vector $\bm\chi$.
+  } \label{fig:l2_chebyshev}
+\end{figure}
+%%%
+For the density function $\omega(\bx_i)$ given by \eqref{eq:dens_cheb}, $\tilde{f}(\bx)$ can be represented by a multivariate 
+basis constructed by the tensor products of univariate Chebyshev polynomials.
+However, in general, the \ac{PDF} of $\bm\chi$ does not retain the form $\omega'(\bm\chi) = \prod_{i=1}^d \frac{1}{\pi \sqrt{1 - \chi_i^2}}$. 
+As shown in Figure~\ref{fig:l2_chebyshev}, iteratively employing the multivariate Chebyshev polynomials to represent $\tilde{g}(\bm\chi)$ 
+(the red dash-dotted curve)---as done in previous studies \cite{Yang_Wan_rotation_2017}---resulted in a larger error than $\tilde{f}(\bx).$
+Representing $\tilde{g}(\bm\chi)$ by the reconstructed orthonormal \blue{\ac{amdP}} basis (the blue dashed curve) further decreases 
+the numerical error compared to $\tilde{f}(\bx)$ (the solid red curve).
+
+%{In this subsection, we  presented two numerical examples that included explicit knowledge of the probability 
+%density. The numerical results showed that the combination of the rotation procedure with orthonormal basis 
+%construction yielded the most accurate results. Directly applying the rotation procedure may lead to increased error.}
+
+\subsection{Systems with implicit knowledge of density function}
+In this suite of benchmark examples, we investigated  the applicability and efficiency of the developed \ac{DSRAR} framework based on 
+data-driven orthonormal bases construction and sparsity enhanced rotation.
+
+\subsubsection{High-dimensional polynomials} \label{sec:high_d_poly}
+We studied the ability of the data-driven method to recover a high-dimensional polynomial function 
+\begin{equation}
+  f(\bx) = \sum_{ \ba \in T_{\ba}} \hat{\psi}_{\ba}(\bx),
+\end{equation}
+where $\hat{\psi}_{\ba}$ represents the monomial basis function, $T_{\ba}$ represents a set containing $50$ indices randomly chosen from $\Lambda_p^d$ with $d = 25$ and $p = 3$.
+The sample set $S$ of random vector $\bx$ for basis construction was generated from the Gaussian mixture model specified in \eqref{eq:GM_test_set} with $|S| = 2\times 10^5$. 
+
+We approximated $f(\bx)$ by a \nth{3}-order polynomial expansion $\tilde{f}(\bx) = \sum_{i=1}^N \tilde{c}_i\psi_i(\bx)$ with $N = 3276$.
+Figure~\ref{fig:err_rand_poly_dim_25}(a) shows the relative $l_2$ error of the constructed surrogate model $\tilde{f}$ defined by
+\begin{equation}
+  \epsilon = \left(\int(f(\bx) - \tilde{f}(\bx))^2 \dif \nu_{S_2}(\bx) \big/ \int f(\bx)^2 \dif \nu_{S_2}(\bx) \right)^{\frac{1}{2}},
+\end{equation}
+where $20$ implementations were utilized for each training sample size number $M$.
+%%%
+\begin{figure}[htbp]
+  \center
+  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_4/el2_rand_poly_dim_25_p3_rotate_together}}
+  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_4/coeff_rand_poly_orth_near_orth_legendre}} \\
+  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_4/coeff_rand_poly_near_orth_rotate_loglog}}
+  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_4/coeff_rand_poly_legendre_rotate_loglog}}
+  \caption{Numerical results for recovery of a high-dimensional polynomial function. The combination of
+  near-orthonormal basis construction with the sparsity enhancement rotation procedure yields 
+  the most accurate results. Directly applying the rotation procedure to the Legendre basis 
+  may lead to increased error despite increased sparsity in $\bm c$.
+  (a) Relative $l_2$ error of the recovered polynomial function with different bases:
+  the exact orthonormal \blue{\ac{amdP}} basis with respect to $\bx$ (``\textcolor{red}{\protect\rectanglesolidline}'') and 
+  $\bm\chi$ (``\textcolor{red}{\protect\rectangledashline}''); 
+  the near-orthonormal \blue{\ac{amdP}} basis with respect to $\bx$ (``\textcolor{green}{\protect\trianglesolidline}'') and
+  $\bm\chi$ (``\textcolor{green}{\protect\triangledashline}'');
+  Legendre basis with respect to $\bx$ (``\textcolor{blue}{\protect\diamondsolidline}'') and 
+  $\bm\chi$( ``\textcolor{blue}{\protect\diamonddashline}'').
+  (b) Coefficients magnitude $\vert c_{i}\vert$ recovered using different bases. 
+  ``\textcolor{red}{\protect\rectangleopen}'': the exact orthonormal \blue{\ac{amdP}} basis with respect to $\bx$;  
+  ``\textcolor{green}{\protect\triangleopen}'': the near-orthonormal \blue{\ac{amdP}} basis with respect to $\bx$;  
+  ``\textcolor{blue}{\protect\diamondopen}'': Legendre basis with respect to $\bx$.
+  (c) Recovered coefficient magnitude $\vert \mathbf{c}_{i}\vert $ using the near orthogonal basis with respect to $\bx$ 
+    (``\textcolor{green}{\protect\triangleopen}'') and $\bm\chi$ (``\textcolor{gray}{\protect\circleopen}'').
+  The dashed vertical lines indicate the separation between different polynomial orders $p$.
+  (d) Recovered coefficient magnitude $\vert \mathbf{c}_{i}\vert $ using the Legendre basis with respect to 
+  $\bx$ (``\textcolor{blue}{\protect\diamondopen}'') and $\bm\chi$ (``\textcolor{gray}{\protect\circleopen}'').} 
+  \label{fig:err_rand_poly_dim_25}
+\end{figure}
+%%%
+As shown in Figure~\ref{fig:err_rand_poly_dim_25}(a), $\tilde{f}(\bx)$ constructed by the near-orthonormal 
+\blue{\ac{amdP}} 
+basis yielded the smallest error while the tensor product of Legendre basis functions yielded the largest error.
+Accordingly, the magnitudes of the recovered coefficients $\vert \tilde{c}_i \vert$ by the exact and near-orthonormal bases decayed more quickly than those recovered using the Legendre basis functions, as shown in Figure~\ref{fig:err_rand_poly_dim_25}(b).
+Furthermore, $\tilde{f}(\bx)$ allowed us to define a new random vector $\bm\chi$, which further enhanced the sparsity of $\bm c$, as shown in Figures~\ref{fig:err_rand_poly_dim_25}(c) and (d).
+Following Step 5 in Algorithm 4, we defined a new random $\bm\chi$ through rotation. The associated representation
+coefficient vector $\bm c$ has enhanced sparsity.
+
+However, for the exact and near-orthonormal basis, the $\tilde{g}(\bm\chi)$ gave smaller errors (the dashed curve) than $\tilde{f}(\bx)$ (the solid curve), as shown in Figure~\ref{fig:err_rand_poly_dim_25}(a).
+Thus, enhancing the sparsity of $\bm c$ alone does not guarantee enhanced accuracy of $\tilde{f}$.
+In particular, $\tilde{g}(\bm\chi)$ constructed by the Legendre basis yielded larger error than $\tilde{f}(\bx)$ as demonstrated in Figure~\ref{fig:err_rand_poly_dim_25}(a); although, the sparsity of $\bm c$ was greater, as seen in Figure~\ref{fig:err_rand_poly_dim_25}(d).
+This behavior indicates that retaining the orthonormal condition can be crucial for the accurate construction of $\tilde{f}$. {The basis bound (see Table \ref{tab:GM_d_25_p_3} in \ref{app:basis_bound}) provides a metric to understand why the near-orthonormal basis performs better than the exact orthonormal basis.}
+
+%Table~\ref{tab:GM_d_25_p_2} shows the basis bounds for samples from Gaussian mixtures $\left\{\bx^{(i)}\right\}, i = 1, \cdots, N_s$ with $N_s = 1\times 10^5$, $d = 25$ and {$p = 2$}.
+%%%%
+%\begin{table}[tbp]
+%  \centering
+%  \caption{Basis bound $\tilde{K}$ of constructed basis set for Gaussian mixture system $d = 25$, $p = 2$ and $N_s = 1\times 10^5$.}
+%  \begin{tabular}{C{8em}|C{6em} C{6em} C{6em} C{6em} C{6em}}
+%    \hline\hline
+%    $M_{\sigma}$ & $3$ & $4$ & $5$ & $6$ &$ \displaystyle \mathop{\max}_{\bx\in S} k(\bx)$ \\
+%    \hline
+%    $\tilde{K}_{\rm orth}$ & 10.359 & 12.048 & 13.895 & 15.513 & 22.208\\ 
+%    $\tilde{K}_{\rm near-orth}$ & 9.622 & 11.196 & 12.867 & 14.448 & 18.790\\ 
+%    \hline\hline
+%  \end{tabular}
+%  \label{tab:GM_d_25_p_2}
+%\end{table}
+%%%
+%{For different values of $M_{\sigma}$, the values of $\tilde{K}$ for the near orthogonal basis were consistently smaller than the value for the exact orthogonal basis set.}
+%\subsection{\ac*{UQ} in systems with non-Gaussian noise distributions}
+
+\subsubsection{1D elliptic \acp{PDE} with high-dimensional random inputs}
+In this example, we revisited the 1D elliptic \ac{PDE} (\ref{eq:ellip})
+with random coefficient given by Equation \eqref{eq:kl}. 
+Here we set $a_0(x) \equiv 1$, $\sigma = 1$, $l_c=0.12$ and $d=20$ such that $\sum_{i=1}^d\lambda_i > 0.91\sum_{i=1}^{\infty}\lambda_i$. 
+
+Similar to the work by Zabaras et al.\ \cite{Zabaras_2014}, a non-Gaussian multivariate distribution was used for $\bx = \left(\xi_1, \xi_2, \cdots, \xi_d\right)$.
+We generated a sample set $\left\{\tilde{\bx}^{(k)}\right\}_{k=1}^{Ns}$, where $N_s = 2\times 10^5$ and $\tilde{\bx}$ came from the Gaussian mixture distribution specified in \eqref{eq:GM_test_set}.
+We used \ac{PCA} to transform $\tilde{\bx}$ to $\bx$ such that $\mathbb{E}\left[\bx_i\right] = 0$ and $\mathbb{E}\left[\bx_i \bx_j\right] = \delta_{ij}$.
+For each input sample $\bx^{(k)}$, $a$ and $u$ only depended on $x$ and the solution of the deterministic elliptic equation is given by \cite{Yang_2013reweightedL1}
+\begin{equation}\label{eq:ellip_sol}
+  \begin{split}
+    & u(x) = u(0) + \int_0^x \dfrac{a(0)u(0)'-y}{a(y)}\dif y \\
+    & a(0)u(0)' = \left(\int_0^1 \dfrac{y}{a(y)}\dif y\right) \Big / \left(\int_0^1 \dfrac{1}{a(y)}\dif y\right).
+  \end{split}
+\end{equation}
+
+We chose the \ac{QoI} to be $u(x;\bx)$ at $x=0.35$ and constructed a \nth{3}-order polynomial expansion with $N=1771$ basis functions.
+Figure~\ref{fig:err_elliptical_dim_20_p_3} shows the relative $l_2$ error of $\tilde{f}(\bx)$ (solid curve) and $\tilde{g}(\bm\chi)$ (dashed curve) constructed by different bases.
+%%%
+\begin{figure}[tbp]
+  \center
+  \includegraphics*[scale=0.25]{./Figure/Group_6/el2_elliptical_dim_20_p3}
+  \caption{The combination of near-orthonormal basis construction and sparsity enhancement rotation
+  yields the most accurate results, as shown through the relative $l_2$ error of the constructed surrogate model for the 1D elliptic \ac{PDE} 
+  with random permeability coefficient: the exact orthonormal \blue{\ac{amdP}} basis with respect to $\bx$ 
+    (``\textcolor{red}{\protect\rectanglesolidline}'') and 
+  $\bm\chi$ (``\textcolor{red}{\protect\rectangledashline}''); 
+  %near-orthonormal basis with respect to $\bx$ (``\textcolor{green}{\protect\trianglesolidline}'') and
+  %$\bm\chi$ (``\textcolor{green}{\protect\triangledashline}'');
+  Legendre basis with respect to $\bx$ (``\textcolor{blue}{\protect\diamondsolidline}'') and 
+  $\bm\chi$( ``\textcolor{blue}{\protect\diamonddashline}'');
+  Hermite basis with respect to $\bx$ (``\textcolor{gray}{\protect\downtrianglesolidline}'');
+  the near-orthornormal \blue{\ac{amdP}} basis with respect to $\bm\chi$ (``\textcolor{green}{\protect\triangledashline}'').
+  } \label{fig:err_elliptical_dim_20_p_3}
+\end{figure}
+%%%
+The data-driven bases (both exact orthonormal basis and near-orthonormal basis) showed more accurate results than the Legendre basis and the Hermite basis.
+In particular, the near-orthonormal basis with respect to the rotated variable $\bm\chi$ yielded the most accurate result (the green dashed curve).
+In contrast, directly employing the Legendre basis to the rotated  variable $\bm\chi$ without reconstructing the basis function led to increased $l_2$ error, although $\bm c$ shows more sparsity in terms of $\bm\chi$ (the gray dashed curve) than $\bx$ (the gray solid curve). 
+
+\subsection{\ac{UQ} study of a molecule system under Non-Gaussian conformational distributions}\label{sec:mole_example}
+
+We demonstrated the proposed method on a physical system exploring conformational uncertainty in a small molecule system.
+Molecular properties, such as solvation energies or \acp{SASA}, are often calculated using single molecular conformations.
+However, due to thermal energy, a molecule undergoes conformational fluctuations which can induce significant uncertainty in properties calculated from single structures.
+Our previous work \cite{Lei_Yang_MMS_2015} was focused on quantifying this uncertainty using a simple multivariate Gaussian model for conformational fluctuations: the elastic network model \cite{Ati_Bahar_BJ_2001}.
+However, it is well known that the conformational fluctuations are often non-Gaussian due to the complicated structure of the underlying energy landscape.
+Therefore, in the current study, we construct the data-driven basis \emph{directly} from the samples of molecular trajectories collected from \ac{MD} simulations, thus eliminating the \emph{over-simplified} Gaussian assumption.
+
+We simulated the dynamics of the small molecule benzyl bromide under equilibrium (see \ref{app:sim} for details) and collected a sample set of the instantaneous molecular structure  $\left\{\mb r^{(k)}\right\}_{k=1}^{N_s}$ from \ac{MD} simulation trajectories over $20 \mu$s.
+In what follows, $N_s = 2\times 10^5$ and $\mb r$ represent the positions of individual atoms.
+As a pre-processing step, we transformed $\left\{\mb r^{(k)}\right\}_{k=1}^{N_s}$ into a set of uncorrelated random vectors $S = \left\{\mb \bx^{(k)}\right\}_{k=1}^{N_s}$ via \ac{PCA}: 
+\begin{equation}
+  \begin{split}
+    &\bm\Sigma = \mathbb{E}\left[\left(\mb r - \bar {\mb r}\right) \left(\mb r - \bar {\mb r}\right)^T\right] \\
+    &\bm\Sigma = \mb Q \bm \Gamma \mb Q^T \quad \bx = \bm \Gamma^{-1/2}\mb Q^T\mb r,
+  \end{split}
+\end{equation}
+where the average $\mathbb{E}[\cdot]$ is taken over the entire sample set and $\bx \in \mathbb{R}^{12}$ is the normalized random vector that represents $99.99\%$
+of the {observed variance}. 
+Figures~\ref{fig:err_mol_dim_12_p_4}(a) and (b) show the joint distributions of $\left(\xi_1,\xi_2\right)$ and $\left(\xi_1,\xi_3\right)$.
+%%%
+\begin{figure}[tbp]
+  \center
+  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_5/scatter_xi1_xi2}}
+  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_5/scatter_xi1_xi3}} \\
+  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_5/el2_solvation_dim_12_p_4}}
+  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_5/el2_sasa_9_dim_12_p_4}}
+  \caption{{The present method based on data-driven basis construction and sparsity 
+    enhancement rotation yields the most accurate surrogate
+  model for molecular systems with mutually dependent non-Gaussian density distributions.} 
+  (a-b) Sampling points representing the joint distributions $\left(\xi_1, \xi_2\right)$ (left) and $\left(\xi_1, \xi_3\right)$ (right).
+  (c-d) Relative $l_2$ error of the polar solvation energy (left) and the local \ac{SASA} (right) of an individual atom
+  (the H9 atom attached to the ortho-carbon atom) obtained with different numbers of training data $M$:
+  the exact \blue{\ac{amdP}} orthonormal basis with respect to $\bx$ 
+    (``\textcolor{red}{\protect\rectanglesolidline}'') and 
+  $\bm\chi$ (``\textcolor{red}{\protect\rectangledashline}''); 
+  %near-orthonormal basis with respect to $\bx$ (``\textcolor{green}{\protect\trianglesolidline}'') and
+  %$\bm\chi$ (``\textcolor{green}{\protect\triangledashline}'');
+  Hermite basis with respect to $\bx$ (``\textcolor{gray}{\protect\downtrianglesolidline}'')
+  and $\bm\chi$ (``\textcolor{gray}{\protect\downtriangledashline}'');
+  Legendre basis with respect to $\bx$ (``\textcolor{blue}{\protect\diamondsolidline}'');
+  the near-orthornormal \blue{\ac{amdP}} basis with respect to $\bm\chi$ (``\textcolor{green}{\protect\triangledashline}'').
+  } \label{fig:err_mol_dim_12_p_4}
+\end{figure}
+%%%
+Although the individual components of $\bx$ are uncorrelated, the joint density distributions are mutually dependent and deviate from the standard Gaussian distributions. 
+
+We chose the polar solvation energy and \ac{SASA} as the target \acp{QoI} for this system.
+The polar solvation energy was modeled by the Poisson-Boltzmann equation \cite{ren_biomolecular_2012,baker_biomolecular_2005}
+\begin{equation}
+  -\nabla \cdot (\epsilon_f(\bm x; \bx) \nabla \varphi(\bm x; \bx)) = \rho_f(\bm x; \bx)
+  \label{eq:PB}
+\end{equation}
+which relates the electrostatic potential $\varphi$ to a dielectric coefficient $\epsilon_f$ and a fixed charge distribution $\rho_f$. 
+Equation~\eqref{eq:PB} is typically solved with Dirichlet boundary conditions set to an analytical asymptotic solution of the equation for an infinite domain. 
+The dielectric coefficient $\epsilon_f$ implicitly represents the boundary between the atoms of the molecule and the surrounding solvent:  the coefficient changes rapidly across this boundary from a low dielectric value in the molecular interior to a high dielectric value in the solvent.
+The charge distribution $\rho_f$ is generally modeled as a collection of $\delta$-like functions centered on the atoms of the molecule with magnitudes proportional to the atomic partial charges.
+Both $\epsilon_f$ and $\rho_f$ are dependent on the instantaneous molecular structure (i.e., $\bx$).
+The polar solvation energy was calculated from 
+\begin{equation}
+  G_p(\bx) = \int \rho_f(\bm x; \bx) \left( \varphi(\bm x; \bx)) - \varphi_h(\bm x; \bx)) \right) d \bm x
+\end{equation}
+where $\varphi_h$ is a reference potential obtained from solution of
+\begin{equation}
+  -\epsilon_h \nabla^2 \varphi_h(\bm x; \bx) = \rho_f(\bm x; \bx)
+\end{equation}
+where $\epsilon_h$ is a constant reference dielectric value.
+We used the \ac{APBS} software to solve the equations above \cite{APBS_2018}.
+Besides the solvation energy of the whole molecule, we also studied a local property like the \ac{SASA} of an individual atom 
+(the H9 atom attached to the ortho-carbon atom of the benzyl bromide molecule, see Figure \ref{fig:mol_blb}) 
+by the Shake-Rupley algorithm \cite{Shrake_JMB_1973} using \ac{APBS}.
+Details of the \ac{APBS} calculations are presented in \ref{app:sim}.
+
+Figures~\ref{fig:err_mol_dim_12_p_4}(c) and (d) show the relative $l_2$ error of the constructed surrogate model $\tilde{f}(\bx)$ for the solvation energy and \ac{SASA} using a \nth{4}-order \ac{gPC} expansion with $N = 1820$ basis functions.
+{For both \acp{QoI}, the near-orthonormal and orthonormal
+ bases with respect to the rotated variable $\bm\chi$ (dashed curves) 
+ yield similar error which is much smaller than the error of 
+ Legendre and Hermite bases. A possible explanation for the 
+ similar performance of the near-orthonormal and orthonormal bases is the
+ closeness of the basis bound estimates for these two bases (see 
+ Table \ref{tab:BioMol_d_12_p_4} in \ref{app:basis_bound}).
+
+\begin{figure}[tbp]
+  \center
+  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_5/GM_scatter_xi1_xi2}}
+  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_5/pdf_solvation_dim_12_p_4}}
+  \caption{{The present method yields the most accurate prediction on the \ac{PDF} of the QoI for the molecular systems.
+  Direct fitting of the underlying density $\omega(\bx)$ using Gaussian Mixture model may induce biased error to
+    the \ac{PDF} prediction.}
+  (a) Fitted random variables $(\xi_1,\xi_2)$ with Gaussian mixture models.
+  (b) \ac{PDF} of the solvation energy obtained with the Gaussian Mixture model and the present data-driven approach.
+    ``\textcolor{red}{\protect\rectanglesolidline}'': reference solution obtained from $2\times10^5$ \ac{MC} samples;
+    ``\textcolor{blue}{\protect\diamonddashdotline}'': direct \ac{MC} sampling using the same set of $200$ samples; 
+    ``\textcolor{green}{\protect\triangledashline}'': present method using the same set of $200$ samples; 
+    ``\textcolor{orange}{\protect\dashline}'': fitting Gaussian Mixture model using $800$ samples.
+   }
+   \label{fig:pdf_mol_dim_12_p_4}
+\end{figure}
+%%%
+
+Instead of the direct construction of $\tilde{f}(\bx)$ using data-driven basis functions, another possible 
+approach to characterize the uncertainty of the molecular system is to fit the distribution density $\omega(\bx)$ with 
+a distribution model such as a Gaussian Mixture model. Figure~\ref{fig:pdf_mol_dim_12_p_4} (a) shows a scatter plot of the joint distribution $\left(\xi_1,\xi_2\right)$ extracted from the fitted Gaussian mixture distribution $\tilde{\omega}(\bx)$ using $7$ Gaussian modes.
+Accordingly, we can construct the surrogate model for each Gaussian mode using standard Hermite basis function.
+However, it is well-known that accurate construction of $\omega(\bx)$ is a numerically challenging problem for $d > 4$.
+As shown in Figure~\ref{fig:pdf_mol_dim_12_p_4}(b), direct fitting $\omega(\bx)$ by $\tilde{\omega}(\bx)$ 
+induces non-negligible error and leads to biased prediction of the \ac{PDF} of the solvation energy. 
+\blue{
+Furthermore, we lose the one-to-one mapping between the individual conformation state $\bx$ and the \acp{QoI} through the 
+constructed surrogate model $\tilde{f}(\bx)$.}  
+
+
+
+%%%

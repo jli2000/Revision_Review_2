@@ -1,0 +1,177 @@
+%\documentclass[a4paper,11pt]{amsart}
+%\documentclass[a4paper,11pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{indentfirst}
+%\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{array}
+\usepackage{fullpage}
+\usepackage[hidelinks]{hyperref}
+\usepackage{color}
+\usepackage{latexsym}
+\usepackage{soul}
+\usepackage{etoolbox}
+\usepackage{acronym}
+\usepackage[super]{nth}
+\usepackage[draft,inline,nomargin]{fixme}
+
+\mathchardef\mhyphen="2D
+\newcommand{\angstrom}{\mbox{\normalfont\AA}}
+\newtheorem{Definition}{definition}
+
+%\renewcommand{\baselinestretch}{1.0}
+
+\newcommand{\ignore}[1]{}
+
+%\def\mb{\mathbf}
+\def\half{\frac{1}{2}}
+\def\veps{\varepsilon}
+\def\dsp{\displaystyle}
+\def\cal{\mathcal}
+%\def\bm{\boldsymbol}
+\newcommand{\Rmnum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+%\usepackage[top=1.2in, bottom=1.3in, left=0.9in, right=0.9in]{geometry}
+
+\newcommand{\D}{\displaystyle}
+\newcommand{\mb}{\mathbf}
+\newcommand{\mo}{\mathcal{O}}
+\DeclareMathAlphabet{\mathsfsl}{OT1}{cmss}{m}{sl}
+\newcommand{\tensormat}[1]{\mathsfsl{#1}}
+\renewcommand{\vec}[1]{\mathit{\boldsymbol{#1}}}
+\newcommand{\dif}{\,\mathrm{d}}
+\newcommand{\mi}{\mathrm{i}}
+\newcommand{\me}{\mathrm{e}}
+\newcommand{\ba}{\bm\alpha}
+\newcommand{\bx}{\bm\xi}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
+\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
+
+%\newcommand{\prb}[1]{\noindent\textbf{Problem #1 :}}
+%\newcommand{\prf}{\noindent\textbf{Proof :}}
+%\newcommand{\sln}{\noindent\textbf{Solution :}}
+
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\numberwithin{equation}{section}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{prop}[thm]{Property}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{exam}{Example}
+\newcommand\Def{\stackrel{\textrm{def}}{=}}
+%
+%\renewcommand{\baselinestretch}{1.40}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\usepackage{newfloat, algcompatible}
+\usepackage{algcompatible}
+\DeclareFloatingEnvironment[fileext=loa, listname=List of Algorithms, name=ALGORITHM, placement=tbhp]{algorithm}
+
+\acrodef{QoI}{quantity of interest}
+\acrodef{UQ}{uncertainty quantification}
+\acrodef{MC}{Monte Carlo}
+\acrodef{GP}{Gaussian Process}
+\acrodef{gPC}{generalized polynomial chaos}
+\acrodef{aPC}{arbitrary polynomial chaos}
+\acrodef{amdP}{\emph{polynomials for arbitrary mutually dependent}}
+\acrodef{DSRAR}{\emph{Data-driven Sparsity-enhancing Rotation for Arbitrary Randomness}} 
+\acrodef{CS}{compressed sensing}
+\acrodef{SASA}{solvent-accessible surface area}
+\acrodef{PDE}{partial differential equation}
+\acrodef{RIC}{restricted isometry constant}
+\acrodef{RIP}{restricted isometry property}
+\acrodef{PCA}{principal component analysis}
+\acrodef{MD}{molecular dynamics}
+\acrodef{APBS}{Adaptive Poisson-Boltzmann Solver}
+\acrodef{PDF}{probability density function}
+\acrodef{GAFF}{General AMBER Force Field}
+
+
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+
+\newcommand{\dashline}{\raisebox{0pt}{\tikz{\draw[-,dashed,line width = 1.0pt](0.,1mm) -- (10.0mm,1mm)}}}
+
+\newcommand{\rectangleopen}{\raisebox{0pt}{\tikz{\draw[solid,line width = 1.0pt](4.mm,0)rectangle (5.8mm,1.8mm);
+  }}}
+
+\newcommand{\circleopen}{\raisebox{0pt}{\tikz{\draw[solid, line width = 1.0pt](5mm,0) circle[radius=1.0mm];
+}}}
+
+\newcommand{\triangleopen}{\raisebox{0pt}{\tikz{\draw[solid, line width = 1.0pt](4mm,0.15mm) -- (6mm,0.15mm) -- (5mm,1.95mm) -- cycle;
+}}}
+
+\newcommand{\downtriangleopen}{\raisebox{0pt}{\tikz{\draw[solid, line width = 1.0pt](4mm,1.95mm) -- (6mm,1.95mm) -- (5mm,0.15mm) -- cycle;
+}}}
+
+\newcommand{\diamondopen}{\raisebox{0pt}{
+  \tikz{\draw[solid, line width = 1.0pt](-1mm,0mm) -- (0mm,1mm) -- (1mm,0mm) -- (0mm,-1mm) -- cycle;
+  }}}
+
+
+\newcommand{\rectanglesolidline}{\raisebox{0pt}{\tikz{\draw[solid,fill, line width = 1.0pt](4.mm,0)rectangle (5.8mm,1.8mm);
+  \draw[-,solid,line width = 1.0pt](0.,1mm) -- (10.0mm,1mm)}}}
+
+\newcommand{\rectangledashline}{\raisebox{0pt}{\tikz{\draw[solid,fill, line width = 1.0pt](4.mm,0)rectangle (5.8mm,1.8mm);
+  \draw[-,dashed,line width = 1.0pt](0.,1mm) -- (10.0mm,1mm)}}}
+
+\newcommand{\rectangledashdotline}{\raisebox{0pt}{\tikz{\draw[solid,fill, line width = 1.0pt](4.mm,0)rectangle (5.8mm,1.8mm);
+  %\draw[-,dashdotted,line width = 1.0pt,dash pattern=on 1pt off 1.5pt on 2pt off 2pt](0.,1mm) -- (10.0mm,1mm)}}}
+  \draw[-,dashdotted,line width = 1.0pt](0.,1mm) -- (10.0mm,1mm)}}}
+
+\newcommand{\circlesolidline}{\raisebox{0pt}{\tikz{\draw[solid,fill, line width = 1.0pt](5mm,0) circle[radius=1.0mm];
+  \draw[-,solid,line width = 1.0pt](0.,0.0mm) -- (10.0mm,0.0mm)}}}
+
+\newcommand{\circledashline}{\raisebox{0pt}{\tikz{\draw[solid,fill, line width = 1.0pt](5mm,0) circle[radius=1.0mm];
+  \draw[-,dashed,line width = 1.0pt](0.,1mm) -- (10.0mm,1mm)}}}
+
+\newcommand{\circledashdotline}{\raisebox{0pt}{\tikz{\draw[solid,fill, line width = 1.0pt](5mm,0) circle[radius=1.0mm];
+  %\draw[-,dashdotted,line width = 1.0pt,dash pattern=on 1pt off 1.5pt on 2pt off 2pt](0.,1mm) -- (10.0mm,1mm)}}}
+  \draw[-,dashdotted,line width = 1.0pt](0.,1mm) -- (10.0mm,1mm)}}}
+
+\newcommand{\trianglesolidline}{\raisebox{0pt}{\tikz{\draw[solid,fill, line width = 1.0pt](4mm,0.15mm) -- (6mm,0.15mm) -- (5mm,1.95mm) -- cycle;
+  \draw[-,solid,line width = 1.0pt](0.,1.05mm) -- (10.0mm,1.05mm)}}}
+
+\newcommand{\triangledashline}{\raisebox{0pt}{\tikz{\draw[solid,fill, line width = 1.0pt](4mm,0.15mm) -- (6mm,0.15mm) -- (5mm,1.95mm) -- cycle;
+  \draw[-,dashed,line width = 1.0pt](0.,1.05mm) -- (10.0mm,1.05mm)}}}
+
+\newcommand{\triangledashdotline}{\raisebox{0pt}{\tikz{\draw[solid,fill, line width = 1.0pt](4mm,0.15mm) -- (6mm,0.15mm) -- (5mm,1.95mm) -- cycle;
+  %\draw[-,dashdotted,line width = 1.0pt,dash pattern=on 1pt off 1.5pt on 2pt off 2pt](0.,1.05mm) -- (10.0mm,1.05mm)}}}
+  \draw[-,dashdotted,line width = 1.0pt](0.,1.05mm) -- (10.0mm,1.05mm)}}}
+
+\newcommand{\downtrianglesolidline}{\raisebox{0pt}{\tikz{\draw[solid,fill, line width = 1.0pt](4mm,1.95mm) -- (6mm,1.95mm) -- (5mm,0.15mm) -- cycle;
+  \draw[-,solid,line width = 1.0pt](0.,1.05mm) -- (10.0mm,1.05mm)}}}
+
+\newcommand{\downtriangledashline}{\raisebox{0pt}{\tikz{\draw[solid,fill, line width = 1.0pt](4mm,1.95mm) -- (6mm,1.95mm) -- (5mm,0.15mm) -- cycle;
+  \draw[-,dashed,line width = 1.0pt](0.,1.05mm) -- (10.0mm,1.05mm)}}}
+
+\newcommand{\downtriangledashdotline}{\raisebox{0pt}{\tikz{\draw[solid,fill, line width = 1.0pt](4mm,1.95mm) -- (6mm,1.95mm) -- (5mm,0.15mm) -- cycle;
+  %\draw[-,dashdotted,line width = 1.0pt,dash pattern=on 1pt off 1.5pt on 2pt off 2pt](0.,1.05mm) -- (10.0mm,1.05mm)}}}
+  \draw[-,dashdotted,line width = 1.0pt](0.,1.05mm) -- (10.0mm,1.05mm)}}}
+
+\newcommand{\diamondsolidline}{\raisebox{0pt}{
+  \tikz{ \draw[solid,fill, line width = 1.0pt](4mm,0mm) -- (5mm,1mm) -- (6mm,0mm) -- (5mm,-1mm) -- cycle;
+  \draw[-,solid,line width = 1.0pt](0.,0mm) -- (10.0mm,0mm)}}}
+
+\newcommand{\diamonddashline}{\raisebox{0pt}{
+  \tikz{ \draw[solid,fill, line width = 1.0pt](4mm,0mm) -- (5mm,1mm) -- (6mm,0mm) -- (5mm,-1mm) -- cycle;
+  \draw[-,dashed,line width = 1.0pt](0.,0mm) -- (10.0mm,0mm)}}}
+
+\newcommand{\diamonddashdotline}{\raisebox{0pt}{
+  \tikz{ \draw[solid,fill, line width = 1.0pt](4mm,0mm) -- (5mm,1mm) -- (6mm,0mm) -- (5mm,-1mm) -- cycle;
+  \draw[-,dashdotted,line width = 1.0pt](0.,0mm) -- (10.0mm,0mm)}}}
+
+\DeclareRobustCommand{\legendsquaretest}[1]{%
+    \tikz[baseline=(a.south)]{\node[#1, inner sep=.8ex, outer sep=0] (a) {}; \draw[->,solid,line width = 1.5pt](0,0) -- (5mm,0)(a) {}}%
+}
+

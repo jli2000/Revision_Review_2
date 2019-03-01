@@ -1,0 +1,340 @@
+% Encoding: UTF-8
+@book{dunkl_xu_2014,
+place={Cambridge}, 
+edition={2}, 
+series={Encyclopedia of Mathematics and its Applications}, 
+title={Orthogonal Polynomials of Several Variables}, 
+DOI={10.1017/CBO9781107786134}, 
+publisher={Cambridge University Press}, 
+author={Dunkl, Charles F. and Xu, Yuan}, 
+year={2014}, 
+collection={Encyclopedia of Mathematics and its Applications}
+}
+
+
+@article{GROMACS,
+	title = {{GROMACS}: A message-passing parallel molecular dynamics implementation},
+	volume = {91},
+	issn = {0010-4655},
+	shorttitle = {{GROMACS}},
+	doi = {10.1016/0010-4655(95)00042-E},
+	abstract = {A parallel message-passing implementation of a molecular dynamics (MD) program that is useful for bio(macro)molecules in aqueous environment is described. The software has been developed for a custom-designed 32-processor ring GROMACS (GROningen MAchine for Chemical Simulation) with communication to and from left and right neighbours, but can run on any parallel system onto which a a ring of processors can be mapped and which supports PVM-like block send and receive calls. The GROMACS software consists of a preprocessor, a parallel MD and energy minimization program that can use an arbitrary number of processors (including one), an optional monitor, and several analysis tools. The programs are written in ANSI C and available by ftp (information: gromacs@chem.rug.nl). The functionality is based on the GROMOS (GROningen MOlecular Simulation) package (van Gunsteren and Berendsen, 1987; BIOMOS B.V., Nijenborgh 4, 9747 AG Groningen). Conversion programs between GROMOS and GROMACS formats are included. The MD program can handle rectangular periodic boundary conditions with temperature and pressure scaling. The interactions that can be handled without modification are variable non-bonded pair interactions with Coulomb and Lennard-Jones or Buckingham potentials, using a twin-range cut-off based on charge groups, and fixed bonded interactions of either harmonic or constraint type for bonds and bond angles and either periodic or cosine power series interactions for dihedral angles. Special forces can be added to groups of particles (for non-equilibrium dynamics or for position restraining) or between particles (for distance restraints). The parallelism is based on particle decomposition. Interprocessor communication is largely limited to position and force distribution over the ring once per time step.},
+	number = {1},
+	urldate = {2018-04-20},
+	journal = {Computer Physics Communications},
+	author = {Berendsen, H. J. C. and van der Spoel, D. and van Drunen, R.},
+	month = sep,
+	year = {1995},
+	keywords = {Molecular dynamics, Parallel computing},
+	pages = {43--56}
+}
+
+
+@incollection{baker_biomolecular_2005,
+	title = {Biomolecular {Applications} of {Poisson}?{Boltzmann} {Methods}},
+	copyright = {Copyright � 2005 John Wiley \& Sons, Inc.},
+	isbn = {978-0-471-72089-8},
+	language = {en},
+	urldate = {2018-02-26},
+	booktitle = {Reviews in {Computational} {Chemistry}},
+	publisher = {John Wiley \& Sons, Inc.},
+	author = {Baker, Nathan A.},
+	editor = {Lipkowitz, Kenny B. and Larter, Raima and Cundari, Thomas R.},
+	year = {2005},
+	doi = {10.1002/0471720895.ch5},
+	keywords = {electrostatics, molecular simulation, biophysics, binding free energies, discretization methods, implicit solvation, Poisson?Boltzmann Equation},
+	pages = {349--379},
+	file = {Biomolecular applications of Poisson-Boltzmann methods.pdf:C\:\\Users\\bake113\\Zotero\\storage\\PZV7R846\\Biomolecular applications of Poisson-Boltzmann methods.pdf:application/pdf;Snapshot:C\:\\Users\\bake113\\Zotero\\storage\\XP83AQKL\\summary.html:text/html}
+}
+
+@article{ren_biomolecular_2012,
+	title = {Biomolecular electrostatics and solvation: a computational perspective},
+	volume = {45},
+	copyright = {All rights reserved},
+	issn = {0033-5835},
+	shorttitle = {Biomolecular electrostatics and solvation},
+	doi = {10.1017/S003358351200011X},
+	abstract = {An understanding of molecular interactions is essential for insight into biological systems at the molecular scale. Among the various components of molecular interactions, electrostatics are of special importance because of their long-range nature and their influence on polar or charged molecules, including water, aqueous ions, proteins, nucleic acids, carbohydrates, and membrane lipids. In particular, robust models of electrostatic interactions are essential for understanding the solvation properties of biomolecules and the effects of solvation upon biomolecular folding, binding, enzyme catalysis, and dynamics. Electrostatics, therefore, are of central importance to understanding biomolecular structure and modeling interactions within and among biological molecules. This review discusses the solvation of biomolecules with a computational biophysics view towards describing the phenomenon. While our main focus lies on the computational aspect of the models, we provide an overview of the basic elements of biomolecular solvation (e.g., solvent structure, polarization, ion binding, and nonpolar behavior) in order to provide a background to understand the different types of solvation models.},
+	number = {4},
+	urldate = {2018-02-26},
+	journal = {Quarterly reviews of biophysics},
+	author = {Ren, Pengyu and Chun, Jaehun and Thomas, Dennis G. and Schnieders, Michael J. and Marucho, Marcelo and Zhang, Jiajing and Baker, Nathan A.},
+	month = nov,
+	year = {2012},
+	pmid = {23217364},
+	pmcid = {PMC3533255},
+	pages = {427--491},
+	file = {PubMed Central Full Text PDF:C\:\\Users\\bake113\\Zotero\\storage\\9ZPVIYM5\\Ren et al. - 2012 - Biomolecular electrostatics and solvation a compu.pdf:application/pdf}
+}
+
+@article{APBS_2018,
+	title = {Improvements to the {APBS} biomolecular solvation software suite},
+	volume = {27},
+	copyright = {All rights reserved},
+	issn = {1469-896X},
+	doi = {10.1002/pro.3280},
+	abstract = {The Adaptive Poisson?Boltzmann Solver (APBS) software was developed to solve the equations of continuum electrostatics for large biomolecular assemblages that have provided impact in the study of a broad range of chemical, biological, and biomedical applications. APBS addresses the three key technology challenges for understanding solvation and electrostatics in biomedical applications: accurate and efficient models for biomolecular solvation and electrostatics, robust and scalable software for applying those theories to biomolecular systems, and mechanisms for sharing and analyzing biomolecular electrostatics data in the scientific community. To address new research applications and advancing computational capabilities, we have continually updated APBS and its suite of accompanying software since its release in 2001. In this article, we discuss the models and capabilities that have recently been implemented within the APBS software package including a Poisson?Boltzmann analytical and a semi-analytical solver, an optimized boundary element solver, a geometry-based geometric flow solvation model, a graph theory-based algorithm for determining pKa values, and an improved web-based visualization tool for viewing electrostatics.},
+	language = {en},
+	number = {1},
+	journal = {Protein Science},
+	author = {Jurrus, Elizabeth and Engel, Dave and Star, Keith and Monson, Kyle and Brandi, Juan and Felberg, Lisa E. and Brookes, David H. and Wilson, Leighton and Chen, Jiahui and Liles, Karina and Chun, Minju and Li, Peter and Gohara, David W. and Dolinsky, Todd and Konecny, Robert and Koes, David R. and Nielsen, Jens Erik and Head-Gordon, Teresa and Geng, Weihua and Krasny, Robert and Wei, Guo-Wei and Holst, Michael J. and McCammon, J. Andrew and Baker, Nathan A.},
+	month = jan,
+	year = {2018},
+	keywords = {solvation, electrostatics, software, pKa, titration},
+	pages = {112--128}
+}
+
+
+
+@article{Shrake_JMB_1973,
+title = "Environment and exposure to solvent of protein atoms. Lysozyme and insulin ",
+journal = "Journal of Molecular Biology",
+volume = "79",
+number = "2",
+pages = "351 - 371",
+year = "1973",
+note = "",
+author = "A. Shrake and J.A. Rupley"
+}
+
+
+@article{Lei_Yang_MMS_2015,
+author = {H. Lei and X. Yang and B. Zheng and G. Lin and N. A. Baker},
+title = {Constructing Surrogate Models of Complex Systems with Enhanced Sparsity: Quantifying the Influence of Conformational Uncertainty in Biomolecular Solvation},
+journal = {SIAM Multiscale Model. Simul.} ,
+Fjournal = {SIAM Journal on Multiscale Modeling \& Simulation},
+volume = {13},
+number = {4},
+pages = {1327-1353},
+year = {2015},
+}
+
+@article{Yang_Lei_JCP_2016,
+title = "Enhancing sparsity of Hermite polynomial expansions by iterative rotations ",
+Fjournal = "Journal of Computational Physics ",
+journal = {J. Comput. Phys.},
+volume = "307",
+number = "",
+pages = "94 - 109",
+year = "2016",
+note = "",
+author = "Yang, X. and Lei, H. and Baker, N. A. and Lin, G.",
+}
+
+@article{ConstantineDW14,
+  title={Active subspace methods in theory and practice: Applications to
+    kriging surfaces},
+  author={Constantine, Paul G and Dow, Eric and Wang, Qiqi},
+  journal={SIAM J. Sci. Comput.},
+  fjournal={SIAM Journal on Scientific Computing},
+  volume={36},
+  number={4},
+  pages={A1500--A1524},
+  year={2014},
+  publisher={SIAM}
+}
+
+@article{JardakSK02,
+  title={Spectral polynomial chaos solutions of the stochastic advection equation},
+  author={Jardak, M and Su, Chau-Hsing and Karniadakis, George Em},
+  journal={J. Sci. Comput.},
+  fjournal={Journal of Scientific Computing},
+  volume={17},
+  number={1-4},
+  pages={319--338},
+  year={2002},
+  publisher={Springer}
+} 
+
+@article{YangK13,
+  author = "Xiu Yang and George Em Karniadakis",
+  title = "Reweighted {$\ell_1$} minimization method for stochastic elliptic differential equations",
+  journal = "J. Comput. Phys.",
+  fjournal = "Journal of Computational Physics ",
+  volume = "248",
+  number = "1",
+  pages = "87-108",
+  year = "2013",
+}
+
+@article{BakerSJHM01,
+  title={Electrostatics of nanosystems: application to microtubules and the
+    ribosome},
+  author={Baker, Nathan A and Sept, David and Joseph, Simpson and Holst,
+    Michael J and McCammon, J Andrew},
+  journal={Proceedings of the National Academy of Sciences},
+  volume={98},
+  number={18},
+  pages={10037--10041},
+  year={2001},
+  publisher={National Acad Sciences}
+}
+
+@article{Ati_Bahar_BJ_2001,
+Author = {Atilgan, A. R. and Durell, S. R. and Jernigan, R. L. and Demirel, M. C. and Keskin, O. and Bahar, I.},
+Title = {Anisotropy of fluctuation dynamics of proteins with an elastic network model},
+Journal = {Biophysical Journal},
+Year = {2001},
+Volume = {80},
+Number = {1},
+Pages = {505-515},
+}
+
+
+@article{RN1,
+   author = {Wang, Junmei and Wolf, Romain M. and Caldwell, James W. and Kollman, Peter A. and Case, David A.},
+   title = {Development and testing of a general amber force field},
+   journal = {Journal of Computational Chemistry},
+   volume = {25},
+   number = {9},
+   pages = {1157-1174},
+   year = {2004},
+   type = {Journal Article}
+}
+
+
+@article{RN2,
+   author = {Bayly, Christopher I. and Cieplak, Piotr and Cornell, Wendy and Kollman, Peter A.},
+   title = {A well-behaved electrostatic potential based method using charge restraints for deriving atomic charges: the RESP model},
+   journal = {The Journal of Physical Chemistry},
+   volume = {97},
+   number = {40},
+   pages = {10269-10280},
+   year = {1993},
+   type = {Journal Article}
+}
+
+@article{RN3,
+   author = {Hess, Berk and Bekker, Henk and Berendsen Herman, J. C. and Fraaije Johannes, G. E. M.},
+   title = {LINCS: A linear constraint solver for molecular simulations},
+   journal = {Journal of Computational Chemistry},
+   volume = {18},
+   number = {12},
+   pages = {1463-1472},
+   ISSN = {0192-8651},
+   year = {1998},
+   type = {Journal Article}
+}
+
+@article{RN4,
+   author = {Jorgensen, William L. and Chandrasekhar, Jayaraman and Madura, Jeffry D. and Impey, Roger W. and Klein, Michael L.},
+   title = {Comparison of simple potential functions for simulating liquid water},
+   journal = {The Journal of Chemical Physics},
+   volume = {79},
+   number = {2},
+   pages = {926-935},
+   ISSN = {0021-9606},
+   year = {1983},
+   type = {Journal Article}
+}
+
+@article{RN5,
+   author = {Miyamoto, Shuichi and Kollman Peter, A.},
+   title = {Settle: An analytical version of the SHAKE and RATTLE algorithm for rigid water models},
+   journal = {Journal of Computational Chemistry},
+   volume = {13},
+   number = {8},
+   pages = {952-962},
+   ISSN = {0192-8651},
+   year = {2004},
+   type = {Journal Article}
+}
+
+@article{Mar_Van_JCP_2008,
+author = {Luca Maragliano and Eric Vanden-Eijnden},
+title = {Single-sweep methods for free energy calculations},
+journal = {The Journal of Chemical Physics},
+volume = {128},
+number = {18},
+pages = {184110},
+year = {2008},
+doi = {10.1063/1.2907241},
+}
+
+@misc{Yang_Wan_rotation_2017,
+  Author = {Xiu Yang and Xiaoliang Wan and Lin Lin},
+  Title = {A General Framework of Enhancing Sparsity of Generalized Polynomial Chaos Expansions},
+  Year = {2017},
+  Eprint = {arXiv:1707.02688},
+  archivePrefix  = "arXiv",
+}
+
+@article{Laio_Parrinello_PNAS_2002,
+  author = {Laio, Alessandro and Parrinello, Michele}, 
+  title = {Escaping free-energy minima},
+  volume = {99}, 
+  number = {20}, 
+  pages = {12562-12566}, 
+  year = {2002}, 
+  journal = {Proceedings of the National Academy of Sciences} 
+}
+
+@article{Kumar_Kollman_JCC_1992,
+  author = {Kumar, Shankar and Rosenberg, John M. and Bouzida, Djamal and Swendsen, Robert H. and Kollman, Peter A.},
+  title = {THE weighted histogram analysis method for free-energy calculations on biomolecules. I. The method},
+  journal = {Journal of Computational Chemistry},
+  volume = {13},
+  number = {8},
+  pages = {1011--1021},
+  year = {1992},
+}
+
+@article{Lei_Karniadakis_JCP_2017,
+    author = {Lei, H. and Yang, X. and Li, Z. and Karniadakis, G. E.},
+    title = {Systematic parameter inference in stochastic mesoscopic modeling},
+    journal = {{J. Comput. Phys.}},
+    Fjournal = {Journal of Computational Physics},
+    volume = {330},
+    number = {4},
+    pages = {571-593},
+    year = {2017},
+}
+
+@InProceedings{Witteveen_Bijl_2006,
+  author        = {Witteveen, Jeroen A. S. and Bijl, Hester},
+  title         = {Modeling Arbitrary Uncertainties Using Gram-Schmidt Polynomial Chaos},
+  booktitle     = {44th AIAA Aerospace Sciences Meeting and Exhibit},
+  year          = {2006},
+  pages         = {1706-1713},
+  publisher     = {American Institute of Aeronautics and Astronautics},
+  annote        = {doi:10.2514/6.2006-896},
+  bdsk-url-1    = {https://doi.org/10.2514/6.2006-896},
+  bdsk-url-2    = {http://dx.doi.org/10.2514/6.2006-896},
+  date-added    = {2018-04-19 20:27:52 +0000},
+  date-modified = {2018-04-19 20:27:52 +0000},
+  doi           = {doi:10.2514/6.2006-896},
+  m1            = {0},
+  m3            = {doi:10.2514/6.2006-896},
+  title1        = {Aerospace Sciences Meetings},
+  ty            = {CHAP},
+  year1         = {2006/01/09},
+}
+
+@inproceedings{Bajaj_ACM_2016,
+ author = {Rasheed, Muhibur and Clement, Nathan and Bhowmick, Abhishek and Bajaj, Chandrajit},
+ title = {\blue{Statistical Framework for Uncertainty Quantification in Computational Molecular Modeling}},
+ booktitle = {Proceedings of the 7th ACM International Conference on Bioinformatics, Computational Biology, and Health Informatics},
+ year = {2016},
+ isbn = {978-1-4503-4225-4},
+ location = {Seattle, WA, USA},
+ pages = {146--155},
+ numpages = {10},
+ acmid = {2975182},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+}
+
+@article{Bajaj_JCB_2018,
+author = {Clement, Nathan and Rasheed, Muhibur and Bajaj, Chandrajit Lal},
+title = {\blue{Viral Capsid Assembly: A Quantified Uncertainty Approach}},
+journal = {Journal of Computational Biology},
+volume = {25},
+number = {1},
+pages = {51-71},
+year = {2018},
+doi = {10.1089/cmb.2017.0218},
+}
+
+
+
+@Comment{jabref-meta: databaseType:bibtex;}

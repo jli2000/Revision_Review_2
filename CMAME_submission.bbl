@@ -1,0 +1,554 @@
+\begin{thebibliography}{100}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{Lei_Yang_MMS_2015}
+H.~Lei, X.~Yang, B.~Zheng, G.~Lin, N.~A. Baker, Constructing surrogate models
+  of complex systems with enhanced sparsity: Quantifying the influence of
+  conformational uncertainty in biomolecular solvation, SIAM Multiscale Model.
+  Simul. 13~(4) (2015) 1327--1353.
+
+\bibitem{OLADYSHKIN2012}
+S.~Oladyshkin, W.~Nowak, Data-driven uncertainty quantification using the
+  arbitrary polynomial chaos expansion, Reliability Engineering \& System
+  Safety 106 (2012) 179 -- 190.
+
+\bibitem{Saltelli_book_2008}
+A.~Saltelli, \blue{Global sensitivity analysis: the primer}, John Wiley, 2008.
+
+\bibitem{Bishop_2006}
+C.~M. Bishop, \blue{Pattern Recognition and Machine Learning (Information
+  Science and Statistics)}, Springer-Verlag, Berlin, Heidelberg, 2006.
+
+\bibitem{Laio_Parrinello_PNAS_2002}
+A.~Laio, M.~Parrinello, Escaping free-energy minima, Proceedings of the
+  National Academy of Sciences 99~(20) (2002) 12562--12566.
+
+\bibitem{Fishman96}
+G.~Fishman, {Monte Carlo: Concepts, Algorithms, and Applications},
+  Springer-Verlag New York, Inc., 1996.
+
+\bibitem{Kucherenko_2015}
+S.~Kucherenko, D.~Albrecht, A.~Saltelli, \blue{Exploring multi-dimensional
+  spaces: a Comparison of Latin Hypercube and Quasi Monte Carlo Sampling
+  Techniques} (2015).
+\newblock \href {http://arxiv.org/abs/arXiv:1505.02350}
+  {\path{arXiv:arXiv:1505.02350}}.
+
+\bibitem{Giles_2015}
+M.~B. Giles, \blue{Multilevel Monte Carlo methods}, Acta Numerica 24 (2015) 259
+  -- 328.
+
+\bibitem{Heinrich_MLMC_2001}
+S.~Heinrich, \blue{Multilevel Monte Carlo Methods}, in: S.~Margenov,
+  J.~Wa{\'{s}}niewski, P.~Yalamov (Eds.), Large-Scale Scientific Computing,
+  Springer Berlin Heidelberg, Berlin, Heidelberg, 2001, pp. 58--67.
+
+\bibitem{Pisaroni_Nobile_CMAME_2017}
+M.~Pisaroni, F.~Nobile, P.~Leyland, \blue{A Continuation Multi Level Monte
+  Carlo (C-MLMC) method for uncertainty quantification in compressible inviscid
+  aerodynamics}, Computer Methods in Applied Mechanics and Engineering 326
+  (2017) 20 -- 50.
+
+\bibitem{Koutsourelakis_SISC_2009}
+P.~Koutsourelakis, \blue{Accurate Uncertainty Quantification Using Inaccurate
+  Computational Models}, SIAM Journal on Scientific Computing 31~(5) (2009)
+  3274--3300.
+
+\bibitem{Peherstorfer_Willcox_SISC_2016}
+B.~Peherstorfer, K.~Willcox, M.~Gunzburger, \blue{Optimal Model Management for
+  Multifidelity Monte Carlo Estimation}, SIAM Journal on Scientific Computing
+  38~(5) (2016) A3163--A3194.
+
+\bibitem{Fox99}
+B.~Fox, Strategies for {Quasi-Monte Carlo}, Kluwer Academic Pub., 1999.
+
+\bibitem{Niedeereiter92}
+H.~Niederreiter, Random number generation and {Quasi-Monte Carlo} methods,
+  SIAM, 1992.
+
+\bibitem{NiederreiterHLZ98}
+H.~Niederreiter, P.~Hellekalek, G.~Larcher, P.~Zinterhof, {Monte Carlo} and
+  {Quasi-Monte Carlo} methods 1996, Springer-Verlag, 1998.
+
+\bibitem{Mckay_Beckman_Technometrics_1979}
+M.~D. McKay, R.~J. Beckman, W.~J. Conover, \blue{Comparison of Three Methods
+  for Selecting Values of Input Variables in the Analysis of Output from a
+  Computer Code}, Technometrics 21~(2) (1979) 239--245.
+
+\bibitem{Stein_tech87}
+M.~Stein, Large sample properties of simulations using {Latin Hypercube
+  Sampling}, Technometrics 29~(2) (1987) 143--151.
+
+\bibitem{Loh_AS96}
+W.~Loh, On {Latin} hypercube sampling, Ann. Stat. 24~(5) (1996) 2058--2080.
+
+\bibitem{Sack_Welch_Stat_1989}
+J.~Sacks, W.~J. Welch, T.~J. Mitchell, H.~P. Wynn, \blue{Design and Analysis of
+  Computer Experiments}, Statist. Sci. 4~(4) (1989) 409--423.
+
+\bibitem{Kennedy_Hagan_JRSS_2001}
+M.~C. Kennedy, A.~O'Hagan, \blue{Bayesian calibration of computer models},
+  Journal of the Royal Statistical Society: Series B (Statistical Methodology)
+  63~(3) (2001) 425--464.
+
+\bibitem{GP_book_Rasmussen_2006}
+C.~Rasmussen, C.~Williams, \blue{Gaussian Processes for Machine Learning},
+  Adaptive Computation and Machine Learning, MIT Press, Cambridge, MA, USA,
+  2006.
+
+\bibitem{Wiener38}
+N.~Wiener, {The homogeneous chaos}, Amer. J. Math. 60 (1938) 897--936.
+
+\bibitem{Ghanem_1991Spectralappro}
+R.~Ghanem, P.~Spanos, Stochastic Finite Elements: A Spectral Approach,
+  Springer-Verlag, 1991.
+
+\bibitem{Xiu_2002Wiener}
+D.~Xiu, G.~E. Karniadakis, The wiener-askey polynomial chaos for stochastic
+  differential equations, SIAM J. Sci. Comput. 24 (2002) 619--644.
+
+\bibitem{Qian_Wu_2008}
+P.~Z.~G. Qian, C.~F.~J. Wu, \blue{Bayesian Hierarchical Modeling for
+  Integrating Low-Accuracy and High-Accuracy Experiments}, Technometrics 50~(2)
+  (2008) 192--204.
+
+\bibitem{Williams_2006}
+B.~Williams, D.~Higdon, J.~Gattiker, L.~Moore, M.~McKay, S.~Keller-McNulty,
+  \blue{Combining experimental data and computer simulations, with an
+  application to flyer plate experiments}, Bayesian Anal. 1~(4) (2006)
+  765--792.
+\newblock \href {http://dx.doi.org/10.1214/06-BA125}
+  {\path{doi:10.1214/06-BA125}}.
+
+\bibitem{Oakley_OHagan_Biometrika_2002}
+J.~Oakley, A.~O'Hagan, \blue{Bayesian inference for the uncertainty
+  distribution of computer model outputs}, Biometrika 89~(4) (2002) 769--784.
+
+\bibitem{Lockwood_Anitescu_2012}
+B.~A. Lockwood, M.~Anitescu, \blue{Gradient-Enhanced Universal Kriging for
+  Uncertainty Propagation}, Nuclear Science and Engineering 170~(2) (2012)
+  168--195.
+\newblock \href {http://dx.doi.org/10.13182/NSE10-86}
+  {\path{doi:10.13182/NSE10-86}}.
+
+\bibitem{XiuK_JCP03}
+D.~Xiu, G.~Karniadakis, Modeling uncertainty in flow simulations via
+  generalized polynomial chaos, J. Comput. Phys. 187 (2003) 137--167.
+
+\bibitem{GhanemMPW_CMAME05}
+R.~Ghanem, S.~Masri, M.~Pellissetti, R.~Wolfe, Identification and prediction of
+  stochastic dynamical systems in a polynomial chaos basis, Comput. Meth. Appl.
+  Math. Engrg. 194 (2005) 1641--1654.
+
+\bibitem{Knio_CFD06}
+O.~Knio, O.~{Le Maitre}, Uncertainty propagation in {CFD} using polynomial
+  chaos decomposition, Fluid Dyn. Res. 38~(9) (2006) 616--640.
+
+\bibitem{Sudret2008}
+B.~Sudret, Global sensitivity analysis using polynomial chaos expansions,
+  Reliability Engineering \& System Safety 93~(7) (2008) 964 -- 979.
+
+\bibitem{LiXiu_JCP09}
+J.~Li, D.~Xiu, A generalized polynomial chaos based ensemble {Kalman} filter
+  with high accuracy, J. Comput. Phys. 228 (2009) 5454--5469.
+
+\bibitem{MarzoukXiu2009}
+Y.~Marzouk, D.~Xiu, A stochastic collocation approach to bayesian inference in
+  inverse problems, Communications in Computational Physics 6~(4) (2009)
+  826--847.
+\newblock \href {http://dx.doi.org/10.4208/cicp.2009.v6.p826}
+  {\path{doi:10.4208/cicp.2009.v6.p826}}.
+
+\bibitem{Li2010}
+J.~Li, D.~Xiu, Evaluation of failure probability via surrogate models, J.
+  Comput. Phys. 229 (2010) 8966--8980.
+
+\bibitem{Li2018}
+J.~Li, P.~Stinis, Mori-zwanzig reduced models for uncertainty quantification,
+  arXiv:1803.02826.
+
+\bibitem{Schobi_2015}
+R.~Schobi, B.~Sudret, J.~Wiart, \blue{Polynomial-chaos-based Kriging},
+  International Journal for Uncertainty Quantification 5~(2) (2015) 171--193.
+
+\bibitem{Gratiet_2016}
+L.~L. Gratiet, S.~Marelli, B.~Sudret, \blue{Metamodel-Based Sensitivity
+  Analysis: Polynomial Chaos Expansions and Gaussian Processes}, Springer
+  International Publishing, Cham, 2016, pp. 1--37.
+
+\bibitem{Owen_Challenor_SIAM_2017}
+N.~Owen, P.~Challenor, P.~Menon, S.~Bennani, \blue{Comparison of
+  Surrogate-Based Uncertainty Quantification Methods for Computationally
+  Expensive Simulators}, SIAM/ASA Journal on Uncertainty Quantification 5~(1)
+  (2017) 403--435.
+\newblock \href {http://dx.doi.org/10.1137/15M1046812}
+  {\path{doi:10.1137/15M1046812}}.
+
+\bibitem{Roy_Mocayd_2018}
+P.~T. Roy, N.~El~Mo{\c{c}}ayd, S.~Ricci, J.-C. Jouhaud, N.~Goutal, M.~De~Lozzo,
+  M.~C. Rochoux, \blue{Comparison of polynomial chaos and Gaussian process
+  surrogates for uncertainty quantification and correlation estimation of
+  spatially distributed open-channel steady flows}, Stochastic Environmental
+  Research and Risk Assessment 32~(6) (2018) 1723--1741.
+
+\bibitem{MathelinH_NASA03}
+L.~Mathelin, M.~Hussaini, A stochastic collocation algorithm for uncertainty
+  analysis, Tech. Rep. NASA/CR-2003-212153, NASA Langley Research Center
+  (2003).
+
+\bibitem{XiuH_SISC05}
+D.~Xiu, J.~Hesthaven, High-order collocation methods for differential equations
+  with random inputs, SIAM J. Sci. Comput. 27~(3) (2005) 1118--1139.
+
+\bibitem{Babuska2007}
+I.~Babu$\check{\rm{s}}$ka, F.~Nobile, R.~Tempone, A stochastic collocation
+  method for elliptic partial differential equations with random input data,
+  SIAM J. Numer. Anal. 45~(3) (2007) 1005--1034.
+
+\bibitem{nobile2008sparse}
+F.~Nobile, R.~Tempone, C.~G. Webster, A sparse grid stochastic collocation
+  method for partial differential equations with random input data, SIAM J.
+  Numer. Anal. 46~(5) (2008) 2309--2345.
+
+\bibitem{Ma2009}
+X.~Ma, N.~Zabaras, An adaptive hierarchical sparse grid collocation algorithm
+  for the solution of stochastic differential equations, J. Comput. Phys.
+  228~(8) (2009) 3084--3113.
+
+\bibitem{Foo2010}
+J.~Foo, G.~E. Karniadakis, Multi-element probabilistic collocation method in
+  high dimensions, J. Comput. Phys. 229~(5) (2010) 1536 -- 1557.
+
+\bibitem{CONSTANTINE2012}
+P.~G. Constantine, M.~S. Eldred, E.~T. Phipps, Sparse pseudospectral
+  approximation method, Computer Methods in Applied Mechanics and Engineering
+  229-232 (2012) 1 -- 12.
+\newblock \href {http://dx.doi.org/https://doi.org/10.1016/j.cma.2012.03.019}
+  {\path{doi:https://doi.org/10.1016/j.cma.2012.03.019}}.
+
+\bibitem{jakemanG2013}
+J.~D. Jakeman, S.~G. Roberts, Local and dimension adaptive stochastic
+  collocation for uncertainty quantification, in: Sparse grids and
+  applications, Springer, 2013, pp. 181--203.
+
+\bibitem{Li2016}
+J.~Li, P.~Stinis, A unified framework for mesh refinement in random and
+  physical space, Journal of Computational Physics 323 (2016) 243 -- 264.
+\newblock \href {http://dx.doi.org/https://doi.org/10.1016/j.jcp.2016.07.027}
+  {\path{doi:https://doi.org/10.1016/j.jcp.2016.07.027}}.
+
+\bibitem{Doostan_2011nonadapted}
+A.~Doostan, H.~Owhadi, A non-adapted sparse approximation of pdes with
+  stochastic inputs, J. Comput. Phys 230 (2011) 3015--3034.
+
+\bibitem{Yan_2012Sc}
+L.~Yan, L.~Guo, D.~Xiu, Stochastic collocation algorithms using $l^1$
+  minimization, Inter. J. Uncertain Quantification 2 (2012) 279--293.
+
+\bibitem{Rauhut_2012sparseLegen}
+H.~Rauhut, R.~Ward, Sparse legendre expansions via $\ell_1$-minimization, J.
+  Approx. Theory 164 (2012) 517--533.
+
+\bibitem{mathelin_gallivan_2012}
+L.~Mathelin, K.~A. Gallivan, A compressed sensing approach for partial
+  differential equations with random input data, Communications in
+  Computational Physics 12~(4) (2012) 919?954.
+\newblock \href {http://dx.doi.org/10.4208/cicp.151110.090911a}
+  {\path{doi:10.4208/cicp.151110.090911a}}.
+
+\bibitem{Yang_2013reweightedL1}
+X.~Yang, G.~E. Karniadakis, Reweighted $\ell_1$ minimization method for
+  stochastic elliptic differential equations, J. Comput. Phys. 248 (2013)
+  87--108.
+
+\bibitem{Hampton_2015Cs}
+J.~Hampton, A.~Doostan, Compressive sampling of polynomial chaos expansions:
+  Convergence analysis and sampling strategies., J. Comput. Phys 280 (2015)
+  363--386.
+
+\bibitem{Peng_2016gradientL1}
+J.~Peng, J.~Hampton, A.~Doostan, On polynomial chaos expansion via
+  gradient-enhanced $\ell_1$-minimization, J. Comput. Phys 310 (2016) 440--458.
+
+\bibitem{Yan_2017}
+L.~Yan, Y.~Shin, D.~Xiu, Sparse approximation using $\ell_1-\ell_2$
+  minimization and its application to stochastic collocation, SIAM Journal on
+  Scientific Computing 39~(1) (2017) A229--A254.
+\newblock \href {http://dx.doi.org/10.1137/15M103947X}
+  {\path{doi:10.1137/15M103947X}}.
+
+\bibitem{Liu_2016QMCL1}
+Y.~L. Liu, L.~Guo, Stochastic collocation via l1-minimisation on low
+  discrepancy point sets with application to uncertainty quantification, EAJAM
+  6 (2016) 171--191.
+
+\bibitem{Lei_Karniadakis_JCP_2017}
+H.~Lei, X.~Yang, Z.~Li, G.~E. Karniadakis, Systematic parameter inference in
+  stochastic mesoscopic modeling, {J. Comput. Phys.} 330~(4) (2017) 571--593.
+
+\bibitem{ALEMAZKOOR2017}
+N.~Alemazkoor, H.~Meidani, Divide and conquer: An incremental sparsity
+  promoting compressive sampling approach for polynomial chaos expansions,
+  Computer Methods in Applied Mechanics and Engineering 318 (2017) 937 -- 956.
+\newblock \href {http://dx.doi.org/https://doi.org/10.1016/j.cma.2017.01.039}
+  {\path{doi:https://doi.org/10.1016/j.cma.2017.01.039}}.
+
+\bibitem{DIAZ2018}
+P.~Diaz, A.~Doostan, J.~Hampton, Sparse polynomial chaos expansions via
+  compressed sensing and d-optimal design, Computer Methods in Applied
+  Mechanics and Engineering 336 (2018) 640 -- 666.
+\newblock \href {http://dx.doi.org/https://doi.org/10.1016/j.cma.2018.03.020}
+  {\path{doi:https://doi.org/10.1016/j.cma.2018.03.020}}.
+
+\bibitem{RAI2018}
+P.~Rai, K.~Sargsyan, H.~Najm, Compressed sparse tensor based quadrature for
+  vibrational quantum mechanics integrals, Computer Methods in Applied
+  Mechanics and Engineering 336 (2018) 471 -- 484.
+\newblock \href {http://dx.doi.org/https://doi.org/10.1016/j.cma.2018.02.026}
+  {\path{doi:https://doi.org/10.1016/j.cma.2018.02.026}}.
+
+\bibitem{Huang_Protein_book_2005}
+K.~Huang, \blue{Lectures on Statistical Physics and Protein Folding}, WORLD
+  SCIENTIFIC, 2005.
+\newblock \href {http://dx.doi.org/10.1142/5741} {\path{doi:10.1142/5741}}.
+
+\bibitem{Kumar_Kollman_JCC_1992}
+S.~Kumar, J.~M. Rosenberg, D.~Bouzida, R.~H. Swendsen, P.~A. Kollman, The
+  weighted histogram analysis method for free-energy calculations on
+  biomolecules. i. the method, Journal of Computational Chemistry 13~(8) (1992)
+  1011--1021.
+
+\bibitem{Mar_Van_JCP_2008}
+L.~Maragliano, E.~Vanden-Eijnden, Single-sweep methods for free energy
+  calculations, The Journal of Chemical Physics 128~(18) (2008) 184110.
+\newblock \href {http://dx.doi.org/10.1063/1.2907241}
+  {\path{doi:10.1063/1.2907241}}.
+
+\bibitem{ConstantineDW14}
+P.~G. Constantine, E.~Dow, Q.~Wang, Active subspace methods in theory and
+  practice: Applications to kriging surfaces, SIAM J. Sci. Comput. 36~(4)
+  (2014) A1500--A1524.
+
+\bibitem{LIweixuan2015}
+W.~Li, G.~Lin, An adaptive importance sampling algorithm for bayesian inversion
+  with multimodal distributions, Journal of Computational Physics 294 (2015)
+  173 -- 190.
+
+\bibitem{Vittaldev2016}
+V.~Vittaldev, R.~P. Russell, R.~Linares, Spacecraft uncertainty propagation
+  using gaussian mixture models and polynomial chaos expansions, Journal of
+  Guidance, Control, and Dynamics 39~(12) (2016) 2615--2626.
+\newblock \href {http://dx.doi.org/10.2514/1.g001571}
+  {\path{doi:10.2514/1.g001571}}.
+
+\bibitem{FEINBERG2015}
+J.~Feinberg, H.~P. Langtangen, Chaospy: An open source tool for designing
+  methods of uncertainty quantification, Journal of Computational Science 11
+  (2015) 46 -- 57.
+\newblock \href {http://dx.doi.org/https://doi.org/10.1016/j.jocs.2015.08.008}
+  {\path{doi:https://doi.org/10.1016/j.jocs.2015.08.008}}.
+
+\bibitem{Zabaras_2014}
+J.~Wan, N.~Zabaras, A probabilistic graphical model based stochastic input
+  model construction, Journal of Computational Physics 272 (2014) 664 -- 685.
+\newblock \href {http://dx.doi.org/https://doi.org/10.1016/j.jcp.2014.05.002}
+  {\path{doi:https://doi.org/10.1016/j.jcp.2014.05.002}}.
+
+\bibitem{WanK_SISC06}
+X.~Wan, G.~Karniadakis, Multi-element generalized polynomial chaos for
+  arbitrary probability measures, SIAM J. Sci. Comput. 28 (2006) 901--928.
+
+\bibitem{Witteveen_Bijl_2006}
+J.~A.~S. Witteveen, H.~Bijl, Modeling arbitrary uncertainties using
+  gram-schmidt polynomial chaos, in: 44th AIAA Aerospace Sciences Meeting and
+  Exhibit, American Institute of Aeronautics and Astronautics, 2006, pp.
+  1706--1713.
+\newblock \href {http://dx.doi.org/doi:10.2514/6.2006-896}
+  {\path{doi:doi:10.2514/6.2006-896}}.
+
+\bibitem{Zheng_2015MEPCM}
+M.~Zheng, X.~Wan, G.~E. Karniadakis, Adaptive multi-element polynomial chaos
+  with discrete measure: Algorithms and application to spdes, Applied Numerical
+  Mathematics 90 (2015) 91--110.
+
+\bibitem{YIN2018}
+S.~Yin, D.~Yu, Z.~Luo, B.~Xia, An arbitrary polynomial chaos expansion approach
+  for response analysis of acoustic systems with epistemic uncertainty,
+  Computer Methods in Applied Mechanics and Engineering 332 (2018) 280 -- 302.
+\newblock \href {http://dx.doi.org/https://doi.org/10.1016/j.cma.2017.12.025}
+  {\path{doi:https://doi.org/10.1016/j.cma.2017.12.025}}.
+
+\bibitem{AHLFELD2016}
+R.~Ahlfeld, B.~Belkouchi, F.~Montomoli, Samba: Sparse approximation of
+  moment-based arbitrary polynomial chaos, Journal of Computational Physics 320
+  (2016) 1 -- 16.
+\newblock \href {http://dx.doi.org/https://doi.org/10.1016/j.jcp.2016.05.014}
+  {\path{doi:https://doi.org/10.1016/j.jcp.2016.05.014}}.
+
+\bibitem{dunkl_xu_2014}
+C.~F. Dunkl, Y.~Xu, Orthogonal Polynomials of Several Variables, 2nd Edition,
+  Encyclopedia of Mathematics and its Applications, Cambridge University Press,
+  2014.
+\newblock \href {http://dx.doi.org/10.1017/CBO9781107786134}
+  {\path{doi:10.1017/CBO9781107786134}}.
+
+\bibitem{Candes_2005error}
+E.~Cand\`{e}s, M.~Rudelson, T.~Tao, R.~Vershynin, Error correction via linear
+  programming, in: 46th Annual IEEE Symposium on Foundations of Computer
+  Science (FOCS'05), 2005, pp. 668--681.
+
+\bibitem{Candes_2008Rip}
+E.~J. Cand\`{e}s, The restricted isometry property and its implications for
+  compressed sensing, C. R. Acad. Sci. Paris S\'{e}r. I Math. 346 (2008)
+  589--592.
+
+\bibitem{Davies_2010RICLp}
+M.~E. Davies, R.~Gribonval, Restricted isometry constants where $\ell_p$ sparse
+  recovery can fail for $0<p\leq1$, IEEE Trans. Inf. Theory 55 (2010)
+  2203--2214.
+
+\bibitem{Donoho_2006srs}
+D.~Donoho, M.~Elad, V.~Temlyakov, Stable recovery of sparse overcomplete
+  representations in the presence of noise, Information Theory, IEEE
+  Transactions on 52~(1) (2006) 6--18.
+
+\bibitem{Berg_2007spgl}
+E.~V.~D. Berg, M.~Friedlander, Spgl1: A solver for large-scale sparse
+  reconstruction, http:// www.cs.ubc.ca/labs/scl/spgl.
+
+\bibitem{Candes_2005Decoding}
+E.~J. Cand\`{e}s, T.~Tao, Decoding by linear programming, IEEE Trans. Inform.
+  Theory 51 (2005) 4203--4215.
+
+\bibitem{Candes_2006Stablesrec}
+E.~J. Cand\`{e}s, J.~Romberg, T.~Tao, Stable signal recovery from incomplete
+  and inaccurate measurements, Comm. Pure Appl. Math. 56 (2006) 1207--1223.
+
+\bibitem{Natarajan_1995L0}
+B.~K. Natarajan, Sparse approximate solutions to linear systems, SIAM J. Sci.
+  Comput. 2 (1995) 227--234.
+
+\bibitem{Russi_PHD_2001}
+T.~M. Russi, \blue{Uncertainty Quantification with Experimental Data and
+  Complex System Models}, Ph.D. thesis, University of California, Berkeley
+  (2001).
+
+\bibitem{Yang_Lei_JCP_2016}
+X.~Yang, H.~Lei, N.~A. Baker, G.~Lin, Enhancing sparsity of hermite polynomial
+  expansions by iterative rotations, J. Comput. Phys. 307 (2016) 94 -- 109.
+
+\bibitem{JardakSK02}
+M.~Jardak, C.-H. Su, G.~E. Karniadakis, Spectral polynomial chaos solutions of
+  the stochastic advection equation, J. Sci. Comput. 17~(1-4) (2002) 319--338.
+
+\bibitem{Yang_Wan_rotation_2017}
+X.~Yang, X.~Wan, L.~Lin, A general framework of enhancing sparsity of
+  generalized polynomial chaos expansions (2017).
+\newblock \href {http://arxiv.org/abs/arXiv:1707.02688}
+  {\path{arXiv:arXiv:1707.02688}}.
+
+\bibitem{Ati_Bahar_BJ_2001}
+A.~R. Atilgan, S.~R. Durell, R.~L. Jernigan, M.~C. Demirel, O.~Keskin,
+  I.~Bahar, Anisotropy of fluctuation dynamics of proteins with an elastic
+  network model, Biophysical Journal 80~(1) (2001) 505--515.
+
+\bibitem{ren_biomolecular_2012}
+P.~Ren, J.~Chun, D.~G. Thomas, M.~J. Schnieders, M.~Marucho, J.~Zhang, N.~A.
+  Baker, Biomolecular electrostatics and solvation: a computational
+  perspective, Quarterly reviews of biophysics 45~(4) (2012) 427--491.
+\newblock \href {http://dx.doi.org/10.1017/S003358351200011X}
+  {\path{doi:10.1017/S003358351200011X}}.
+
+\bibitem{baker_biomolecular_2005}
+N.~A. Baker, Biomolecular {Applications} of {Poisson}?{Boltzmann} {Methods},
+  in: K.~B. Lipkowitz, R.~Larter, T.~R. Cundari (Eds.), Reviews in
+  {Computational} {Chemistry}, John Wiley \& Sons, Inc., 2005, pp. 349--379.
+\newblock \href {http://dx.doi.org/10.1002/0471720895.ch5}
+  {\path{doi:10.1002/0471720895.ch5}}.
+
+\bibitem{APBS_2018}
+E.~Jurrus, D.~Engel, K.~Star, K.~Monson, J.~Brandi, L.~E. Felberg, D.~H.
+  Brookes, L.~Wilson, J.~Chen, K.~Liles, M.~Chun, P.~Li, D.~W. Gohara,
+  T.~Dolinsky, R.~Konecny, D.~R. Koes, J.~E. Nielsen, T.~Head-Gordon, W.~Geng,
+  R.~Krasny, G.-W. Wei, M.~J. Holst, J.~A. McCammon, N.~A. Baker, Improvements
+  to the {APBS} biomolecular solvation software suite, Protein Science 27~(1)
+  (2018) 112--128.
+\newblock \href {http://dx.doi.org/10.1002/pro.3280}
+  {\path{doi:10.1002/pro.3280}}.
+
+\bibitem{Shrake_JMB_1973}
+A.~Shrake, J.~Rupley, Environment and exposure to solvent of protein atoms.
+  lysozyme and insulin, Journal of Molecular Biology 79~(2) (1973) 351 -- 371.
+
+\bibitem{Bajaj_ACM_2016}
+M.~Rasheed, N.~Clement, A.~Bhowmick, C.~Bajaj, \blue{Statistical Framework for
+  Uncertainty Quantification in Computational Molecular Modeling}, in:
+  Proceedings of the 7th ACM International Conference on Bioinformatics,
+  Computational Biology, and Health Informatics, ACM, New York, NY, USA, 2016,
+  pp. 146--155.
+
+\bibitem{Bajaj_JCB_2018}
+N.~Clement, M.~Rasheed, C.~L. Bajaj, \blue{Viral Capsid Assembly: A Quantified
+  Uncertainty Approach}, Journal of Computational Biology 25~(1) (2018) 51--71.
+\newblock \href {http://dx.doi.org/10.1089/cmb.2017.0218}
+  {\path{doi:10.1089/cmb.2017.0218}}.
+
+\bibitem{Rauhut_2010CsSM}
+H.~Rauhut, Compressive sensing and structured random matrices, Radon Series
+  Comp. Appl. Math. 9 (2010) 1--92.
+
+\bibitem{Marrel_Q2_2009}
+A.~Marrel, B.~Iooss, B.~Laurent, O.~Roustant, \blue{Calculations of Sobol
+  indices for the Gaussian process metamodel}, Reliability Engineering \&
+  System Safety 94~(3) (2009) 742 -- 751.
+
+\bibitem{Chastaing_sobol_2014}
+G.~Chastaing, F.~Gamboa, C.~Prieur, \blue{Generalized Sobol sensitivity indices
+  for dependent variables: numerical methods}, Journal of Statistical
+  Computation and Simulation 85~(7) (2015) 1306--1333.
+\newblock \href {http://dx.doi.org/10.1080/00949655.2014.960415}
+  {\path{doi:10.1080/00949655.2014.960415}}.
+
+\bibitem{GROMACS}
+H.~J.~C. Berendsen, D.~van~der Spoel, R.~van Drunen, {GROMACS}: A
+  message-passing parallel molecular dynamics implementation, Computer Physics
+  Communications 91~(1) (1995) 43--56.
+\newblock \href {http://dx.doi.org/10.1016/0010-4655(95)00042-E}
+  {\path{doi:10.1016/0010-4655(95)00042-E}}.
+
+\bibitem{RN1}
+J.~Wang, R.~M. Wolf, J.~W. Caldwell, P.~A. Kollman, D.~A. Case, Development and
+  testing of a general amber force field, Journal of Computational Chemistry
+  25~(9) (2004) 1157--1174.
+
+\bibitem{RN2}
+C.~I. Bayly, P.~Cieplak, W.~Cornell, P.~A. Kollman, A well-behaved
+  electrostatic potential based method using charge restraints for deriving
+  atomic charges: the resp model, The Journal of Physical Chemistry 97~(40)
+  (1993) 10269--10280.
+
+\bibitem{RN3}
+B.~Hess, H.~Bekker, J.~C. Berendsen~Herman, G.~E.~M. Fraaije~Johannes, Lincs: A
+  linear constraint solver for molecular simulations, Journal of Computational
+  Chemistry 18~(12) (1998) 1463--1472.
+
+\bibitem{RN4}
+W.~L. Jorgensen, J.~Chandrasekhar, J.~D. Madura, R.~W. Impey, M.~L. Klein,
+  Comparison of simple potential functions for simulating liquid water, The
+  Journal of Chemical Physics 79~(2) (1983) 926--935.
+
+\bibitem{RN5}
+S.~Miyamoto, A.~Kollman~Peter, Settle: An analytical version of the shake and
+  rattle algorithm for rigid water models, Journal of Computational Chemistry
+  13~(8) (2004) 952--962.
+
+\bibitem{BakerSJHM01}
+N.~A. Baker, D.~Sept, S.~Joseph, M.~J. Holst, J.~A. McCammon, Electrostatics of
+  nanosystems: application to microtubules and the ribosome, Proceedings of the
+  National Academy of Sciences 98~(18) (2001) 10037--10041.
+
+\end{thebibliography}

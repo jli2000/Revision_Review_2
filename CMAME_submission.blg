@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2017)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: CMAME_submission.aux
+The style file: elsarticle-num.bst
+Database file #1: ab_uq.bib
+Database file #2: physics_system.bib
+Warning--can't use both author and editor fields in Gratiet_2016
+Warning--empty chapter and pages in Gratiet_2016
+You've used 105 entries,
+            2937 wiz_defined-function locations,
+            1420 strings with 25512 characters,
+and the built_in function-call counts, 32349 in all, are:
+= -- 3135
+> -- 1014
+< -- 9
++ -- 407
+- -- 302
+* -- 2442
+:= -- 4369
+add.period$ -- 133
+call.type$ -- 105
+change.case$ -- 96
+chr.to.int$ -- 3
+cite$ -- 107
+duplicate$ -- 906
+empty$ -- 3593
+format.name$ -- 391
+if$ -- 8348
+int.to.chr$ -- 0
+int.to.str$ -- 105
+missing$ -- 112
+newline$ -- 351
+num.names$ -- 109
+pop$ -- 616
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 1953
+stack$ -- 0
+substring$ -- 2279
+swap$ -- 205
+text.length$ -- 8
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 2
+while$ -- 240
+width$ -- 108
+write$ -- 900
+(There were 2 warnings)

@@ -1,0 +1,28 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Background}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Approximation with orthogonal polynomials}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Compressed sensing}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Methods}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{Data-driven construction of the amdP basis}{section.3}% 6
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Orthonormal basis}{subsection.3.1}% 7
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Near-orthonormal basis}{subsection.3.1}% 8
+\BOOKMARK [2][-]{subsection.3.2}{Sparsity enhancement}{section.3}% 9
+\BOOKMARK [1][-]{section.4}{Results}{}% 10
+\BOOKMARK [2][-]{subsection.4.1}{Accurate recovery of linear systems with data-driven bases}{section.4}% 11
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Sparse linear systems}{subsection.4.1}% 12
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Non-sparse linear systems}{subsection.4.1}% 13
+\BOOKMARK [2][-]{subsection.4.2}{Systems with explicit knowledge of density function}{section.4}% 14
+\BOOKMARK [3][-]{subsubsection.4.2.1}{High-dimensional polynomial}{subsection.4.2}% 15
+\BOOKMARK [3][-]{subsubsection.4.2.2}{One-dimensional elliptic PDEs with high-dimensional random inputs}{subsection.4.2}% 16
+\BOOKMARK [2][-]{subsection.4.3}{Systems with implicit knowledge of density function}{section.4}% 17
+\BOOKMARK [3][-]{subsubsection.4.3.1}{High-dimensional polynomials}{subsection.4.3}% 18
+\BOOKMARK [3][-]{subsubsection.4.3.2}{1D elliptic PDEs with high-dimensional random inputs}{subsection.4.3}% 19
+\BOOKMARK [2][-]{subsection.4.4}{UQ study of a molecule system under Non-Gaussian conformational distributions}{section.4}% 20
+\BOOKMARK [1][-]{section.5}{Summary}{}% 21
+\BOOKMARK [1][-]{appendix.A}{Proof of Theorem 4.1}{}% 22
+\BOOKMARK [1][-]{appendix.B}{Measurement matrix and basis bounds}{}% 23
+\BOOKMARK [2][-]{subsection.B.1}{Null space of measurement matrix from Section 4.1}{appendix.B}% 24
+\BOOKMARK [2][-]{subsection.B.2}{Basis bounds}{appendix.B}% 25
+\BOOKMARK [1][-]{appendix.C}{Other metrics for the surrogate model}{}% 26
+\BOOKMARK [1][-]{appendix.D}{Generation of the Gaussian mixture data set}{}% 27
+\BOOKMARK [1][-]{appendix.E}{Molecular Dynamics simulation and calculation details}{}% 28

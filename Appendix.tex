@@ -1,0 +1,269 @@
+\section{Proof of Theorem~\ref{thm:exact_recovery}} \label{app:exact_recovery}
+
+\begin{proof}
+  Let $\bm v \in \rm{Ker}~\bm A$ and $\bm x \neq \bm c$ another solution of $\bm A \bm x = \bm b$. 
+  To show that $\bm c$ is the unique $l_1$ minimizer of $\bm A \bm c  = \bm b$, it is sufficient if 
+  \begin{equation}
+    \Vert \bm v_{T_{\ba}}\Vert_1 < \Vert \bm v_{T_{\ba}^c}\Vert_1,
+    \label{eq:null_condition}
+  \end{equation}
+  which gives
+  \begin{equation}
+    \begin{split}
+      \Vert \bm c \Vert_1 &\le \Vert \bm c - \bm x_{T_{\ba}}\Vert_1 + \Vert  \bm x_{T_{\ba}}\Vert_1
+      = \Vert \bm c_{T_{\ba}} - \bm x_{T_{\ba}}\Vert_1 + \Vert  \bm x_{T_{\ba}}\Vert_1
+      = \Vert \bm v_{T_{\ba}}\Vert_1 + \Vert  \bm x_{T_{\ba}}\Vert_1  \\
+      &< \Vert \bm v_{T_{\ba}^c}\Vert_1 + \Vert  \bm x_{T_{\ba}}\Vert_1 = \Vert \bm x \Vert_1.
+    \end{split} 
+  \end{equation}
+  To satisfy \eqref{eq:null_condition}, we partition $T_{\ba}^c$ into $T_{\ba}^c =  T_{\ba,1}^c \bigcup  T_{\ba,2}^c \bigcup \cdots$, where $T_{\ba,1}^c$ is the index set of $s$ largest absolute entries of $\bm v$ in $T_{\ba}^c$, $T_{\ba,2 }^c$ is the index set of $s$ largest absolute entries of $\bm v$ in $T_{\ba}^c T_{\ba,1}^c$.
+  Accordingly, 
+  \begin{equation}
+    \Vert \bm v_{T_{\ba}}\Vert_2^2 \le \frac{1}{1-\delta_s} \Vert \bm A \bm v_{T_{\ba}}\Vert_2 
+    = \frac{1}{1-\delta_s} \sum_{k=1} \left\langle \bm A \bm v_{T_{\ba}}, \bm A (-\bm v_{T_{\ba,k}^c}) \right\rangle \le \frac{\theta_s}{1-\delta_s} \sum_{k=1} \Vert \bm v_{T_{\ba}}\Vert_2 \Vert \bm v_{T_{\ba,k}^c}\Vert_2,
+  \end{equation}
+  which gives $\Vert \bm v_{T_{\ba}}\Vert_2 \le \frac{\theta_s}{1-\delta_s} \sum_{k=1}  \Vert \bm v_{T_{\ba,k}^c}\Vert_2$.
+  The remaining of the proof is straightforward and follows {\rm Theorem 2.6} of Rauhut~\cite{Rauhut_2010CsSM}.
+  By the Cauchy-Schwarz inequality, we obtain 
+  \begin{equation}
+    \Vert \bm v_{T_{\ba}}\Vert_1 \le  \frac{\theta_s}{1-\delta_s} \left( \Vert \bm v_{T_{\ba}}\Vert_1 + \Vert \bm v_{T_{\ba}^c}\Vert_1 \right).
+  \end{equation}
+  Equation~\eqref{eq:null_condition} follows if $\frac{\theta_s}{1-\delta_s} < 0.5$. 
+  %\left\langle %\bm\Psi \bm v_{T_{\ba}}, \bm\Psi (-\bm v T_{\ba,1}^c) + \bm\Psi (-\bm v T_{\ba,2}^c) + \cdots
+  %\right\rangle
+\end{proof}
+
+\begin{rem}
+  We emphasize that Theorem~\ref{thm:exact_recovery} holds only for the given index set $T_{\ba}$; it provides a metric to examine the recovery accuracy with respect to measurement matrix $\bm A$ and should not be viewed as the sufficient condition for exact recovery of \emph{arbitrary $s$-sparse vector} via $l_1$-minimization (see canonical references \cite{Candes_2005Decoding, Candes_2006Stablesrec,Rauhut_2010CsSM} for details). 
+  Theorem~\ref{thm:exact_recovery} also indicates that, for the given index set $T_{\ba}$, small $\|\bm{A}^*_{T_{\ba}}\bm{A}_{T_{\ba}}-I\|_2$ will promote the recover of $\bm v_{T_{\ba}}$.
+\end{rem}
+
+\section{Measurement matrix and basis bounds}\label{app:basis_bound}
+\subsection{Null space of measurement matrix from Section \ref{sec:basis_comparison}}
+Let $\tilde{\bm c} = \bm c + \bm v$, $\bm v \in \textrm{Ker}~\bm{A}$ where $\bm{A}$ is the measurement matrix defined in \eqref{eq:matA}. 
+From the null space property \cite{Rauhut_2010CsSM}, $\tilde{\bm c}$ does not fully recover $\bm c$ by 
+$\ell_1$ minimization (i.e., equation \eqref{eq:ape_L1}) only if $\Vert  \tilde{\bm c} \Vert_1 < \Vert \bm c\Vert_1$. As a \emph{necessary 
+condition} for the failure of recovery, it requires 
+\begin{equation}
+\left \Vert \bm v_{T_{\ba}}\right \Vert_1 > \left \Vert \bm v_{T_{\ba}^c}\right\Vert_1,
+\label{eq:l1_failure}
+\end{equation}  
+where $T_{\ba}^c$ refers to the complement of $T_{\ba}$. Accordingly, different null space of measurement matrix $\bm{A}$ 
+generally leads to different recovery error.
+
+We examined the above necessary condition \eqref{eq:l1_failure} for different measurement matrices by randomly choosing a non-zero index set 
+$T_{\ba}$ with $\left\vert T_{\ba}\right\vert = 50$ and $M = 180$.
+For $\bm A$ constructed by both basis sets, we collected $1000$ normalized  $\bm v\in\rm{Ker}~\bm A $ that satisfy $\left \Vert \bm v_{T_{\ba}}\right \Vert_1 > \left \Vert \bm v_{T_{\ba}^c}\right\Vert_1$.
+Figure~\ref{fig:contour_null_vector} shows the density contour of individual component $\left\vert \bm v_{i'}\right\vert$ in log-scale, where $i'$ refers to the index sorted by magnitude in descending order.
+%%%
+\begin{figure}[tbp]
+  \center
+  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_2/Logscale_null_vec_density_Ns_50_sam_180_orth}}
+  \subfigure[]{\includegraphics*[scale=0.25]{./Figure/Group_2/Logscale_null_vec_density_Ns_50_sam_180_orth_bound}}
+  \caption{{The null spaces of measurement matrices constructed by the exact and near-orthonormal bases are different under $\left \Vert \bm v_{T_{\ba}}\right \Vert_1 > \left \Vert \bm v_{T_{\ba}^c}\right\Vert_1$---a necessary
+    condition for $\bm c$ not being recoverable exactly.}
+  Density contour of the normalized null space vector component $\log\vert \rm {v}_{i'}\vert $ (sorted by magnitude) of the measurement matrix $\bm A$ constructed by orthogonal (a) and near-orthogonal basis functions (b) that satisfy $\left \Vert \bm v_{T_{\ba}}\right \Vert_1 > \left \Vert \bm v_{T_{\ba}^c}\right\Vert_1$ and $\Vert \bm v\Vert_2 = 1$.} \label{fig:contour_null_vector}
+\end{figure}
+%%%
+The two basis sets demonstrate different distributions of $\log\left\vert \bm v_{i'}\right\vert$, which likely contribute 
+to the different recovery errors shown in Figure~\ref{fig:err_no_sparse_vector}. 
+
+
+\subsection{Basis bounds}
+%It is useful to introduce the ``basis bound'' for the numerical results from our method.
+The lower bound of the required number of samples $M$ given in Theorem \ \ref{thm:boundedBOS} suggests that bases with smaller basis bounds $K$ are preferred.
+We expect that smaller basis bounds will correlate with higher accuracy representations.
+For the constructed basis set $\psi_i(\bx), i = 1,\cdots, N$, we define the basis 
+bound $\tilde{K}$ on the given data set $S$ by
+\begin{equation}\label{eq:basis_bound}
+\tilde{K} := \frac{1}{\vert S_{M_{\sigma}}\vert} \sum_{\bx\in S_{M_{\sigma}}}\vert k(\bm\xi)\vert,
+\end{equation}
+%\end{equation}
+where the set $S_{M_{\sigma}}$ is defined by $S_{M_{\sigma}} = \left
+\{\bx\Big\vert \vert k(\bx) - \mathbb{E}\left[k\right]\vert > M_{\sigma} \sigma\left[k\right], \bx \in S\right\}$. 
+Here $\displaystyle k(\bx) :=\mathop{\max}_{i} \vert \psi_i(\bx) \vert$ denotes the maximum magnitude for 
+an individual sampling point $\bx$, $\mathbb{E}\left[k\right]$ and $\sigma\left[k\right]$  represent the 
+mean and the standard deviation of $k(\bx)$ on $S$ with respect to the discrete measure $\nu_S$.
+%and $M_{\sigma}$ defines the spanned range for sampling $K$. 
+In this study, we present $\tilde{K}$ as an indication of the difference between the exact and near-orthonormal basis function. 
+In compressive sensing, the measurement matrix only consists of limited number of samples. Therefore, we 
+employ the mean of the tails in the basis bounds as an indicator of the upper bound of the largest 
+entry values from the measurement matrix. $M_{\sigma}$ defines the range of this tail set. 
+We choose $M_{\sigma} = 5$ if not specified otherwise.
+
+\begin{table}[!h]
+\centering
+\caption{$\tilde{K}$ of constructed basis set for Gaussian mixture system $d = 25$, $p = 2$ and $N_s = 1\times 10^5$.}
+\begin{tabular}{C{8em}|C{6em} C{6em} C{6em} C{6em} C{6em}}
+\hline\hline
+$M_{\sigma}$ & $3$ & $4$ & $5$ & $6$ &$ \displaystyle \mathop{\max}_{\bx\in S} k(\bx)$ \\
+\hline
+$\tilde{K}_{\rm orth}$ & 10.359 & 12.048 & 13.895 & 15.513 & 22.208\\ 
+$\tilde{K}_{\rm near-orth}$ & 9.622 & 11.196 & 12.867 & 14.448 & 18.790\\ 
+\hline\hline
+\end{tabular}
+\label{tab:GM_d_25_p_2}
+\end{table}
+
+Following the definition by Equation \eqref{eq:basis_bound}, we examine the basis bound $\tilde{K}$ of the numerical
+examples presented in this study. Table \ref{tab:GM_d_25_p_2} shows the results of Gaussian mixture system  
+$\left\{\bx^{(i)}\right\}, i = 1, \cdots, N_s$ with $N_s = 1\times 10^5$, $d = 25$ and $p = 2$ which is defined in Section \ref{sec:basis_comparison}. For different
+values of $M_{\sigma}$, $\tilde{K}$ of the near orthogonal basis shows consistently smaller values than
+the values of the exact orthogonal basis set. 
+
+Table \ref{tab:GM_d_25_p_3} shows the basis bound $\tilde{K}$ of the Gaussian mixture system which is studied 
+in Section \ref{sec:high_d_poly} with $N_s = 2\times 10^5$, 
+$d = 25$ and $p = 3$ . The values of $\tilde{K}$ for the near orthogonal basis are consistently smaller than 
+the value for the exact orthogonal basis set no matter on the original random sample set or the rotated sample set. 
+Furthermore, we present the basis bounds on the rotated sampling set $\left\{\bm\chi_M^{\left(i\right)}\right\}_{i=1}^{N_s}$, where
+the subscript ``$M$'' refers to the different number of training points utilized to construct the surrogate model
+$X(\bx)$. The near-orthogonal basis yields smaller $\tilde{K}$ than the exact orthogonal basis in each case. 
+
+Similarly, Table \ref{tab:BioMol_d_12_p_4} shows $\tilde{K}$ 
+of the constructed basis for uncertainty quantification of the molecular solvation energy 
+($d = 12$, $p=4$ and $N_s = 2\times 10^5$), which is studied in Section \ref{sec:mole_example}. The near-orthogonal basis yields smaller values consistently for different number ($\bm{\chi}_M$) of training points. 
+
+\begin{table}[!h]
+\centering
+\caption{$\tilde{K}$ of constructed basis set for Gaussian mixture system $d = 25$, $p = 3$ and $N_s = 2\times 10^5$.}
+\begin{tabular}{C{8em}|C{6em} C{6em} C{6em} C{6em} C{6em}}
+\hline\hline
+ & $\bx$ & $\bm{\chi}_{M=400}$ & $\bm{\chi}_{M=1200}$ & $\bm{\chi}_{M=1600}$ & $\bm{\chi}_{M=2400}$ \\
+\hline
+$\tilde{K}_{\rm orth}$ & 32.497 & 32.522 & 32.079 & 33.142 & 32.308 \\ 
+$\tilde{K}_{\rm near-orth}$ & 28.320 & 29.811 & 29.407 & 29.512 & 29.192\\ 
+\hline\hline
+\end{tabular}
+\label{tab:GM_d_25_p_3}
+\end{table}
+
+\begin{table}[!h]
+\centering
+\caption{$\tilde{K}$ of constructed basis set for molecular system $d = 12$, $p = 4$ and $N_s = 2\times 10^5$.}
+\begin{tabular}{C{8em}|C{6em} C{6em} C{6em} C{6em} C{6em}}
+\hline\hline
+ & $\bm{\chi}_{M=80}$ & $\bm{\chi}_{M=160}$ & $\bm{\chi}_{M=240}$ & $\bm{\chi}_{M=320}$ & $\bm{\chi}_{M=400}$  \\
+\hline
+$\tilde{K}_{\rm orth}$ & 40.596 & 39.914 & 39.789 & 39.218 & 39.142 \\ 
+$\tilde{K}_{\rm near-orth}$ & 39.970 & 39.278 & 39.290 & 38.528 & 38.631\\ 
+\hline\hline
+\end{tabular}
+\label{tab:BioMol_d_12_p_4}
+\end{table}
+
+\section{Other metrics for the surrogate model}
+\blue{
+Besides the relative $l_2$ error, we have also computed the predictivity coefficients $Q_2$ for 
+the test cases of Gaussian mixture (with $d = 25$ and
+$p = 3$) and molecular systems. Similar to Marrel et al.~\cite{Marrel_Q2_2009}, $Q_2$ is defined by
+\begin{equation}
+Q_2 = 1 - \int(f(\bx) - \tilde{f}(\bx))^2 \dif \nu_{S_2}(\bx) \big/ \int \left(f(\bx) - \bar{f}\right)^2 \dif \nu_{S_2}(\bx) ,
+\end{equation}
+where $\bar{f}$ represents the mean of QoI on $S_2$. The results are shown in Tab.~\ref{tab:Q_2_GM_mol}, where the surrogate models are
+constructed by the our data-driven basis approach. }
+
+\blue{
+\begin{table}[!h]
+\centering
+\caption{The predictivity coefficient $Q_2$ for polynomial function with 
+  Gaussian Mixture measure ($d = 25$ and $p = 3$) and the molecular system for
+    solvation energy and SASA of atom $\rm{H9}$.}
+\begin{tabular}{C{8em} C{3em} C{4em} C{4em} C{4em} C{4em} C{4em}}
+\hline\hline
+molecule solvation & $M$ & 80 & 160 &  240 & 320 & 400 \\
+ & $Q_2$ & 0.995715 & 0.999132 &  0.999731 & 0.999864 & 0.999911 \\
+\hline
+molecule SASA & $M$ & 200 & 300 &  400 & 500 & 600 \\
+ & $Q_2$ & 0.988675 & 0.996069 &  0.998272 & 0.998709 & 0.999027 \\
+\hline
+Gaussian Mixture & $M$ & 200 & 300 &  400 & 500 & 600 \\
+ & $Q_2$ & 0.998372 & 0.999347 &  0.999844 & 0.999892 & 0.999941 \\
+\hline\hline
+\end{tabular}
+\label{tab:Q_2_GM_mol}
+\end{table}
+}
+\blue{
+With the constructed surrogate model, we can compute the \textcolor{red}{Sobol'} sensitivity indices for 
+\ac{QoI} with dependent random variables. In brief, $f(\bx)$ is expanded by
+\begin{equation}
+f(\bx) = \eta_0(\bx) + \sum_{\bm\beta \in \Theta^d} \eta_{\bm\beta}(\bx),
+\end{equation}
+where $\Theta^d$ represents the collection of all subsets of $[1~:~d]$ and $\eta_{\bm\beta}(\bx)$
+satisfies 
+%\begin{equation}
+$\mathbb{E}\left[\eta_{\bm\alpha}, \eta_{\bm\beta}\right] = 0$, if $\bm\alpha \subset \bm\beta$.
+The sensitivity index $S_{\bm\beta}$ is given by
+\begin{equation}
+S_{\bm\beta} = \frac{\mathbb{V}(\eta_{\bm\beta}) + \sum_{\ba \cap \bm\beta \neq \ba, \bm\beta} \rm{Cov}(\eta_{\ba}, \beta_{\bm\beta})}
+    {\mathbb{V}(f)}
+\end{equation}
+where $\mathbb{V}(\cdot)$ refers to the variance on $\nu_S$. 
+We refer to Chastaing et al.~\cite{Chastaing_sobol_2014} for the details. Fig.~\ref{tab:Q_2_GM_mol} shows the first-order sensitivity indices for the test cases of Gaussian mixture systems 
+($d = 25$, $p = 3$) and the molecular systems, where the surrogate models are
+constructed by the data-driven basis approach using $M = 800$, $M = 240$ and $M = 600$ 
+training points, respectively. The dominant components are on the 
+dimensions $(1, 2, 3, 6, 11, 13, 14, 15, 16, 20, 22, 24, 25)$, $(1, 2, 5)$ and $(1, 2, 4, 5, 7)$ ($90\%$ of 
+total variance).
+}
+%%%
+\begin{figure}[tbp]
+  \center
+  \subfigure[]{\includegraphics*[scale=0.21]{./Figure/Group_9/Sobol_indices_rand_poly_d_25_p_3}}
+  \subfigure[]{\includegraphics*[scale=0.21]{./Figure/Group_9/Sobol_indices_mol_blb}}
+  \caption{The first-order \textcolor{red}{Sobol'} sensitivity indices for (a) polynomial function with 
+  Gaussian mixture measure ($d = 25$, $p = 3$) (b) molecular system for
+    solvation energy (``\textcolor{red}{\protect\rectanglesolidline}'')
+    and \ac{SASA} of atom $\rm{H9}$(``\textcolor{blue}{\protect\diamonddashdotline}'').
+   } \label{fig:sobol_GM_mol}
+\end{figure}
+%%%
+
+\section{Generation of the Gaussian mixture data set}
+\label{app:GM_generation}
+\blue{
+We used Matlab to generate the Gaussian mixture data set in Sec.~\ref{sec:basis_comparison}
+by calling the function \\ \texttt{gmdistribution(}$\bm\mu$, $\left\{\Sigma_i\right\}_{i=1}^3$, $\bm a$\texttt{)} with 
+$\bm a = (0.5358, 0.1281, 0.3361)$. $\bm\mu$ is a $25\times 3$ random 
+matrix with i.i.d.\ entries on $U[-2.5, 2.5]$. $\left\{\Sigma_i\right\}_{i=1}^3$ is a 
+$25\times25\times3$ array where $\Sigma_i$ is defined by
+\begin{equation}
+  \bm\Sigma_i = (\bm \Upsilon_i {\bm \Upsilon_i}^T + \mathbf{I})/4,
+\end{equation}
+where $\bm\Upsilon_i$ is a random matrix with i.i.d.\ entries from $\mathcal{U}[0,1]$ for $i=1,2,3$.
+$\bm\mu$ and $\Upsilon_i$ are generated by calling the Matlab function \texttt{rand()} with
+random number seed $200$.
+}
+
+
+\section{Molecular Dynamics simulation and calculation details}
+\label{app:sim}
+We performed all-atom \ac{MD} simulation of benzyl bromide in water using GROMACS 5.1.2 \cite{GROMACS}.
+The simulation system included a benzyl bromide molecule (see Figure \ref{fig:mol_blb} for the molecular structure) 
+ and 1011 water molecules.
+The \ac{GAFF} \cite{RN1} was used for the benzyl bromide parmameters.
+The partial charges of benzyl bromide molecule were calculated by RESP method \cite{RN2}.
+Bond lengths of benzyl bromide were constrained using the LINCS algorithm \cite{RN3}.
+The water molecule was modeled with the rigid TIP3P water model \cite{RN4}.
+The bond lengths and angles were held constant through the SETTLE algorithm \cite{RN5}.
+The system was equilibrated in the isothermal-isobaric ensemble for 10 ns at 300K and 1 bar after energy minimization.
+The van der Waals cut-off radii was 1.0 nm.
+Long-range electrostatics were calculated using a Particle Mesh Ewald (PME) summation with grid spacing of 0.12 nm.
+The time step was 2 fs.
+Isobaric-isothermal simulations were equilibrated using a V-rescale thermostat and Berendsen barostat.
+Following equilibration, the simulation was run for a production period of 20 $\mu$s in a NVT ensemble with a Nos\'e-Hoover thermostat.
+The trajectory was stored every 10000 time steps.
+
+\begin{figure}[htbp]
+\center
+\includegraphics*[scale=0.6]{./Figure/Group_8/blb_structure}
+\caption{Sketch of the molecule benzyl bromide with labeled atoms.}
+\label{fig:mol_blb}
+\end{figure}
+
+
+APBS calculations \cite{BakerSJHM01, APBS_2018} were performed with $129^3$ grid points over a $40 \times 40 \times 40$ \AA$^3$ coarse grid domain with focusing to a $14 \times 14 \times 14$ \AA$^3$ fine grid domain with the grid origin located at the geometric center of the molecule.
+The Poisson equation was solved with Dirichlet boundary conditions based on the asymptotic behavior of multiple point charges in a homogeneous dielectric medium.
+The dielectric coefficient inside the domain used a van der Waals molecular volume definition with a dielectric value of 2.0 inside the molecule and 78.0 outside the molecule.
+Charges were modeled by Dirac delta functions but discretized to the finite difference grid points using a cubic spline approximation.
+

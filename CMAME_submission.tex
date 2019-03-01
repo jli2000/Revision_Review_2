@@ -1,0 +1,176 @@
+\documentclass[review]{elsarticle}
+
+%\usepackage{lineno,hyperref}
+\usepackage{lineno}
+\usepackage{soul}
+\usepackage[utf8x]{inputenc}
+\modulolinenumbers[5]
+\input{mathhead}
+\newcommand{\blue}[1]{{\color{blue}#1}}
+
+\journal{Computer Methods in Applied Mechanics and Engineering}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles
+%%%%%%%%%%%%%%%%%%%%%%%
+%% To change the style, put a % in front of the second line of the current style and
+%% remove the % from the second line of the style you would like to use.
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Numbered
+%\bibliographystyle{model1-num-names}
+
+%% Numbered without titles
+%\bibliographystyle{model1a-num-names}
+
+%% Harvard
+%\bibliographystyle{model2-names.bst}\biboptions{authoryear}
+
+%% Vancouver numbered
+%\usepackage{numcompress}\bibliographystyle{model3-num-names}
+
+%% Vancouver name/year
+%\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
+
+%% APA style
+%\bibliographystyle{model5-names}\biboptions{authoryear}
+
+%% AMA style
+%\usepackage{numcompress}\bibliographystyle{model6-num-names}
+
+%% `Elsevier LaTeX' style
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{%Data-driven approach of quantifying uncertainty in complex systems with arbitrary randomness
+\blue{A data-driven framework for sparsity-enhanced 
+surrogates with arbitrary mutually dependent randomness}\\
+% or \\
+% \blue{A data-driven approach for sparsity-enhanced 
+% surrogates with arbitrary mutually dependent randomness}\\
+%\blue{Data-driven approach of constructing sparsity-enhanced 
+%surrogate model with arbitrary mutually dependent randomness}\\
+%or \\
+%\blue{Data-driven approach of constructing polynomial-based sparsity-enhanced surrogate model of 
+%complex systems with arbitrary randomness}\\
+}
+
+%\tnotetext[mytitlenote]{Fully documented templates are available in the elsarticle package on \href{http://www.ctan.org/tex-archive/macros/latex/contrib/elsarticle}{CTAN}.}
+
+%% Group authors per affiliation:
+
+\author[Leiaddress]{Huan Lei\corref{onecorrespondingauthor}\fnref{afootnote}}
+\cortext[onecorrespondingauthor]{Corresponding author}
+\ead{huan.lei@pnnl.gov}
+\address[Leiaddress]{Pacific Northwest National Laboratory, Richland, WA 99352.}%
+\author[Leiaddress]{Jing Li \fnref{afootnote}}
+\fntext[afootnote]{The first two authors contributed equally}
+%\thanks{The first two authors contributed equally}
+%\address[Leiaddress]{Pacific Northwest National Laboratory, Richland, WA 99352.}%
+\author[Leiaddress]{Peiyuan Gao}
+\author[Leiaddress,UWaddress]{Panagiotis Stinis}
+\address[UWaddress]{Department of Applied Mathematics, University of Washington, Seattle, WA 98195.}%
+\author[Leiaddress,Brownaddress]{Nathan A.\ Baker\corref{onecorrespondingauthor}}
+%\cortext[bcorrespondingauthor]{Corresponding author}
+\ead{nathan.baker@pnnl.gov}
+\address[Brownaddress]{Division of Applied Mathematics, Brown University, Providence, RI 02912.}%
+%\author{Elsevier\fnref{myfootnote}}
+%\address{Radarweg 29, Amsterdam}
+%\fntext[myfootnote]{Since 1880.}
+
+%% or include affiliations in footnotes:
+%\author[mymainaddress,mysecondaryaddress]{Elsevier Inc}
+%\ead[url]{www.elsevier.com}
+
+%\author[mysecondaryaddress]{Global Customer Service\corref{mycorrespondingauthor}}
+%\cortext[mycorrespondingauthor]{Corresponding author}
+%\ead{support@elsevier.com}
+
+%\address[mymainaddress]{1600 John F Kennedy Boulevard, Philadelphia}
+%\address[mysecondaryaddress]{360 Park Avenue South, New York}
+
+\begin{abstract}
+\input{abstract}
+%This template helps you to create a properly formatted \LaTeX\ manuscript.
+\end{abstract}
+
+\begin{keyword}
+data-driven \sep arbitrary randomness \sep mutual dependence \sep compressed sensing \sep sparsity enhancement \sep uncertainty quantification 
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers
+
+\input{Introduction}
+\input{Background}
+\input{Methods}
+\input{Results}
+\input{Summary}
+
+\appendix
+\input{Appendix}
+
+%\begin{acknowledgments}
+\section*{Acknowledgements}
+We thank %\fxwarning*{Can you please add ORCID IDs or institutional affiliations for the people you are acknowledging?}
+Ling Guo (Shanghai Normal University), Lei Wu (Princeton University), Wen Zhou (Colorado State University), and David Sept 
+(University of Michigan, ORCID:0000-0003-3719-2483) for helpful discussions.
+This work was supported by the U.S.\ Department of Energy, Office of Science, Office of Advanced Scientific Computing Research as part of the Collaboratory on Mathematics for Mesoscopic Modeling of Materials (CM4)
+and by the National Institutes of Health grant R01 GM069702. The research was performed using resources available through Research Computing at Pacific Northwest National Laboratory
+%\fxwarning*{I think there is some official text you should use to acknowledge LDRD support.}
+HL acknowledges grant support from AMS Simons Post-doctoral Travel Grant and PNNL Laboratory Directed Research \& Development (LDRD) under project
+``Development of physics-compatible stochastic models for multiphysics systems''.
+%\end{acknowledgments}
+
+
+
+%Here are two sample references: \cite{Feynman1963118,Dirac1953888}.
+
+
+\nolinenumbers
+
+\section*{References}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles
+%%%%%%%%%%%%%%%%%%%%%%%
+%% To change the style, put a % in front of the second line of the current style and
+%% remove the % from the second line of the style you would like to use.
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Numbered
+%\bibliographystyle{model1-num-names}
+
+%% Numbered without titles
+%\bibliographystyle{model1a-num-names}
+
+%% Harvard
+%\bibliographystyle{model2-names.bst}\biboptions{authoryear}
+
+%% Vancouver numbered
+%\usepackage{numcompress}\bibliographystyle{model3-num-names}
+
+%% Vancouver name/year
+%\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
+
+%% APA style
+%\bibliographystyle{model5-names}\biboptions{authoryear}
+
+%% AMA style
+%\usepackage{numcompress}\bibliographystyle{model6-num-names}
+
+%% `Elsevier LaTeX' style
+%\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\bibliography{mybibfile}
+\bibliography{ab_uq,physics_system}
+
+\end{document}

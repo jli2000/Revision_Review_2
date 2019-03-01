@@ -1,0 +1,385 @@
+\section{Methods} \label{sec:num_method}
+In this section, we introduce the \ac{DSRAR} framework to construct
+surrogate model. The goal of this study is to determine, given a small set of $M\ll N$ unstructured realizations 
+$\{\bm{z}^{(i)}\}_{i=1}^M$ and the corresponding outputs $b=(f(\bm{z}^{(1)}),...f(\bm{z}^{(M)}))^{T},$ the polynomial 
+approximation in \eqref{eq:f_ap_expan} or \eqref{eq:ape_single} when $f(\bm{z})$ has a sparse representation. 
+{\color{blue}This small set $\{\bm{z}^{(i)}\}_{i=1}^M$ is usually called 
+\emph{training set} and $M$ is the \emph{training sample size.}}
+There are two quantities we need to compute: (i) an appropriate orthonormal polynomial basis $\psi$ and (ii) an interpolation-type sparse solution $\bm{c} = (c_1,\dots,c_N)^T\in \mathbb{R}^N$ such that $f_p(\bm{z}^{(i)}) = f(\bm{z}^{(i)})$ for $i = 1,\dots,M$ with the smallest possible number nonzero $\bm{c}$.
+The basis construction, step (i), will be discussed in detail in Section \ref{sec:data_driven_basis}.
+We can reformulate the second part as the following constrained optimization problem,
+\begin{equation}\label{eq:ape_L0}
+    \min \|\bm{c}\|_0 \quad \text{subject to }\bm A\bm{c}=\bm{b},
+\end{equation}
+where $\|\bm{c}\|_0$ indicates the number of nonzero entries of $\bm{c}$ and $\bm A \in \mathbb{R}^{M \times N}$ (usually called the measurement matrix) is written as
+\begin{eqnarray}\label{eq:matrixelem}
+    \bm A=(a_{ij})_{1\leq i\leq M,1\leq j\leq N}, \quad a_{ij}=\psi_{j}(\bm{z}^{(i)}).
+\end{eqnarray}
+It is well known that this $\ell_0$ minimization problem \eqref{eq:ape_L0} is NP-hard \cite{Natarajan_1995L0}. 
+As mentioned in Section~\ref{sec:cs}, \ac{CS} is a well-studied and popular approach to find sparse solutions to \eqref{eq:ape_L0} through $\ell_1$-minimization shown in \eqref{eq:ape_L1} (no noise) or \eqref{eq:ape_L1_denoise} (with noise).
+Therefore, \blue{the approach introduced below can be viewed} as a method for 
+data-driven construction of bases that allow sparse representation and accurate 
+recovery for \acp{QoI} in \ac{UQ} applications.
+
+\subsection{Data-driven construction of the \ac{amdP} basis}\label{sec:data_driven_basis}
+Let us start with a set of \blue{samples of $d$-dimensional} random vector $\bx \in \mathbb{R}^d$, i.e., $S := \left\{\bx^{(k)}\right\}_{k = 1}^{N_s}$ with the underlying probability measure $\rho(\bx).$ $S$ is usually called the \emph{sample set}.
+We aim to construct a set of orthonormal polynomial basis functions $\left\{ \psi_{\ba}(\bx)\right\}_{\vert \ba \vert = 0}^p$ with respect to  $\rho(\bx)$ in $\Pi_p^d,$ the space of polynomials up to degree $p$.
+Since $\rho(\bx)$ can be non-Gaussian or even unknown, \emph{we do not make the assumption that {\color{blue} each component of $\bx$ is mutually} independent, even under a linear transformation such as those based on \ac{PCA}}.
+Consequently, the orthogonal polynomial basis $\psi_{\bm\alpha}(\bx)$ cannot 
+be directly constructed as a tensor product 
+of univariate {\color{blue}orthonormal basis functions in each 
+component of $\bx$}. \blue{Below, we introduce a data-driven approach 
+to construct multivariate \ac{amdP} randomness}.
+
+\subsubsection{Orthonormal basis}
+When we have a collection of random samples $S$, and the 
+underlying probability measure $\rho(\bx)$ can be approximated by the 
+discrete measure $\nu_S(\bx)$
+\begin{equation}\label{def:disc_meas}
+  \rho(\bx) \approx \displaystyle \nu_S(\bx) := \frac{1}{N_s}\sum_{\bx^{(k)} \in S}\delta_{\bx^{(k)}}(\bx),
+\end{equation}
+where $\delta_{\bx^{(k)}}$ is the Dirac measure, that is $\delta_{\bx^{(k)}}(\bx)$ is equal to 1 when $\bx = \bx^{(k)}$ and 0 otherwise.
+Given the inner product defined as in \eqref{def:inner_prod} with $\rho$ replaced by the discrete measure $\nu_{S},$ we 
+can construct a set of orthonormal multivariate polynomial basis functions $\left\{\psi_{\ba}(\bx)\right\}_{\vert \ba \vert = 0}^{p}$ 
+via the Gram-Schmidt orthogonalization process on an ordered monomial basis $\{\hat{\psi}_{\bm{\alpha}}(\bx)\}_{|\ba|=0}^p$. 
+Here, we use the aforementioned {graded lexicographic ordering} of the multi-index.
+
+Similar to Dunkl and Xu \cite{dunkl_xu_2014}, $\psi_{\ba}$ can be constructed using the recursive formulation 
+\begin{equation}
+  \psi_{\bm{\alpha}}(\bx) = f_{\bm{\alpha}}^{\bm{\alpha}} \hat{\psi}_{\ba}(\bx) - \sum_{\bm{\beta} \prec \bm{\alpha}} f_{\bm{\beta}}^{\bm{\alpha}} \psi_{\bm{\beta}}(\bx),
+  \label{eq:exact_orth}
+\end{equation}
+where $\hat{\psi}_{\ba}(\bx) := \prod_{k=1}^{d} \xi^{\alpha_k}_k$ represents the multivariate monomial basis function.
+The expression $\bm{\beta} \prec \ba$ means that the multi-index $\bm{\beta}$ comes before $\ba$ under the chosen ordering.   
+The coefficients $f_{\bm{\beta}}^{\bm{\alpha}}$ are determined by imposing an orthonormal condition with respect to the discrete measure $\nu_{S}$, i.e.,
+\begin{equation}
+  \begin{split}
+    \int \psi_{\bm{\alpha}}(\bm{\xi}) \psi_{\bm{\beta}}(\bm{\xi}) \dif \rho(\bx)  &\approx \int \psi_{\bm{\alpha}}(\bm{\xi}) \psi_{\bm{\beta}}(\bm{\xi}) \dif \nu_{S}(\bx) \\
+    &= \frac{1}{N_s}\sum_{k=1}^{N_s} \psi_{\bm{\alpha}}(\bm{\xi}^{(k)})\psi_{\bm{\beta}}(\bm{\xi}^{(k)}) \\
+    &  \equiv \delta_{\bm{\alpha,\beta}}, \quad\quad \bm{\beta} \preceq \bm{\alpha}.
+  \end{split} \label{eq:exact_orth_coeff}
+\end{equation} 
+Equations \eqref{eq:exact_orth} and \eqref{eq:exact_orth_coeff} generate a set of orthonormal basis 
+functions on the discrete measure 
+$\nu_{S}$ \blue{irrespective of the mutual dependence between the components of $\bx$.}
+\blue{We employ $\left\{\psi_{\ba}(\bx)\right\}_{\vert \ba \vert = 0}^{p}$ as 
+  the \ac{amdP} basis on $\rho(\bx)$.   
+} 
+%
+\textcolor{blue}{Numerically, the modified Gram-Schmidt orthogonalization can be 
+used as an alternative approach when the number of basis is too large and there exists 
+instability in the standard Gram-Schmidt orthogonalization.}
+
+When $\rho(\bx)$ is known explicitly, orthonormal basis functions can also be constructed 
+by taking the general formulation in Equation \eqref{eq:exact_orth} and 
+imposing the inner product in Equation \eqref{def:inner_prod} with respect to $\rho$.
+Here we will also consider a special case when $\bx$ is a random vector that is 
+linearly transformed from {\color{blue} a random vector $\bm z$ with i.i.d.\ components} via $\bx = \mathbf{Q}\bm z.$ 
+This case is motivated by the sparsity enhancement approach discussed in 
+Sec.\ \ref{sec:sparsity_enhancement}. In particular, we assume that the quadrature rule 
+of polynomial integration
+with respect to the probability measure of $\bm z$ is explicitly known. 
+
+Given these assumptions, $f_{\bm{\beta}}^{\bm{\alpha}}$ can be determined by \textcolor{red}{Equation \eqref{eq:exact_orth} and the orthonormal condition}
+\begin{equation}
+  \begin{split}
+    \int \psi_{\bm{\alpha}}(\bm{\xi}) \psi_{\bm{\beta}}(\bm{\xi}) \dif \rho(\bx) &= \sum_{k=1}^{N_Q} \psi_{\bm{\alpha}}\left(\mb Q \bm{z}_Q^{(k)}\right) \psi_{\bm{\beta}}\left(\mb Q \bm{z}_Q^{(k)}\right) w_k \\
+    &  \equiv \delta_{\bm{\alpha,\beta}}, \quad\quad \bm{\beta} \preceq \bm{\alpha},
+  \end{split} \label{eq:exact_orth_coeff_quad}
+\end{equation}
+where $\left\{\bm z_Q^{(k)}\right\}_{k=1}^{N_Q}$ and $\left\{w_k\right\}_{k=1}^{N_Q}$ represent the quadrature points and weights constructed to yield an exact integration with probability measure of $\bm z$ for polynomials of degree $\vert \ba\vert + \vert \bm\beta\vert$ or less. 
+%-------------------------------------------------------------------------------
+\begin{algorithm}[htp]
+  \hrule
+  \caption{Construct the orthonormal \blue{\ac{amdP}} basis $\left\{ \psi_{\ba}(\bx)\right\}_{\vert \ba \vert = 0}^p$ on discrete sample set $S$.}
+  \vspace{5pt} \hrule \vspace{5pt}
+\begin{algorithmic}[1]
+    \State Given sample set  $S = \left\{\bx^{(k)}\right\}_{k = 1}^{N_s}$.
+    \State Given a fixed multi-index order $\left\{\ba^{(l)}\right\}_{l=1}^N$.
+    \FOR{$l=1$ to $N$}
+\State Let $\ba = \ba^{(l)}$, construct $\displaystyle \psi_{\bm{\alpha}}(\bx) = f_{\bm{\alpha}}^{\bm{\alpha}} \hat{\psi}_{\ba}(\bx) - \mathop{\sum}_{\bm{\beta} \prec \bm{\alpha}} f_{\bm{\beta}}^{\bm{\alpha}} \psi_{\bm{\beta}}(\bx)$ subject to Equation \eqref{eq:exact_orth_coeff}.
+\ENDFOR
+\hrule
+\end{algorithmic}
+  %\hrule
+\label{alg:orth_discrete}
+\end{algorithm}
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+\begin{algorithm}[htp]
+  \hrule
+  \caption{Construct the orthonormal \blue{\ac{amdP}} basis $\left\{ \psi_{\ba}(\bx)\right\}_{\vert \ba \vert = 0}^p$ with probability measure $\rho(\ba)$.}
+  \vspace{5pt} \hrule \vspace{5pt}
+  \begin{algorithmic}[1]
+    \State Given a multi-index order $\left\{\ba^{(l)}\right\}_{l=1}^N$.
+    \FOR{$l=1$ to $N$} 
+ 
+    \State Let $\ba = \ba^{(l)}$, construct $\displaystyle \psi_{\bm{\alpha}}(\bx) = f_{\bm{\alpha}}^{\bm{\alpha}} \hat{\psi}_{\ba}(\bx) - \mathop{\sum}_{\bm{\beta} \prec \bm{\alpha}} f_{\bm{\beta}}^{\bm{\alpha}} \psi_{\bm{\beta}}(\bx)$ by evaluating the basis inner product using existing quadrature rule or Equation \eqref{eq:exact_orth_coeff_quad} if $\bx$ can be linearly transformed from {\color{blue} a  random vector with i.i.d.\ components} $\bm z$  with an explicitly known quadrature rule.
+    \ENDFOR
+    \end{algorithmic} 
+   \hrule
+  \label{alg:orth_density}
+\end{algorithm}
+%-------------------------------------------------------------------------------
+Algorithms \ref{alg:orth_discrete} and \ref{alg:orth_density} summarize the procedure of orthonormal basis construction when $\rho(\bx)$ is implicitly represented by a sample set $S$ and known explicitly, respectively.
+There is no unique system of orthogonal polynomial basis functions for both scenarios if $d > 1$; different orderings of $\ba$ lead to different orthogonal basis \cite{dunkl_xu_2014}.
+On the other hand, the constructed orthonormal basis is unique up to unitary transformations as we prove in Theorem \ref{thm:orth_basis}.
+
+\begin{thm}
+  Let $\left\{\psi_{\ba}(\bx)\right\}_{\vert \ba \vert = 0}^{p}$ be a set of orthonormal polynomial basis  with respect to the measure $\rho(\bx)$, $\bx \in \mathbb{R}^d$.
+  Denote by $\bm{\varPsi}(\bx)$ the polynomial basis vector
+  \begin{equation}
+    \bm{\varPsi}(\bx) := (\psi_{\ba^{(1)}}, \cdots, \psi_{\ba^{(N)}})^T,
+    \label{eq:poly_basis_vector}
+  \end{equation}
+  where $\ba^{(1)}, \cdots, \ba^{(N)}$ is the arrangement of multi-index $\ba$ according to a fixed multi-index order.
+  Let $\bm\chi = \mathbf{Q}\bx$, where $\mathbf{Q}\in \mathbb{R}^{d\times d}$ is invertible. Let  $\left\{\phi_{\bm\beta}(\bm\chi)\right\}_{\vert \bm\beta \vert = 0}^{p}$ be a set of orthonormal polynomial basis functions with respect to a measure $\rho'(\bm\chi)$ constructed with order $\bm\beta^{(1)},\cdots,\bm\beta^{(N)}$, where $\rho'(\bm \chi)$ is induced from $\rho(\bx)$.
+  Then there exists a unitary matrix $\mathbf{U}$ such that $\bm{\varPhi}(\bm\chi) = \mathbf{U}  \bm{\varPsi}(\bx)$, where $\bm{\varPhi}(\bm\chi):=(\phi_{\bm\beta^{(1)}}, \cdots, \phi_{\bm\beta^{(N)}})^T$ denotes the corresponding polynomial basis vector.
+  \label{thm:orth_basis}
+\end{thm}
+\begin{proof}
+  Let $\hat{\bm{\varPsi}}(\bx)$ be the monomial basis vector.
+  Note that $\left\{\psi_{\ba}(\bx)\right\}_{\vert \ba \vert = 0}^{p}$ and $\left\{\phi_{\bm\beta}(\bm\bx)\right\}_{\vert \bm\beta \vert = 0}^{p}$  are two sets of basis in $\Pi_{p}^d$.
+  There exists transfer matrices $\mathcal{M_{\psi}}$ and $\mathcal{M_{\phi}}\in \mathbb{R}^{N\times N}$ such that
+  \begin{equation}
+    \bm{\varPsi}(\bm\xi)= \mathcal{M}_{\psi} \hat{\bm{\varPsi}}(\bx), \quad \bm{\varPhi}(\bm\xi)= \mathcal{M}_{\phi} \hat{\bm{\varPsi}}(\bx). \nonumber
+  \end{equation}
+  With $\bm\chi = \mathbf{Q}\bx$, $\bm\varPhi(\mathbf{Q}\bx)$ is also a basis in $\Pi_p^d$.
+  Then there exists an invertible matrix $\mathcal{T}\in\mathbb{R}^{N\times N}$ such that
+  \begin{equation}
+    \bm{\varPhi}(\bm\chi) = \bm{\varPhi}(\mathbf{Q}\bx)= \mathcal{T} \hat{\bm{\varPsi}}(\bx) \nonumber,
+  \end{equation}
+  which gives $\bm{\varPhi}(\bm\chi) = \mathcal{U} \bm{\varPsi}(\bx)$, where $\mathcal{U} = \mathcal{T} \mathcal{M}_{\psi}^{-1}$.
+  Recall $\left\{\psi_{\ba}(\bx)\right\}_{\vert \ba \vert = 0}^{p}$ and $\left\{\phi_{\bm\beta}(\bm\chi)\right\}_{\vert \bm\beta \vert = 0}^{p}$ are orthonormal basis with respect to $\rho(\bx)$ and $\rho'(\bm\chi)$, we have
+  \begin{equation}
+    \mathbf{I} = \int \bm{\varPhi}(\bm\chi) \bm{\varPhi}(\bm\chi)^T \dif \rho'(\bm\chi) = \int \mathcal{U}\bm{\varPsi}(\bm\xi) \bm{\varPsi}(\bm\xi)^T  \mathcal{U}^T  \dif \rho(\bm\xi) = \mathcal{U} \mathcal{U}^T
+  \end{equation}
+\end{proof}
+We do not need further assumptions on $\rho(\bx)$ because Theorem~\ref{thm:orth_basis} holds both when $\rho(\bx)$  is a measure on the continuous random vector $\bx$ (with probability density function $\omega(\bx)$) or a discrete measure $\nu_S(\bx)$ on a sample set $S$.
+Furthermore, it is straightforward to show the following Corollary.
+\begin{cor}
+  Let $S_1 := \left\{\bx^{(k)}\right\}_{k = 1}^{M}$ and $S_2 := \left\{\bm\chi^{(k)}\right\}_{k = 1}^{M}$ be two sets of random sampling points where $\bm\chi^{(k)} = \mathbf{Q}\bm\xi^{(k)}$ with invertible $\mathbf{Q}$.
+  Let $\mathbf{G}_{\bx}$ and $\mathbf{G}_{\bm\chi}$ be the Gram matrix constructed by $\bm{\varPsi}(\bx)$ and $\bm{\varPhi}(\bm\chi)$ defined in Theorem~\ref{thm:orth_basis}, i.e.,
+  %$\mathbf{G}_{\bx}$ and $\mathbf{G}_{\bm\chi}$
+  %\begin{equation}
+    $\displaystyle \mathbf{G}_{\bx} := \sum_{k=1}^{M} \bm{\varPsi}(\bx^{(k)}) \bm{\varPsi}(\bx^{(k)})^T / M$ and $\displaystyle \mathbf{G}_{\bm\chi} := \sum_{k=1}^{M} \bm{\varPhi}(\bm\chi^{(k)}) \bm{\varPhi}(\bm\chi^{(k)})^T / M$.
+  %\end{equation}
+  Then $\mathbf{G}_{\cdot}$ has invariant $l_2$ norm, that is, $\Vert \mathbf{G}_{\bx}\Vert_2 = \Vert \mathbf{G}_{\bm\chi}\Vert_2$. \label{col:orth_basis}
+  Moreover, $\Vert \mathbf{G}_{\bx}-\mathbf{I}\Vert_2 = \Vert \mathbf{G}_{\bm\chi}-\mathbf{I}\Vert_2$.
+\end{cor}
+
+%Thm. \ref{thm:orth_basis} and Col. \ref{col:orth_basis} indicate that 
+In general, the $l_2$ norm of $\Vert \mathbf{G}_{\bx}-\mathbf{I}\Vert_2$ is independent of specific monomial order of $\ba$ and invariant under linear transformations of the random vector.
+The basis functions $\left\{\psi_{\ba}(\bx)\right\}_{\vert \ba \vert = 0}^{p}$ constructed by Equations \eqref{eq:exact_orth} and \eqref{eq:exact_orth_coeff} provide an appropriate candidate for representing the surrogate model $f(\bx)$ via \ac{CS}.
+
+\subsubsection{Near-orthonormal basis}
+
+When $\rho(\bx)$ is implicitly represented by a sample set $S$, we employ the discrete measure $\nu_S$ to construct $\left\{\psi_{\ba}(\bx)\right\}_{\vert \bm\beta \vert = 0}^{p}$. 
+However, we note that the training set that queries $f(\cdot)$, denoted by $S_f$, may not be a subset of $S$.
+In practice, the sample set $S$ and the training set $S_f$ are usually collected in a sequential manner or directly from different experiments, although individual sampling points of both $S$ and $S_f$ follow the same distribution.
+Since $S$ only contains a finite number of samples of $\bx$, basis $\left\{\psi_{\ba}(\bx)\right\}_{\vert \ba \vert = 0}^{p}$  constructed by \eqref{eq:exact_orth} and \eqref{eq:exact_orth_coeff} is not the ``exact orthonormal'' basis with respect to $\rho(\bx)$.
+Especially, let $S' = \left\{{\bx'}_k\right\}_{k = 1}^{N_s}$ be another sample set following the same distribution $\rho(\cdot)$ and $\nu_{S'}(\cdot)$ be the discrete measure defined on $S'$.
+For the orthonormal \blue{\ac{amdP}} basis functions $\left\{\psi_{\ba}(\bx)\right\}_{\vert \ba \vert = 0}^{p}$ 
+constructed on $S$, we have $\mathbb{E}\left[ \bm{\varPsi}(\bx) \bm{\varPsi}(\bx)^T \right] \neq \mathbf{I}$ 
+under the discrete measure $\nu_{S'}(\bx)$ and vice versa.
+
+The above observation forces us to re-examine the orthonormal condition imposed by \eqref{eq:exact_orth_coeff}.
+Since the pre-constructed basis $\psi_{\ba}(\bx)$ does not retain the exact orthonormal condition when later being applied to approximate $f(\bx)$, we may relax the condition when determining the coefficients $f_{\bm\beta}^{\ba}$ in \eqref{eq:exact_orth}.
+In the present study, we propose the following heuristic criterion 
+\begin{equation}
+  \arg\min_{\hat{\mathbf{f}}^{\bm\alpha}} \Vert \hat{\mathbf{f}}^{\bm\alpha}\Vert_2~~\mbox{subject to}~~ \left \vert \int \psi_{\bm{\alpha}}(\bm{\xi}) \psi_{\bm{\beta}}(\bm{\xi}) \dif \nu_{S}(\bx) - \delta_{\bm{\alpha,\beta}}\right \vert < \zeta_{\ba,\bm\beta},~~ \bm{\beta} \le \bm{\alpha},
+  \label{eq:near_orth_condition}
+\end{equation}
+where $\hat{\mathbf{f}}^{\bm\alpha}$ is the coefficient vector of $\psi_{\bm\alpha}$ when represented using monomial basis functions, i.e., $\displaystyle \psi_{\bm\alpha}(\bx) = \sum_{\bm\beta \le \bm\alpha} \hat{f}_{\bm\beta}^{\bm\alpha} \hat{\psi}_{\bm\beta}(\bx)$.  $\hat{\mathbf{f}}^{\bm\alpha}$ is related to $\mathbf{f}^{\ba}$ through the linear transformation
+\begin{equation}
+  \hat{\mathbf{f}}^{\bm\alpha} =
+  \begin{pmatrix}
+    \mathbf{F} & 0 \\
+    0 & 1
+  \end{pmatrix}
+  \mathbf{f}^{\ba},
+  \label{eq:coeff_transform}  
+\end{equation}
+where $\mathbf{F}$ is an upper triangle matrix determined by pre-computed $\hat{\mathbf{f}}^{\bm\beta}, \bm\beta \prec \ba$, i.e.,
+\begin{equation}
+  \left[\mathbf{F}\right]_{I_{\bm\beta'} I_{\bm\beta}} = 
+  \begin{cases}
+    \hat{f}_{\bm\beta'}^{\bm\beta} \quad &\bm\beta' \preceq \bm\beta \\
+    0 \quad  &\bm\beta' \succ \bm\beta,
+  \end{cases}
+\end{equation}
+where $I_{\bm\beta}$ represents the mapping from multi-index to single index.
+
+The parameter $\zeta_{\ba,\bm\beta}$ quantifies the relaxation of the orthonormal condition. We split the sample set $S$ equally into two parts $S:=S_1\cup S_2$.
+Denote $\left\{\psi^{\left(1\right)}_{\ba}(\bx)\right\}_{\vert \ba \vert = 0}^{p}$ and $\left\{\psi^{\left(2\right)}_{\ba}(\bx)\right\}_{\vert \ba \vert = 0}^{p}$ the orthonormal bases constructed by Equations \eqref{eq:exact_orth} and \eqref{eq:exact_orth_coeff} on the discrete measures $\nu_{S_1}(\bx)$ and $\nu_{S_2}(\bx)$, respectively. 
+Inspired by cross-validation, we have chosen 
+$\displaystyle \zeta_{\bm\alpha,\bm\beta} = \frac{\vert \zeta_1\vert + \vert \zeta_2\vert }{2\sqrt{2}}$%, where $\zeta_1$ and $\zeta_2$ are determined by
+\begin{equation}
+  \zeta_1 = \int \psi^{(1)}_{\bm{\alpha}}(\bm{\xi}) \psi^{(1)}_{\bm{\beta}}(\bm{\xi}) \dif\nu_{S_2}(\bx),
+  \quad
+  \zeta_2 = \int \psi^{(2)}_{\bm{\alpha}}(\bm{\xi}) \psi^{(2)}_{\bm{\beta}}(\bm{\xi}) \dif \nu_{S_1}(\bx).
+  \label{eq:zeta_cross_validation}
+\end{equation}
+%\textcolor{blue}{Here the $\sqrt{2}$ in the denominator is caused by the relation that $|S| = 2|S_2|$. Consider a special case, that we construct exact orthogonal basis on set $S1$ and employ this basis to evaluate $\zeta$ on $S_1$ $S_2$ and the entire set $S$, then by \eqref{eq:zeta_cross_validation} $\zeta_{S_1} = 0$ and $\zeta_{S_2} = \zeta_1$ and $\zeta_{S} = \frac{\zeta_1}{2}$ 
+%-------------------------------------------------------------------------------
+
+\begin{algorithm}
+  \hrule
+  \caption{Construct the near-orthonormal \blue{\ac{amdP}} basis $\left\{ \psi_{\ba}(\bx)\right\}_{\vert \ba \vert = 0}^p$ on discrete sample set $S$.}
+  \vspace{5pt} \hrule \vspace{5pt}
+  \begin{algorithmic}[1]
+    \State Collect samples of $\bx$ from sample set  $S = \left\{\bx^{(k)}\right\}_{k = 1}^{N_s}$, split $S$ equally into two disjoint subsets, i.e., $S = S_1\cup S_2$, 
+    $S_1 \cap S_2 = \O $. 
+    \State Given fixed monomial index order $\left\{\ba^{(l)}\right\}_{l=1}^N$, construct the orthonormal \blue{\ac{amdP}} basis $\left\{\psi^{\left(1\right)}_{\ba}(\bx)\right\}_{\vert \ba \vert = 0}^{p}$ and $\left\{\psi^{\left(2\right)}_{\ba}(\bx)\right\}_{\vert \ba \vert = 0}^{p}$ on set $S_1$ and $S_2$ by \textbf{Algorithm 1}.
+    \FOR{$l=1$ to $N$}
+      \State Let $\ba = \ba^{(l)}$, construct $\displaystyle \psi_{\bm{\alpha}}(\bx) = f_{\bm{\alpha}}^{\bm{\alpha}} \hat{\psi}_{\ba}(\bx) - \mathop{\sum}_{\bm{\beta} \prec \bm{\alpha}} f_{\bm{\beta}}^{\bm{\alpha}} \psi_{\bm{\beta}}(\bx)$ on by Equations \eqref{eq:near_orth_condition}, \eqref{eq:coeff_transform}, and \eqref{eq:zeta_cross_validation}.
+    \ENDFOR   
+  \end{algorithmic}
+  \hrule
+  \label{alg:near_orth_discrete}
+\end{algorithm}
+%-------------------------------------------------------------------------------
+
+Algorithm \ref{alg:near_orth_discrete} describes construction for a set of near-orthonormal \blue{\ac{amdP}} 
+basis functions on the sample set $S$. 
+When applied to the sample set $S'$ to approximate $f(\bx)$, the basis shows comparable orthonormal conditions with the basis constructed by \eqref{eq:exact_orth_coeff}. 
+Such results can be partially understood by the theoretical bound from Theorem~\ref{thm:boundedBOS} on the number of samples $M$ for exact recovery in orthonormal polynomial systems, $\displaystyle M \ge C_1 K^2 s \log^3(s) \log(N)$, where $\displaystyle s = \Vert \bm{c}\Vert_0$ and $\displaystyle K = \sup_{\ba}\Vert \psi_{\ba}\Vert_{\infty}$.
+Theoretical analysis of the recovery error under different basis functions is out of the scope of the present work and is left for future investigation.
+However, we note that the accuracy of the surrogate model $f(\bx)$ can be further improved by enhancing the sparsity of $\bm c.$
+This can be achieved through the ideas presented in our previous work \cite{Lei_Yang_MMS_2015} which will be extended to general distributions below.
+
+\begin{rem}
+  We emphasize that \eqref{eq:near_orth_condition} provides a heuristic approach to construct the near-orthonormal 
+\blue{\ac{amdP}} basis functions $\psi_{\ba}(\bx)$ with {\color{blue}a} smaller basis bound.
+  In practice, \eqref{eq:near_orth_condition} can be further relaxed to
+  \begin{equation}
+    \begin{split}
+      \arg\min_{\hat{\mathbf{f}}^{\bm\alpha}} \Vert \hat{\mathbf{f}}^{\bm\alpha}\Vert_2~~\mbox{subject to}~~ \sum_{\vert\bm\beta\vert = r, \bm\beta < \ba} \left \vert \int \psi_{\bm{\alpha}}(\bm{\xi}) \psi_{\bm{\beta}}(\bm{\xi}) \dif \nu_{S}(\bx) \right \vert^2 < \sum_{\vert\bm\beta\vert = r, \bm\beta < \ba} \zeta_{\ba,\bm\beta}^2, \\
+      \left \vert \int \psi_{\bm{\alpha}}(\bm{\xi}) \psi_{\ba}(\bm{\xi}) \dif \nu_{S}(\bx) - 1 \right \vert < \zeta_{\ba,\ba},~~ r = 0,\cdots, \vert\ba\vert,
+    \end{split} \label{eq:near_orth_condition_approx}
+  \end{equation}
+which shows similar numerical performance.
+There is no theoretical guarantee yet that Equations \eqref{eq:near_orth_condition} and \eqref{eq:near_orth_condition_approx} 
+yield a smaller basis bound than \eqref{eq:exact_orth_coeff} on ${S_f}$, $S$ or the entire domain of $\bx$.
+We numerically compare some properties of different bases in Section~\ref{sec:basis_comparison}, which illustrate the 
+performance of the near-orthonormal \blue{\ac{amdP}} basis constructed above.
+There may exist other numerical approaches to optimize $\psi_{\ba}(\bx)$ that can lead to an even smaller basis bound. 
+\textcolor{blue}{We also note that the threshold $\zeta_{\bm{\alpha},\bm{\beta}}$ is determined by directly splitting $S$ into
+two disjoint sets. In practice, it is possible to design more sophisticated strategies to optimize the choice 
+of $ \zeta_{\bm{\alpha},\bm{\beta}}$ and the basis construction procedure.} We leave such studies for future work.
+\end{rem}
+
+\subsection{Sparsity enhancement} \label{sec:sparsity_enhancement}
+
+For the linear system in \eqref{eq:ape_L1}, the numerical accuracy of the recovered $\bm\tilde{c}$ via $l_1$-minimization depends on the sparsity of $\bm c$.
+This dependence motivates us to develop a numerical approach to further enhance the sparsity of $\bm c$ through the variability analysis of $f(\bx)$ \cite{Lei_Yang_MMS_2015}.
+If we know $f(\bx)$ explicitly, the (sorted) directions of variance in $f(\bx)$ under the distribution of $\bx$ can be found 
+based on the active subspace method \cite{Russi_PHD_2001,ConstantineDW14}.
+In particular, we define the gradient matrix $\mathbf{G}$ by
+\begin{equation}
+	\mathbf{G} = \mathbb{E} \left[\nabla f(\bx) {\nabla f(\bx)}^T\right]
+\end{equation}
+where $\nabla f(\bx)$ is the gradient vector defined by $\nabla f(\bx) = \left(\frac{\partial f}{\partial \xi_1}, \frac{\partial f}{\partial \xi_2}, \cdots \frac{\partial f}{\partial \xi_d}\right)^{T}$.
+Eigendecomposition of $\mathbf{G}$,
+\begin{subequations}
+  \begin{equation}
+    \mathbf{G} = \mathbf{Q} \mathbf{K} \mathbf{Q}^{T}, ~~~~~ \mathbf{Q} = \left [{\mathbf q}_1 ~\mathbf{q}_2 \cdots ~\mathbf{q}_{d} \right ],
+  \end{equation}
+  \begin{equation}
+    \mathbf{K} = {\rm diag}(k_1, \cdots , k_{d}), ~~~k_1 \ge \cdots \ge k_d \ge 0,
+  \end{equation}
+\end{subequations}
+yields the sorted variability directions $\mathbf{q}_1, \mathbf{q}_2, \cdots, \mathbf{q}_d$.
+Accordingly, we may define a new random vector $\bm \chi$ following the sorted variability directions via linear transformation
+\begin{equation}
+	{\bm \chi} = \mathbf{Q}^T \bx.
+	\label{eq:chi_def}
+\end{equation}
+{\color{blue} $f(\bx) = f((\mathbf{Q}^T)^{-1}\bm\chi) = f(\mathbf{Q}\bm\chi)$  can be approximated by expansion in an orthonormal polynomial basis $\bm\chi$ with a coefficient vector $\bm c$ which is sparser than the $f(\bx)$ being expanded by orthonormal basis of $\bx$. For the remainder of this paper, we use $\mathbf{Q}$ to denote the rotation matrix to transform $\bx$ to $\bm\chi$ and $g(\bm\chi)$ to represent $f(\mathbf{Q}\bm\chi)$.}
+
+In practice, $f(\bx)$ is usually not explicitly known.
+We may numerically approximate $\mb G$ by 
+\begin{equation}
+  \mathbf{G} \approx \mathbb{E} \left[ \nabla \tilde{f} (\bx) {\nabla \tilde{f} (\bx)}^T\right],
+  \label{eq:G_approx}  
+\end{equation}
+where $\tilde{f}(\bx)$ represents the approximation of $f(\bx)$ by the orthonormal polynomial basis functions $\psi_{\ba}(\bx)$ as proposed in \cite{Lei_Yang_MMS_2015} or obtained via solving \eqref{eq:ape_L1} with the data-driven basis approach (i.e., basis functions constructed with respect to an arbitrary measure) described in Section~\ref{sec:data_driven_basis}.
+In particular, if $\bx$ {\color{blue}is a random vector with i.i.d.\ Gaussian components, $\bm\chi$ is also 
+a random vector with i.i.d.\ Gaussian components.
+Thus, $\tilde{f}(\bx)$ and $\tilde{g}(\bm\chi):=\tilde{f}(\mathbf{Q} \bm\chi)$ can be 
+represented by the orthonormal basis functions of the same form, e.g., tensor products of univariate 
+Hermite polynomials. Without of lost of generality, from now on, we use $\tilde{g}(\bm\chi)$ to 
+represent $\tilde{f}(\mathbf{Q} \bm\chi)$.} 
+
+\emph{However, if $\rho(\bx)$  is not i.i.d.\ Gaussian, $\bm\chi$ and $\bx$ do not generally have the same distribution.
+Therefore, an orthonormal polynomial basis $\psi(\cdot)$ with respect to $\bx$ \emph{cannot} be directly applied to $\bm\chi$.}
+\blue{The general approach presented in Section~\ref{sec:data_driven_basis} enables us to construct
+the \ac{amdP} basis with respect to the probability measure of the rotated vector $\bm\chi$.}
+The two orthonormal bases associated with $\bx$ and $\bm\chi$ respectively are related to each other via a unitary 
+transformation as shown in Theorem~\ref{thm:orth_basis}.
+In particular, if $\rho(\bx)$ is implicitly described by a sample set $S = \left\{\bx^{(k)}\right\}_{k = 1}^{N_s}$, $\mb G$ can be easily evaluated by representing $\psi_{\ba}(\bx)$ via the monomial basis, i.e., $\displaystyle \psi_{\bm\alpha}(\bx) = \sum_{\bm\beta \preceq \bm\alpha} \hat{f}_{\bm\beta}^{\bm\alpha} \hat{\psi}_{\bm\beta}(\bx)$ via Equation \eqref{eq:coeff_transform} and then integrating with discrete measure $\nu_S$. 
+%, where $\tilde{\mathbf{f}}^{\bm\beta}$ and  $\mathbf{f}^{\bm\beta}$ are available 
+%from the construction of $\bm \psi_{\ba}(\bx)$. 
+By transforming $S$ and $S_f$ into $\left\{{\bm\chi}^{(k)}\right\}_{k = 1}^{N_s}$ and $\left\{{\bm\chi'}^{(k)}\right\}_{k = 1}^{M}$, the orthonormal and near-orthonormal \blue{\ac{amdP}} basis functions with respect to $\bm\chi$ can be constructed by Eqs.~\eqref{eq:exact_orth_coeff} \eqref{eq:near_orth_condition_approx}.
+The surrogate model $\tilde{g}(\bm\chi)$ can then be constructed by solving \eqref{eq:ape_L1}.
+
+The entire \ac{DSRAR} procedure is presented in \textbf{Algorithm 4}. 
+Compared with $\tilde{f}(\bm\xi)$, $\tilde{g}({\bm\chi})$ shows
+smaller numerical error in general. The additional cost of sparsity 
+enhancement procedure in Step 4 - 6 is less than $0.6$ CPU (3.7 GHz Quad-Core 
+Intel Xeon E5) hour for the numerical examples considered in this study. 
+For realistic applications, the overhead of Step 4 - 6 could be 
+relatively small if sampling of QoI is expensive or the available training set is limited. 
+
+%-------------------------------------------------------------------------------
+\begin{algorithm}
+  \hrule
+  \caption{\ac{DSRAR}: Surrogate model construction with discrete sample set $S$ and training set $S_f$.}
+  \vspace{5pt} \hrule \vspace{5pt}
+  \begin{algorithmic}[1]
+    \State Collect the sample set within the random space $S = \left\{\bx^{(k)}\right\}_{k = 1}^{N_s}$.
+    \State Generate evaluations of $f$ on training set $S_f = \left\{{\bx'}^{(k)}\right\}_{k = 1}^{M}$ with $M$ outputs $f_1, f_2, \cdots, f_M$.
+    \State Construct the data-driven \blue{\ac{amdP}} basis $\left\{ \psi_{i}(\bx)\right\}_{i = 1}^N$ on discrete measure $\nu_S(\bx)$ as the exact orthonormal basis by Algorithm~\ref{alg:orth_discrete} or the near orthonormal basis by Algorithm~\ref{alg:near_orth_discrete}.
+    \State Evaluate the measurement matrix ${\bm A}_{ij} = \psi_{j}({\bx'}^{(i)})$, $1\le i\le M$, $1\le j \le N$; construct surrogate model $\tilde{f}(\bx) = \displaystyle \sum_{\vert \alpha\vert = 0}^{p} c_{\bm \alpha} \psi_{\bm \alpha}(\bx)$ by solving the $l_1$-minimization problem.
+    \State Evaluate the gradient matrix $ \mathbf{G} \approx \mathbb{E}\left[\nabla \tilde{f}(\bx) \nabla \tilde{f} (\bx)^T \right ]$ on $\nu_{S}(\bx)$.
+    Find the eigendecomposition $\mathbf{G} = \mathbf{Q} \mathbf{K}\mathbf{Q}^T$, define sample set $\left\{\bm{\chi}^{(k)}\right\}_{k=1}^{N_s}$ and training set $\left\{{\bm \chi'}^{(k)}\right\}_{k=1}^{M}$ by $\bm{\chi}^{(k)} = \mathbf{Q}^T \bx^{(k)}$, $\bm{\chi'}^{(k)} = \mathbf{Q}^T {\bx'}^{(k)}$.
+    \State Reconstruct the data-driven \blue{amdP} basis $\left\{ \phi_{\ba}(\bm\chi)\right\}_{\vert \ba \vert = 0}^p$ by Algorithm~\ref{alg:near_orth_discrete} and surrogate model $\tilde{g}(\bm\chi)$ with enhanced sparsity following Step 3 and Step 4.
+    %\State Repeat Step 5 to Step 6 
+  \end{algorithmic}
+  \hrule
+  \label{alg:data_driven}
+\end{algorithm}
+
+The \ac{DSRAR} framework described above is also applicable to systems with 
+standard density distributions, where $\rho(\bx)$ is known explicitly.
+Without loss of generality, we assume that an orthonormal polynomial basis $\left\{ \psi_{\ba}(\bx)\right\}_{\vert \ba \vert = 0}^p$ is known.
+Evaluation of $\mb G$ by \eqref{eq:G_approx} on $\rho(\bx)$ is straightforward.
+The surrogate model of $f$ can be constructed via $l_1$ minimization with enhanced sparsity through Algorithm~\ref{alg:explicit_density}.
+
+\begin{algorithm}
+  \hrule
+  \caption{\ac{DSRAR}: Surrogate model construction with training set $S_f$ and probability measure $\rho(\bx)$.}
+  \vspace{5pt} \hrule \vspace{5pt}
+  \begin{algorithmic}[1]
+    \State Evaluate $f$ on training set $S_f = \left\{{\bx'}^{(k)}\right\}_{k = 1}^{M}$ with $M$ outputs $f_1, f_2, \cdots, f_M$.
+    \State Evaluate the measurement matrix ${\bm A}_{ij} = \psi_{j}({\bx'}^{(i)})$, $1\le i\le M$, $1\le j \le N$ ; construct surrogate model $\tilde{f}(\bx) = \displaystyle \sum_{\vert \alpha\vert = 0}^{p} c_{\bm \alpha} \psi_{\bm \alpha}(\bx)$ by solving $l_1$ minimization problem.
+    \State Evaluate the gradient matrix $ \mathbf{G}  = \mathbb{E}\left[\nabla \tilde{f}(\bx) \nabla \tilde{f} (\bx)^T \right ]$ on $\rho(\bx)$.
+    Conduct eigendecomposition $\mathbf{G} = \mathbf{Q} \mathbf{K}\mathbf{Q}^T$ and define training set $\left\{\bm{\chi'}^{(k)}\right\}_{k=1}^{M}$, $\bm{\chi'}^{(k)} = \mathbf{Q}^T {\bx'}^{(k)}$.
+    \State Re-construct the orthonormal \blue{\ac{amdP}} basis $\left\{ \phi_{\ba}(\bm\chi)\right\}_{\vert \ba \vert = 0}^p$ with respect to $\rho'(\bm\chi)$ by \textbf{Algorithm 2}.
+    Construct the surrogate model $\tilde{g}(\bm\chi)$ with enhanced sparsity following Step 3.
+    %Repeat Step 3 to Step 4 if necessary.
+  \end{algorithmic}
+  \hrule
+  \label{alg:explicit_density}
+\end{algorithm}
+
+The procedures for random vector rotation and surrogate construction presented in  Algorithms \ref{alg:data_driven} and \ref{alg:explicit_density} can be conducted in an iterative manner.
+We have investigated this issue \cite{Yang_Lei_JCP_2016} by applying a previously developed rotation procedure \cite{Lei_Yang_MMS_2015} successively to systems with underlying Gaussian distributions.
+For the systems studied in the present work, the improvement of the numerical accuracy is marginal after the first rotation procedure.
+Therefore, the numerical results with only one rotation procedure will be presented in this manuscript.
+% In the following section, we first compare numerically the properties of different polynomial bases, including orthonormal bases, near orthonormal basis and other standard polynomial (Legendre, Hermite, Chebyshev, etc.) bases which are popular in applications.
+% Then we test the developed methods for surrogate construction in various systems with different density distributions.
+% The reconstruction of the orthonormal basis $\left\{ \phi_{\ba}(\bm\chi)\right\}_{\vert \ba \vert = 0}^p$ with respect to probability measure of $\bm\chi$ (denoted by $\rho'(\bm\chi)$) in \textbf{Step 4} of \textbf{Algorithm 5} is crucial for the accurate of the surrogate model of $f(\bm\chi)$.
+% As shown in Sec. \ref{sec:numerical}, directly utilizing the original basis set $\psi(\cdot)$ on the new random vector $\bm\chi$, violates the orthonormal condition and may lead to increased error of the surrogate model.
+
